@@ -1,0 +1,551 @@
+{
+ "app": "SISO",
+ "version": 2,
+ "fecha": "2026-11-17",
+ "config": {
+  "proyecto": "Yorito – Empalme RN-23",
+  "sub": "Pavimentación DTS · Ruta 43 · 13.65 km",
+  "siso": "Fernando Domínguez",
+  "empresa": "Cordon's Heavy Equipment",
+  "inicio": "2026-11-16"
+ },
+ "datos": {
+  "equipos": [
+   {
+    "id": "M-509",
+    "inv": "M-509",
+    "tipo": "Motoniveladora",
+    "modelo": "CAT 140M",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "M-528",
+    "inv": "M-528",
+    "tipo": "Motoniveladora",
+    "modelo": "CAT 140K",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "E-591",
+    "inv": "E-591",
+    "tipo": "Excavadora",
+    "modelo": "CAT 320",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "E-690",
+    "inv": "E-690",
+    "tipo": "Excavadora",
+    "modelo": "CAT 320 GC",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "T-668",
+    "inv": "T-668",
+    "tipo": "Tractor",
+    "modelo": "CAT D6T",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "T-REY",
+    "inv": "T-REY",
+    "tipo": "Tractor",
+    "modelo": "CAT D6H",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "VC-238",
+    "inv": "VC-238",
+    "tipo": "Vibrocompactador",
+    "modelo": "CAT CS533E",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "VC-771",
+    "inv": "VC-771",
+    "tipo": "Vibrocompactador",
+    "modelo": "BW 212 D",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "VC-772",
+    "inv": "VC-772",
+    "tipo": "Vibrocompactador",
+    "modelo": "BW 212 D",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "V-543",
+    "inv": "V-543",
+    "tipo": "Volqueta",
+    "modelo": "VOLVO 440 FMX",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "V-605",
+    "inv": "V-605",
+    "tipo": "Volqueta",
+    "modelo": "VOLVO 440 FMX",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "V-606",
+    "inv": "V-606",
+    "tipo": "Volqueta",
+    "modelo": "VOLVO 440 FMX",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "V-644",
+    "inv": "V-644",
+    "tipo": "Volqueta",
+    "modelo": "VOLVO 440 FMX",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "V-645",
+    "inv": "V-645",
+    "tipo": "Volqueta",
+    "modelo": "VOLVO 440 FMX",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "TA-141",
+    "inv": "TA-141",
+    "tipo": "Tanque de agua",
+    "modelo": "MACK",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "TA-342",
+    "inv": "TA-342",
+    "tipo": "Tanque de agua",
+    "modelo": "MACK",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "CZ-236",
+    "inv": "CZ-236",
+    "tipo": "Cabezal",
+    "modelo": "MACK",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "L-364",
+    "inv": "L-364",
+    "tipo": "Low boy",
+    "modelo": "Cama baja",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
+   },
+   {
+    "id": "PS-764",
+    "inv": "PS-764",
+    "tipo": "Pick-up",
+    "modelo": "Foton Tunland",
+    "placa": "JAB 5007",
+    "asignado": "Merlin Adalid Ramos Diaz",
+    "estado": "Activo"
+   }
+  ],
+  "personal": [
+   {
+    "id": "p1",
+    "nombre": "Merlin Adalid Ramos Diaz",
+    "cargo": "Ingeniero Residente",
+    "estado": "Habilitado",
+    "lic": "Liviana Nacional",
+    "emision": "2025-02-03",
+    "lvence": "2030-02-02",
+    "obs": ""
+   },
+   {
+    "id": "p2",
+    "nombre": "Luisa Veronica Ramos Montes",
+    "cargo": "Ingeniero Asistente",
+    "estado": "Habilitado",
+    "lic": "Liviana Nacional",
+    "emision": "2026-11-03",
+    "lvence": "2028-11-02",
+    "obs": ""
+   }
+  ],
+  "extintores": [
+   {
+    "id": "x-T-668",
+    "fecha": "2026-11-01",
+    "equipo": "T-668",
+    "cap": 10,
+    "recarga": "",
+    "vence": "",
+    "items": {
+     "Seguro": "C",
+     "Pasador": "C",
+     "Boquilla / manguera": "C",
+     "Manómetro": "C",
+     "Palanca de disparo": "C",
+     "Arnés o base": "C",
+     "Cilindro": "C"
+    },
+    "obs": "Etiqueta de recarga y vencimiento ilegible. Cargado del archivo de inspección de extintores de noviembre 2026.",
+    "fotos": []
+   },
+   {
+    "id": "x-T-REY",
+    "fecha": "2026-11-01",
+    "equipo": "T-REY",
+    "cap": 10,
+    "recarga": "",
+    "vence": "",
+    "items": {
+     "Seguro": "A",
+     "Pasador": "A",
+     "Boquilla / manguera": "C",
+     "Manómetro": "C",
+     "Palanca de disparo": "C",
+     "Arnés o base": "C",
+     "Cilindro": "N"
+    },
+    "obs": "Sin seguro ni pasador; cilindro en mal estado; etiqueta ilegible. Cargado del archivo de inspección de extintores de noviembre 2026.",
+    "fotos": []
+   },
+   {
+    "id": "x-TA-141",
+    "fecha": "2026-11-01",
+    "equipo": "TA-141",
+    "cap": 10,
+    "recarga": "2026-03-30",
+    "vence": "2027-03-30",
+    "items": {
+     "Seguro": "C",
+     "Pasador": "C",
+     "Boquilla / manguera": "C",
+     "Manómetro": "C",
+     "Palanca de disparo": "C",
+     "Arnés o base": "C",
+     "Cilindro": "C"
+    },
+    "obs": "Cargado del archivo de inspección de extintores de noviembre 2026.",
+    "fotos": []
+   },
+   {
+    "id": "x-TA-342",
+    "fecha": "2026-11-01",
+    "equipo": "TA-342",
+    "cap": 10,
+    "recarga": "2026-08-31",
+    "vence": "2027-08-31",
+    "items": {
+     "Seguro": "C",
+     "Pasador": "C",
+     "Boquilla / manguera": "C",
+     "Manómetro": "C",
+     "Palanca de disparo": "C",
+     "Arnés o base": "C",
+     "Cilindro": "N"
+    },
+    "obs": "Cilindro pelado. Cargado del archivo de inspección de extintores de noviembre 2026.",
+    "fotos": []
+   },
+   {
+    "id": "x-CZ-236",
+    "fecha": "2026-11-01",
+    "equipo": "CZ-236",
+    "cap": 10,
+    "recarga": "2026-06-01",
+    "vence": "2027-06-01",
+    "items": {
+     "Seguro": "C",
+     "Pasador": "C",
+     "Boquilla / manguera": "C",
+     "Manómetro": "C",
+     "Palanca de disparo": "C",
+     "Arnés o base": "C",
+     "Cilindro": "C"
+    },
+    "obs": "Cargado del archivo de inspección de extintores de noviembre 2026.",
+    "fotos": []
+   }
+  ],
+  "catepp": [
+   {
+    "id": "c-casco-azul",
+    "nombre": "Casco azul",
+    "unidad": "Unidad",
+    "inicial": 0,
+    "minimo": 0,
+    "obs": ""
+   },
+   {
+    "id": "c-casco-blanco",
+    "nombre": "Casco blanco",
+    "unidad": "Unidad",
+    "inicial": 0,
+    "minimo": 0,
+    "obs": "Revisar existencia inicial: tiene una entrega de 4 sin entrada registrada."
+   },
+   {
+    "id": "c-chaleco-normal",
+    "nombre": "Chaleco normal",
+    "unidad": "Unidad",
+    "inicial": 0,
+    "minimo": 0,
+    "obs": ""
+   }
+  ],
+  "catbot": [],
+  "epp": [
+   {
+    "id": "43mr4zwtvxyiz97bwsoe",
+    "fecha": "2026-11-16",
+    "mov": "Entrada / compra",
+    "persona": "Fernando Domínguez",
+    "cargo": "Jefe SISO",
+    "lista": [
+     {
+      "art": "Casco azul",
+      "cant": 16,
+      "vida": ""
+     }
+    ],
+    "obs": "",
+    "fotos": []
+   },
+   {
+    "id": "9gc46v64ywp1phstiyfw",
+    "fecha": "2026-11-17",
+    "mov": "Entrega a personal",
+    "persona": "Fernando Domínguez",
+    "cargo": "Jefe SISO",
+    "lista": [
+     {
+      "art": "Casco blanco",
+      "cant": 4,
+      "vida": ""
+     }
+    ],
+    "obs": "",
+    "fotos": []
+   },
+   {
+    "id": "9y4pcp8lgdb7rxtfelcs",
+    "fecha": "2026-11-17",
+    "mov": "Entrada / compra",
+    "persona": "Fernando Dominguez",
+    "cargo": "Jefe SISO",
+    "lista": [
+     {
+      "art": "Chaleco normal",
+      "cant": 20,
+      "vida": ""
+     }
+    ],
+    "obs": "",
+    "fotos": []
+   },
+   {
+    "id": "l9lbb5wj8yzrew4il32y",
+    "fecha": "2026-11-17",
+    "mov": "Entrega a personal",
+    "persona": "3 ayudantes, 1 operador de tractor, 1 Ing. Licona",
+    "cargo": "Varios",
+    "lista": [
+     {
+      "art": "Chaleco normal",
+      "cant": 5,
+      "vida": ""
+     }
+    ],
+    "obs": "",
+    "fotos": []
+   }
+  ],
+  "senal": [
+   {
+    "id": "s01",
+    "senal": "10 KM/H VELOCIDAD MÁXIMA",
+    "total": 4,
+    "uso": 0,
+    "danada": 0,
+    "extrav": 0,
+    "ubic": "",
+    "act": ""
+   },
+   {
+    "id": "s02",
+    "senal": "20 KM/H VELOCIDAD MÁXIMA",
+    "total": 4,
+    "uso": 0,
+    "danada": 0,
+    "extrav": 0,
+    "ubic": "",
+    "act": ""
+   },
+   {
+    "id": "s03",
+    "senal": "DESVÍO ←",
+    "total": 4,
+    "uso": 0,
+    "danada": 0,
+    "extrav": 0,
+    "ubic": "",
+    "act": ""
+   },
+   {
+    "id": "s04",
+    "senal": "DESVÍO →",
+    "total": 4,
+    "uso": 0,
+    "danada": 0,
+    "extrav": 0,
+    "ubic": "",
+    "act": ""
+   },
+   {
+    "id": "s05",
+    "senal": "CARRIL DERECHO CERRADO",
+    "total": 2,
+    "uso": 0,
+    "danada": 0,
+    "extrav": 0,
+    "ubic": "",
+    "act": ""
+   },
+   {
+    "id": "s06",
+    "senal": "CARRIL IZQUIERDO CERRADO",
+    "total": 2,
+    "uso": 0,
+    "danada": 0,
+    "extrav": 0,
+    "ubic": "",
+    "act": ""
+   },
+   {
+    "id": "s07",
+    "senal": "SOLO UN CARRIL",
+    "total": 2,
+    "uso": 0,
+    "danada": 0,
+    "extrav": 0,
+    "ubic": "",
+    "act": ""
+   },
+   {
+    "id": "s08",
+    "senal": "BANDERILLERO (DIBUJO)",
+    "total": 10,
+    "uso": 0,
+    "danada": 0,
+    "extrav": 0,
+    "ubic": "",
+    "act": ""
+   },
+   {
+    "id": "s09",
+    "senal": "HOMBRES TRABAJANDO (DIBUJO)",
+    "total": 10,
+    "uso": 0,
+    "danada": 0,
+    "extrav": 0,
+    "ubic": "",
+    "act": ""
+   },
+   {
+    "id": "s10",
+    "senal": "DISCULPE TRABAJO EN EJECUCIÓN",
+    "total": 5,
+    "uso": 0,
+    "danada": 0,
+    "extrav": 0,
+    "ubic": "",
+    "act": ""
+   },
+   {
+    "id": "s11",
+    "senal": "FIN DE CARRETERA EN CONSTRUCCIÓN",
+    "total": 1,
+    "uso": 0,
+    "danada": 0,
+    "extrav": 0,
+    "ubic": "",
+    "act": ""
+   },
+   {
+    "id": "s12",
+    "senal": "INICIO DE CARRETERA EN CONSTRUCCIÓN",
+    "total": 1,
+    "uso": 0,
+    "danada": 0,
+    "extrav": 0,
+    "ubic": "",
+    "act": ""
+   },
+   {
+    "id": "s13",
+    "senal": "MAQUINAS TRABAJANDO",
+    "total": 5,
+    "uso": 0,
+    "danada": 0,
+    "extrav": 0,
+    "ubic": "",
+    "act": ""
+   },
+   {
+    "id": "s14",
+    "senal": "PELIGRO",
+    "total": 5,
+    "uso": 0,
+    "danada": 0,
+    "extrav": 0,
+    "ubic": "",
+    "act": ""
+   },
+   {
+    "id": "s15",
+    "senal": "PALETA PARE/SIGA",
+    "total": 8,
+    "uso": 0,
+    "danada": 0,
+    "extrav": 0,
+    "ubic": "",
+    "act": ""
+   }
+  ]
+ }
+}
