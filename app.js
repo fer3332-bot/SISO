@@ -293,8 +293,11 @@ function pdfLabel(k,r){return k==='epp'?'Comprobante PDF':k==='botiquin'?'Compro
 function closeM(){$('#modal').classList.remove('on');cur=null;render()}
 
 /* ---------- excel ---------- */
-function rowsFor(k,list){const m=M[k];return(list||R(k)).slice().sort((a,b)=>String(a.fecha||'').localeCompare(String(b.fecha||''))).map(r=>{const o={};for(const f of m.f){if(f.t==='chk'){for(const it of f.o(r)){const v=(r[f.k]||{})[it];o[it]=v==='N'?'X':v==='A'?'N/A':'✓'}}else if(f.t==='fotos')o['Fotos']=(r.fotos||[]).length;else if(f.t==='firma')o[f.l]=r.firma?'Firmado':'';else if(f.t==='lista')o[f.l]=eitems(r).map(i=>(i.cant||1)+' '+i.art+(i.vida?' ('+i.vida+' meses)':'')).join(', ');else o[f.l]=f.t==='date'&&r[f.k]?r[f.k]:r[f.k]??''}if(k==='charlas')o['N° asistentes']=nAs(r);if(k==='senal')o['Existencia en plantel']=exist(r);return o})}
+function rowsFor(k,list){const m=M[k];return(list||R(k)).slice().sort((a,b)=>String(a.fecha||'').localeCompare(String(b.fecha||''))).map(r=>{const o={};for(const f of m.f){if(f.t==='chk'){for(const it of f.o(r)){const v=(r[f.k]||{})[it];o[it]=v==='N'?'X':v==='A'?'N/A':'✓'}}else if(f.t==='fotos'){}else if(f.t==='firma')o[f.l]='';else if(f.t==='lista')o[f.l]=eitems(r).map(i=>(i.cant||1)+' '+i.art+(i.vida?' ('+i.vida+' meses)':'')).join(', ');else o[f.l]=f.t==='date'&&r[f.k]?r[f.k]:r[f.k]??''}if(k==='charlas')o['N° asistentes']=nAs(r);if(k==='senal')o['Existencia en plantel']=exist(r);const fl=m.f.find(f=>f.t==='firma');o[META]={fotos:(r.fotos||[]).slice(),firma:r.firma||'',firmaCol:fl?fl.l:'',needSig:!!fl&&!(m.inv&&(isIn(r)||String(r.mov||'').startsWith('Baja')))};return o})}
 let xlsxP=null,logoP=null;
+const META=Symbol('meta');
+async function longLinks(paths){const out={};if(!paths.length||!sb||!navigator.onLine)return out;for(let i=0;i<paths.length;i+=100){try{const {data}=await sb.storage.from(BUCKET).createSignedUrls(paths.slice(i,i+100),31536000);for(const d of data||[])if(d&&d.signedUrl&&d.path)out[d.path]=d.signedUrl}catch(e){}}return out}
+async function sigImg(id){try{const b=await fileBlob(id);const du=await new Promise((ok,no)=>{const f=new FileReader();f.onload=()=>ok(f.result);f.onerror=no;f.readAsDataURL(b)});const im=await new Promise((ok,no)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=no;i.src=du});return{du,w:im.naturalWidth,h:im.naturalHeight}}catch(e){return null}}
 function loadX(){return xlsxP||(xlsxP=new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js';s.onload=()=>ok(window.ExcelJS);s.onerror=()=>{xlsxP=null;no()};document.head.appendChild(s)}))}
 function loadLogo(){return logoP||(logoP=fetch('icons/logo-empresa.png').then(r=>{if(!r.ok)throw 0;return r.blob()}).then(b=>new Promise((ok,no)=>{const f=new FileReader();f.onload=()=>{const i=new Image();i.onload=()=>ok({du:f.result,w:i.naturalWidth,h:i.naturalHeight});i.onerror=no;i.src=f.result};f.onerror=no;f.readAsDataURL(b)})).catch(()=>{logoP=null;return null}))}
 const PROY_TITULO=()=>cfg.titulo||'Proyecto Pavimentación con Doble Tratamiento Superficial, Ruta 43, Tramo Yorito – Empalme RN-23 (13.65 km), Departamento de Yoro';
@@ -311,11 +314,14 @@ async function exportX(name,sheets){
  for(const[sheetName,rows0,docTitle]of sheets){
   let nm=String(sheetName).replace(/[\\\/?*\[\]:]/g,' ').slice(0,31).trim()||'Hoja';let n=2;while(used.has(nm.toLowerCase()))nm=nm.slice(0,28)+' '+(n++);used.add(nm.toLowerCase());
   const ws=wb.addWorksheet(nm,{views:[{state:'frozen',ySplit:6,showGridLines:false}],pageSetup:{orientation:'landscape',fitToPage:true,fitToWidth:1,fitToHeight:0,paperSize:1,horizontalCentered:true,margins:{left:.4,right:.4,top:.5,bottom:.5,header:.3,footer:.3}}});
-  let rows=rows0.length?rows0:[{'Registros':'Sin registros en este periodo','Observación':''}];let cols=Object.keys(rows[0]);
+  let rows=rows0.length?rows0:[{'Registros':'Sin registros en este periodo','Observación':''}];
+  const metas=rows.map(r=>r[META]||null),nF=Math.min(12,Math.max(0,...metas.map(m=>m&&m.fotos?m.fotos.length:0))),fCol=(metas.find(m=>m&&m.firmaCol)||{}).firmaCol;
+  if(nF)rows=rows.map((r,i)=>{const o={...r};for(let j=1;j<=nF;j++)o['Foto '+j]='';return o});
+  let cols=Object.keys(rows[0]);
   if(cols.length<2){cols=[...cols,'Observación'];rows=rows.map(r=>({...r,'Observación':''}))}
   const numCol=cols.map(c=>rows.every(r=>r[c]===''||r[c]==null||typeof r[c]==='number'));
   const len=v=>Math.max(...String(v??'').split('\n').map(s=>s.length));
-  let W=cols.map((c,i)=>Math.min(48,Math.max(numCol[i]?9:11,len(c)+4,...rows.map(r=>len(r[c])+3))));
+  let W=cols.map((c,i)=>/^Foto \d+$/.test(c)?12:c===fCol?22:Math.min(48,Math.max(numCol[i]?9:11,len(c)+4,...rows.map(r=>len(r[c])+3))));
   const tot=W.reduce((a,b)=>a+b,0);if(tot<100){let k=numCol.indexOf(false);if(k<0)k=0;W[k]+=100-tot}
   const last=cols.length,px=w=>w*7+5;
   // espacio para el logo (como en el formato: logo a la izquierda, título a la derecha)
@@ -346,6 +352,11 @@ async function exportX(name,sheets){
    const f={name:'Calibri',size:10,color:{argb:C.ink}};if(v==='X'||v==='No cumple'||v==='Positivo'||v==='Abierto'||v==='Con hallazgos'){f.color={argb:C.bad};f.bold=true}else if(v==='✓'||v==='Cumple'||v==='Negativo'||v==='Cerrado'||v==='Sin hallazgos'){f.color={argb:C.ok};f.bold=true}if(typeof v==='number'&&v<0){f.color={argb:C.bad};f.bold=true}x.font=f;
    x.alignment={vertical:'middle',horizontal:numCol[i]?'right':(v instanceof Date||raw.length<=3?'center':'left'),wrapText:true,indent:numCol[i]?0:0};
    x.fill={type:'pattern',pattern:'solid',fgColor:{argb:ri%2?C.z2:C.z1}};x.border={top:thin,bottom:thin,left:thin,right:thin}});row.height=Math.max(28,lines*14+8)});
+  // fotos: enlace de descarga · firma: imagen dentro de la celda
+  const allF=[...new Set(metas.flatMap(m=>m&&m.fotos?m.fotos.slice(0,nF):[]))],links=await longLinks(allF),fIdx=fCol?cols.indexOf(fCol):-1;
+  for(let ri=0;ri<rows.length;ri++){const m=metas[ri];if(!m)continue;const row=ws.getRow(7+ri);
+   (m.fotos||[]).slice(0,nF).forEach((pth,j)=>{const x=row.getCell(cols.indexOf('Foto '+(j+1))+1);const u=links[pth];x.value=u?{text:'Ver foto '+(j+1),hyperlink:u,tooltip:'Abrir o descargar la fotografía'}:(navigator.onLine?'No disponible':'Sin conexión');x.font={name:'Calibri',size:10,bold:true,underline:!!u,color:{argb:u?'FF1F5FBF':C.bad}};x.alignment={horizontal:'center',vertical:'middle'}});
+   if(fIdx>=0){const x=row.getCell(fIdx+1);if(m.firma){const im=await sigImg(m.firma);if(im){x.value='';const id=wb.addImage({base64:im.du,extension:'png'});const h=40,w=Math.min(140,Math.round(h*im.w/im.h));ws.addImage(id,{tl:{col:fIdx+0.08,row:6+ri+0.1},ext:{width:w,height:h},editAs:'oneCell'});row.height=Math.max(row.height||28,36)}else x.value='Firmado'}else if(m.needSig){x.value='Sin firma';x.font={name:'Calibri',size:10,italic:true,color:{argb:C.bad}};x.alignment={horizontal:'center',vertical:'middle'}}}}
   if(rows0.length)ws.autoFilter={from:{row:6,column:1},to:{row:6,column:last}};
   ws.pageSetup.printTitlesRow='1:6';
   ws.headerFooter.oddFooter='&L&8'+String(cfg.empresa||"Cordon's Heavy Equipment").replace(/&/g,'&&')+' · SISO&R&8Página &P de &N';

@@ -80,6 +80,12 @@ En **Informe → Control de riesgo** está la misma tabla de tu formato *Control
 
 Cada Excel que descargas lleva arriba el logo de la empresa, el título del proyecto, el nombre del documento, la fecha y el responsable. El título y el nombre del responsable se cambian en **Proyecto**. Para cambiar el logo, reemplaza `icons/logo-empresa.png` por otra imagen PNG con el mismo nombre.
 
+## Fotos y firmas en el Excel
+
+- La **firma** aparece como imagen dentro de su celda.
+- Cada **foto** aparece como un enlace “Ver foto 1”, “Ver foto 2”… que abre o descarga la imagen. Los enlaces funcionan **1 año** desde que descargas el Excel; si necesitas uno más reciente, vuelve a descargarlo. Cualquier persona que tenga el Excel puede abrir esas fotos.
+- Para generar el Excel con fotos y firmas necesitas señal.
+
 ## Respaldo
 
 En **Proyecto → Descargar respaldo** obtienes un `.json` con todo. Con **Importar respaldo** lo restauras.
