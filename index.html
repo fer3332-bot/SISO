@@ -111,6 +111,9 @@ table{border-collapse:collapse;width:100%;font-size:15px}th,td{text-align:left;p
 .li-row.nv,.li-h.nv{grid-template-columns:minmax(0,1fr) 64px 40px}
 table.inv tr.click{cursor:pointer}table.inv tr.click:hover{background:var(--soft)}td.ex{font:800 20px "Barlow Condensed",Barlow,sans-serif;color:var(--ok)}td.ex.bad{color:var(--bad)}td.ex.warn{color:var(--orx)}
 .tile.inv{border-left:5px solid var(--or)}
+table.ctl{font-size:14px}table.ctl th,table.ctl td{padding:6px 7px;white-space:nowrap}table.ctl td.act{min-width:220px;white-space:normal}table.ctl th.cur{background:var(--or);color:#141414;border-radius:4px}
+table.ctl td.m.ok{background:light-dark(#d9f2e9,#16382d);color:var(--ok);font-weight:700}table.ctl td.m.warn,table.ctl td.m.run{background:light-dark(#ffe7d6,#3a2414);color:var(--orx);font-weight:700}table.ctl td.m.bad{background:light-dark(#fde0de,#3d1a18);color:var(--bad);font-weight:700}table.ctl td.fut{background:light-dark(#f1efea,#1a1a1a)}table.ctl td.pct{font-weight:800}table.ctl tr.click{cursor:pointer}
+.autof{background:var(--soft)!important;border-color:var(--or)!important}
 @media(max-width:480px){.top h1{font-size:20px}.top h1 small{font-size:12px}}
 @media(prefers-reduced-motion:no-preference){.sheet{animation:up .18s ease-out}@keyframes up{from{transform:translateY(14px);opacity:.6}}}
 @media(max-width:600px){table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;white-space:normal;color:var(--mut)}.stack td:empty{display:none}}

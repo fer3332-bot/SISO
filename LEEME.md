@@ -65,6 +65,21 @@ Entra con el mismo usuario en todos. Lo que registras en el celular aparece en l
 - Si una entrega deja un artículo en negativo, te avisa. También verás alertas en **Hoy** cuando un artículo llega a su **mínimo**, cuando queda en negativo o cuando un lote del botiquín está por vencer.
 - Toca cualquier fila del inventario para ver su historial de entradas y salidas.
 
+## Personal y equipos: autollenado
+
+En **Registros → Personal del proyecto** registra a cada persona con su cargo, área y **unidad asignada**. Al llenar cualquier formato:
+- si escribes el equipo (por ejemplo PS-764), la app pone sola el conductor asignado, la marca, el modelo y la placa;
+- si escribes el nombre de una persona, pone su cargo y su unidad;
+- en el checklist, el punto **Licencia de conducir vigente** se marca según el vencimiento registrado.
+
+## Control de riesgo (medición de tu trabajo)
+
+En **Informe → Control de riesgo** está la misma tabla de tu formato *Control de Riesgo 2026*, pero llena sola con lo que registras: cada mes cuenta los SOL, auditorías de equipo móvil y pesado, auditorías de EPP, pruebas de alcohol, inspecciones de extintores, escritorios, apartamentos, señalización vial y taller, reuniones y charlas. Compara cada mes contra el objetivo mensual y calcula el % acumulado contra la meta anual. Las metas se cambian con el botón **Metas**. En **Hoy** ves el avance del mes con barras.
+
+## Excel con encabezado
+
+Cada Excel que descargas lleva arriba el logo de la empresa, el título del proyecto, el nombre del documento, la fecha y el responsable. El título y el nombre del responsable se cambian en **Proyecto**. Para cambiar el logo, reemplaza `icons/logo-empresa.png` por otra imagen PNG con el mismo nombre.
+
 ## Respaldo
 
 En **Proyecto → Descargar respaldo** obtienes un `.json` con todo. Con **Importar respaldo** lo restauras.

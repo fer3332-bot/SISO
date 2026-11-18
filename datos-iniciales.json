@@ -15,64 +15,71 @@
     "id": "M-509",
     "inv": "M-509",
     "tipo": "Motoniveladora",
-    "modelo": "CAT 140M",
+    "modelo": "140M",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": "Caterpillar"
    },
    {
     "id": "M-528",
     "inv": "M-528",
     "tipo": "Motoniveladora",
-    "modelo": "CAT 140K",
+    "modelo": "140K",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": "Caterpillar"
    },
    {
     "id": "E-591",
     "inv": "E-591",
     "tipo": "Excavadora",
-    "modelo": "CAT 320",
+    "modelo": "320",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": "Caterpillar"
    },
    {
     "id": "E-690",
     "inv": "E-690",
     "tipo": "Excavadora",
-    "modelo": "CAT 320 GC",
+    "modelo": "320 GC",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": "Caterpillar"
    },
    {
     "id": "T-668",
     "inv": "T-668",
     "tipo": "Tractor",
-    "modelo": "CAT D6T",
+    "modelo": "D6T",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": "Caterpillar"
    },
    {
     "id": "T-REY",
     "inv": "T-REY",
     "tipo": "Tractor",
-    "modelo": "CAT D6H",
+    "modelo": "D6H",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": "Caterpillar"
    },
    {
     "id": "VC-238",
     "inv": "VC-238",
     "tipo": "Vibrocompactador",
-    "modelo": "CAT CS533E",
+    "modelo": "CS533E",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": "Caterpillar"
    },
    {
     "id": "VC-771",
@@ -81,7 +88,8 @@
     "modelo": "BW 212 D",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": ""
    },
    {
     "id": "VC-772",
@@ -90,52 +98,58 @@
     "modelo": "BW 212 D",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": ""
    },
    {
     "id": "V-543",
     "inv": "V-543",
     "tipo": "Volqueta",
-    "modelo": "VOLVO 440 FMX",
+    "modelo": "440 FMX",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": "Volvo"
    },
    {
     "id": "V-605",
     "inv": "V-605",
     "tipo": "Volqueta",
-    "modelo": "VOLVO 440 FMX",
+    "modelo": "440 FMX",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": "Volvo"
    },
    {
     "id": "V-606",
     "inv": "V-606",
     "tipo": "Volqueta",
-    "modelo": "VOLVO 440 FMX",
+    "modelo": "440 FMX",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": "Volvo"
    },
    {
     "id": "V-644",
     "inv": "V-644",
     "tipo": "Volqueta",
-    "modelo": "VOLVO 440 FMX",
+    "modelo": "440 FMX",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": "Volvo"
    },
    {
     "id": "V-645",
     "inv": "V-645",
     "tipo": "Volqueta",
-    "modelo": "VOLVO 440 FMX",
+    "modelo": "440 FMX",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": "Volvo"
    },
    {
     "id": "TA-141",
@@ -144,7 +158,8 @@
     "modelo": "MACK",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": "Mack"
    },
    {
     "id": "TA-342",
@@ -153,7 +168,8 @@
     "modelo": "MACK",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": "Mack"
    },
    {
     "id": "CZ-236",
@@ -162,7 +178,8 @@
     "modelo": "MACK",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": "Mack"
    },
    {
     "id": "L-364",
@@ -171,16 +188,18 @@
     "modelo": "Cama baja",
     "placa": "",
     "asignado": "",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": ""
    },
    {
     "id": "PS-764",
     "inv": "PS-764",
     "tipo": "Pick-up",
-    "modelo": "Foton Tunland",
+    "modelo": "Tunland",
     "placa": "JAB 5007",
     "asignado": "Merlin Adalid Ramos Diaz",
-    "estado": "Activo"
+    "estado": "Activo",
+    "marca": "Foton"
    }
   ],
   "personal": [
@@ -192,7 +211,11 @@
     "lic": "Liviana Nacional",
     "emision": "2025-02-03",
     "lvence": "2030-02-02",
-    "obs": ""
+    "obs": "",
+    "area": "",
+    "telefono": "",
+    "ingreso": "",
+    "unidad": "PS-764"
    },
    {
     "id": "p2",
@@ -202,7 +225,11 @@
     "lic": "Liviana Nacional",
     "emision": "2026-11-03",
     "lvence": "2028-11-02",
-    "obs": ""
+    "obs": "",
+    "area": "",
+    "telefono": "",
+    "ingreso": "",
+    "unidad": ""
    }
   ],
   "extintores": [
