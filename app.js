@@ -300,39 +300,55 @@ function loadLogo(){return logoP||(logoP=fetch('icons/logo-empresa.png').then(r=
 const PROY_TITULO=()=>cfg.titulo||'Proyecto Pavimentación con Doble Tratamiento Superficial, Ruta 43, Tramo Yorito – Empalme RN-23 (13.65 km), Departamento de Yoro';
 const RESP=()=>{const n=cfg.siso||'Fernando Domínguez';return(/^ing/i.test(n)?n:'Ing. '+n)+' – Supervisor SISO'};
 const fechaLarga=s=>{const d=pd(s);return d.getDate()+' de '+MES[d.getMonth()]+' de '+d.getFullYear()};
-/* Excel con encabezado: logo, proyecto, documento, fecha y responsable */
+/* Excel con el formato de Cordon's: logo + título, proyecto, franja, fecha/responsable/área y tabla */
 async function exportX(name,sheets){
  let X;try{X=await loadX()}catch(e){toast('No se pudo cargar el generador de Excel (revisa la conexión)');return}
  const logo=await loadLogo();const wb=new X.Workbook();wb.creator=cfg.siso||'SISO';wb.created=new Date();
- const C={ink:'FF141414',or:'FFFF5A00',orx:'FFD94A00',zebra:'FFF7F4EF',line:'FFD9D4CA',mut:'FF5D5A55',ok:'FF0B7A5A',bad:'FFC8231B',white:'FFFFFFFF'};
- const used=new Set();
+ const C={ink:'FF141414',navy:'FF17324D',amber:'FFFFC000',teal:'FF177E89',info:'FFEAF2F5',or:'FFFF5A00',z1:'FFF2F6F8',z2:'FFF7F4EF',line:'FFD9D4CA',ok:'FF0B7A5A',bad:'FFC8231B',white:'FFFFFFFF'};
+ const used=new Set(),med={style:'medium',color:{argb:C.ink}},thin={style:'thin',color:{argb:C.line}};
+ const nombre=(cfg.siso||'Fernando Domínguez').replace(/^ing\.?\s*/i,'');
+ const proy=PROY_TITULO().replace(/^proyecto\s+/i,'');
  for(const[sheetName,rows0,docTitle]of sheets){
   let nm=String(sheetName).replace(/[\\\/?*\[\]:]/g,' ').slice(0,31).trim()||'Hoja';let n=2;while(used.has(nm.toLowerCase()))nm=nm.slice(0,28)+' '+(n++);used.add(nm.toLowerCase());
-  const ws=wb.addWorksheet(nm,{views:[{state:'frozen',ySplit:7,showGridLines:false}],pageSetup:{orientation:'landscape',fitToPage:true,fitToWidth:1,fitToHeight:0,paperSize:1,margins:{left:.4,right:.4,top:.5,bottom:.5,header:.3,footer:.3}}});
-  const rows=rows0.length?rows0:[{'Sin registros':''}];const cols=Object.keys(rows[0]);
+  const ws=wb.addWorksheet(nm,{views:[{state:'frozen',ySplit:6,showGridLines:false}],pageSetup:{orientation:'landscape',fitToPage:true,fitToWidth:1,fitToHeight:0,paperSize:1,horizontalCentered:true,margins:{left:.4,right:.4,top:.5,bottom:.5,header:.3,footer:.3}}});
+  let rows=rows0.length?rows0:[{'Registros':'Sin registros en este periodo','Observación':''}];let cols=Object.keys(rows[0]);
+  if(cols.length<2){cols=[...cols,'Observación'];rows=rows.map(r=>({...r,'Observación':''}))}
   const numCol=cols.map(c=>rows.every(r=>r[c]===''||r[c]==null||typeof r[c]==='number'));
-  // anchos ajustados al texto
   const len=v=>Math.max(...String(v??'').split('\n').map(s=>s.length));
-  let W=cols.map((c,i)=>Math.min(48,Math.max(numCol[i]?8:10,len(c)+3,...rows.map(r=>len(r[c])+2))));
-  const tot=W.reduce((a,b)=>a+b,0);if(tot<95){let k=numCol.indexOf(false);if(k<0)k=0;W[k]+=95-tot}
-  ws.columns=W.map(w=>({width:w}));const last=cols.length;
-  // encabezado
-  ws.getRow(1).height=50;
-  if(logo){const id=wb.addImage({base64:logo.du,extension:'png'});const h=54,w=Math.round(h*logo.w/logo.h);ws.addImage(id,{tl:{col:0,row:0.12},ext:{width:w,height:h},editAs:'oneCell'})}
-  const band=(r,txt,font,h,fill)=>{if(last>1)ws.mergeCells(r,1,r,last);const c=ws.getCell(r,1);c.value=txt;c.font=font;c.alignment={vertical:'middle',horizontal:'left',wrapText:true,indent:0};if(fill)c.fill={type:'pattern',pattern:'solid',fgColor:{argb:fill}};ws.getRow(r).height=h};
-  band(2,PROY_TITULO(),{name:'Calibri',size:11,bold:true,color:{argb:C.ink}},30);
-  band(3,docTitle||sheetName,{name:'Calibri',size:16,bold:true,color:{argb:C.orx}},26);
-  band(4,'Fecha: '+fdmy(today())+'     ·     Responsable: '+RESP()+(cfg.empresa?'     ·     '+cfg.empresa:''),{name:'Calibri',size:10,color:{argb:C.mut}},18);
-  band(5,'',{size:2},5,C.or);ws.getRow(6).height=8;
-  // tabla
-  const hr=ws.getRow(7);hr.height=30;cols.forEach((c,i)=>{const x=hr.getCell(i+1);x.value=c;x.font={name:'Calibri',size:10,bold:true,color:{argb:C.white}};x.fill={type:'pattern',pattern:'solid',fgColor:{argb:C.ink}};x.alignment={vertical:'middle',horizontal:'center',wrapText:true};x.border={bottom:{style:'medium',color:{argb:C.or}},left:{style:'thin',color:{argb:'FF3A3A3A'}},right:{style:'thin',color:{argb:'FF3A3A3A'}}}});
-  rows.forEach((r,ri)=>{const row=ws.getRow(8+ri);cols.forEach((c,i)=>{const x=row.getCell(i+1);let v=r[c];if(typeof v==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(v)){const d=pd(v);v=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));x.numFmt='dd-mm-yyyy'}x.value=v??'';
-   const f={name:'Calibri',size:10,color:{argb:C.ink}};if(v==='X'||v==='No cumple'||v==='Positivo'||v==='Abierto'){f.color={argb:C.bad};f.bold=true}else if(v==='✓'||v==='Cumple'||v==='Negativo'||v==='Cerrado'){f.color={argb:C.ok};f.bold=true}if(typeof v==='number'&&v<0){f.color={argb:C.bad};f.bold=true}x.font=f;
-   x.alignment={vertical:'top',horizontal:numCol[i]?'right':(len(v)<=3||v instanceof Date?'center':'left'),wrapText:true};
-   if(ri%2)x.fill={type:'pattern',pattern:'solid',fgColor:{argb:C.zebra}};x.border={bottom:{style:'thin',color:{argb:C.line}},left:{style:'thin',color:{argb:C.line}},right:{style:'thin',color:{argb:C.line}}}})});
-  if(rows0.length)ws.autoFilter={from:{row:7,column:1},to:{row:7,column:last}};
-  ws.pageSetup.printTitlesRow='7:7';
-  ws.headerFooter.oddFooter='&L&8'+String(cfg.proyecto||'SISO').replace(/&/g,'&&')+'&R&8Página &P de &N';
+  let W=cols.map((c,i)=>Math.min(48,Math.max(numCol[i]?9:11,len(c)+4,...rows.map(r=>len(r[c])+3))));
+  const tot=W.reduce((a,b)=>a+b,0);if(tot<100){let k=numCol.indexOf(false);if(k<0)k=0;W[k]+=100-tot}
+  const last=cols.length,px=w=>w*7+5;
+  // espacio para el logo (como en el formato: logo a la izquierda, título a la derecha)
+  const LH=54,LW=logo?Math.round(LH*logo.w/logo.h):300;let span=1,acc=px(W[0]);while(acc<LW+16&&span<last-1){acc+=px(W[span]);span++}
+  if(acc<LW+16)W[span-1]+=Math.ceil((LW+16-acc)/7);
+  ws.columns=W.map(w=>({width:w}));
+  const mg=(r,c1,c2)=>{if(c2>c1)(ws.mergeCellsWithoutStyle||ws.mergeCells).call(ws,r,c1,r,c2)};
+  const box=(r,c1,c2)=>{for(let c=c1;c<=c2;c++){const x=ws.getCell(r,c);x.border={top:med,bottom:med,left:c===c1?med:undefined,right:c===c2?med:undefined}}};
+  const fillRow=(r,argb)=>{for(let c=1;c<=last;c++)ws.getCell(r,c).fill={type:'pattern',pattern:'solid',fgColor:{argb}}};
+  // fila 1: logo | título del documento
+  ws.getRow(1).height=46;box(1,1,span);box(1,span+1,last);mg(1,1,span);mg(1,span+1,last);
+  if(logo){const id=wb.addImage({base64:logo.du,extension:'png'});ws.addImage(id,{tl:{col:0.08,row:0.05},ext:{width:LW,height:LH},editAs:'oneCell'})}
+  const t=ws.getCell(1,span+1);t.value=String(docTitle||sheetName).toUpperCase();t.font={name:'Calibri',size:15,bold:true,color:{argb:C.ink}};t.alignment={horizontal:'center',vertical:'middle',wrapText:true};
+  // fila 2: proyecto (ámbar)
+  ws.getRow(2).height=35;fillRow(2,C.amber);mg(2,1,last);const p2=ws.getCell(2,1);
+  p2.value={richText:[{text:'PROYECTO | ',font:{name:'Calibri',size:10,bold:true,color:{argb:C.ink}}},{text:proy,font:{name:'Calibri',size:10,bold:true,color:{argb:C.ink}}}]};p2.alignment={horizontal:'center',vertical:'middle',wrapText:true};
+  // fila 3: franja verde azulado
+  ws.getRow(3).height=8;fillRow(3,C.teal);mg(3,1,last);
+  // fila 4: fecha | responsable | área
+  ws.getRow(4).height=27;fillRow(4,C.info);mg(4,1,last);const f4=ws.getCell(4,1);
+  f4.value='FECHA: '+fdmy(today())+'     |     RESPONSABLE: Ing. '+nombre+'     |     ÁREA: Seguridad y Salud Ocupacional (SISO)';f4.font={name:'Calibri',size:10,bold:true,color:{argb:C.navy}};f4.alignment={horizontal:'left',vertical:'middle',indent:1,wrapText:true};
+  ws.getRow(5).height=8;
+  // fila 6: encabezados de la tabla
+  const hr=ws.getRow(6);hr.height=33;cols.forEach((c,i)=>{const x=hr.getCell(i+1);x.value=c;x.font={name:'Calibri',size:10,bold:true,color:{argb:C.white}};x.fill={type:'pattern',pattern:'solid',fgColor:{argb:C.navy}};x.alignment={vertical:'middle',horizontal:'center',wrapText:true};x.border={bottom:{style:'medium',color:{argb:C.or}},left:{style:'thin',color:{argb:'FF2C4A68'}},right:{style:'thin',color:{argb:'FF2C4A68'}}}});
+  // datos
+  rows.forEach((r,ri)=>{const row=ws.getRow(7+ri);let lines=1;cols.forEach((c,i)=>{const x=row.getCell(i+1);let v=r[c];const raw=String(v??'');lines=Math.max(lines,...raw.split('\n').map(s=>Math.ceil((s.length||1)/Math.max(1,W[i]-2))));
+   if(typeof v==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(v)){const d=pd(v);v=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));x.numFmt='dd-mm-yyyy'}x.value=v??'';
+   const f={name:'Calibri',size:10,color:{argb:C.ink}};if(v==='X'||v==='No cumple'||v==='Positivo'||v==='Abierto'||v==='Con hallazgos'){f.color={argb:C.bad};f.bold=true}else if(v==='✓'||v==='Cumple'||v==='Negativo'||v==='Cerrado'||v==='Sin hallazgos'){f.color={argb:C.ok};f.bold=true}if(typeof v==='number'&&v<0){f.color={argb:C.bad};f.bold=true}x.font=f;
+   x.alignment={vertical:'middle',horizontal:numCol[i]?'right':(v instanceof Date||raw.length<=3?'center':'left'),wrapText:true,indent:numCol[i]?0:0};
+   x.fill={type:'pattern',pattern:'solid',fgColor:{argb:ri%2?C.z2:C.z1}};x.border={top:thin,bottom:thin,left:thin,right:thin}});row.height=Math.max(28,lines*14+8)});
+  if(rows0.length)ws.autoFilter={from:{row:6,column:1},to:{row:6,column:last}};
+  ws.pageSetup.printTitlesRow='1:6';
+  ws.headerFooter.oddFooter='&L&8'+String(cfg.empresa||"Cordon's Heavy Equipment").replace(/&/g,'&&')+' · SISO&R&8Página &P de &N';
  }
  const buf=await wb.xlsx.writeBuffer();
  await saveFile(name+'.xlsx',new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));toast('Excel listo')}
@@ -418,9 +434,10 @@ async function makePDF(k,r){const J=await loadPdf(),doc=new J({unit:'mm',format:
  const kv=(l,v)=>{if(v===''||v==null)return;doc.setFontSize(10);const ln=doc.splitTextToSize(T(v),CW-50);need(ln.length*4.6+2);doc.setFont('helvetica','bold');doc.setTextColor(90);doc.text(T(l),X,y);doc.setFont('helvetica','normal');doc.setTextColor(20);doc.text(ln,X+50,y);y+=ln.length*4.6+2};
  const title=pdfTitle(k,r);
  doc.setFillColor(20,20,20);doc.rect(0,0,W,27,'F');doc.setFillColor(255,90,0);doc.rect(0,27,W,2.5,'F');
- doc.setTextColor(255);doc.setFont('helvetica','bold');doc.setFontSize(16);doc.text(T(title),X,12);doc.setFont('helvetica','normal');doc.setFontSize(9.5);
+ try{const lg=await loadLogo();if(lg){const lh=11,lw=lh*lg.w/lg.h;doc.addImage(lg.du,'PNG',W-X-lw,3.5,lw,lh)}}catch(e){}
+ doc.setTextColor(255);doc.setFont('helvetica','bold');doc.setFontSize(15);doc.text(T(title),X,12,{maxWidth:W-2*X-74});doc.setFont('helvetica','normal');doc.setFontSize(9.5);
  doc.text(T((cfg.empresa?cfg.empresa+'  |  ':'')+'Proyecto '+(cfg.proyecto||'Yorito - Empalme RN-23')),X,19);doc.text(T('Seguridad y Salud Ocupacional (SISO)'),X,24);
- doc.setFontSize(9);doc.text(T((r.codigo?r.codigo+'  |  ':'')+'Fecha: '+fdmy(r.fecha||today())),W-X,12,{align:'right'});
+ doc.setFontSize(9);doc.text(T((r.codigo?r.codigo+'  |  ':'')+'Fecha: '+fdmy(r.fecha||today())),W-X,23,{align:'right'});
  y=40;doc.setTextColor(20);
  const m=M[k];const plain=m.f.filter(f=>!['chk','fotos','firma','lista','area'].includes(f.t)),areas=m.f.filter(f=>f.t==='area');
  H('Datos del registro');for(const f of plain){let v=r[f.k];if(f.t==='date')v=v?fdmy(v):'';kv(f.l,v)}
