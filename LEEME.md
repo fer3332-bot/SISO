@@ -80,6 +80,14 @@ En **Informe → Control de riesgo** está la misma tabla de tu formato *Control
 
 Cada Excel que descargas lleva arriba el logo de la empresa, el título del proyecto, el nombre del documento, la fecha y el responsable. El título y el nombre del responsable se cambian en **Proyecto**. Para cambiar el logo, reemplaza `icons/logo-empresa.png` por otra imagen PNG con el mismo nombre.
 
+## Despliegue diario de señalización
+
+En **Registrar → Despliegue de señalización del día** anotas el frente de trabajo, el tramo (por ejemplo 12+300 a 12+900) y cada rótulo con su cantidad y estación. Usa **Duplicar el último** y cambia solo lo que se movió. El inventario de señalización toma el último despliegue para calcular *en uso* y *en plantel*, y cada rótulo muestra su historial de estaciones. Cada despliegue cuenta como inspección de señalización vial en el Control de riesgo.
+
+## Marca de agua en las fotos
+
+Cada foto se guarda con el logo, día y hora, clima, lugar, coordenadas GPS, el registro (con equipo, persona o estación) y el proyecto. La primera vez el teléfono pide permiso de ubicación: acéptalo. Sin señal salen fecha, hora, coordenadas y registro (el clima y el lugar necesitan internet). Se puede apagar en **Proyecto**.
+
 ## Fotos y firmas en el Excel
 
 - La **firma** aparece como imagen dentro de su celda.
