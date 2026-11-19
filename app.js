@@ -163,10 +163,10 @@ async function importData(d){const rows=[];if(d.config)rows.push({modulo:'config
 
 /* ---------- vistas ---------- */
 let view='hoy',modOpen=null,filt={q:'',mes:today().slice(0,7)},infMes=today().slice(0,7);
-function route(){const h=location.hash.slice(1)||'hoy';if(h.startsWith('m-')&&M[h.slice(2)]){view='mod';modOpen=h.slice(2)}else view=['hoy','agenda','nuevo','registros','informe','control'].includes(h)?h:'hoy';
- for(const a of document.querySelectorAll('nav a'))a.classList.toggle('on',a.dataset.v===(view==='mod'?'registros':view==='control'?'informe':view));render();scrollTo(0,0)}
+function route(){const h=location.hash.slice(1)||'hoy';if(h.startsWith('m-')&&M[h.slice(2)]){view='mod';modOpen=h.slice(2)}else view=['hoy','agenda','nuevo','registros','informe','control','fotos'].includes(h)?h:'hoy';
+ for(const a of document.querySelectorAll('nav a'))a.classList.toggle('on',a.dataset.v===(view==='mod'?'registros':view==='control'?'informe':view==='fotos'?'registros':view));render();scrollTo(0,0)}
 addEventListener('hashchange',route);
-function render(){syncBadge();if(!user){vLogin();return}if(!ready&&!loadNote)return;const m=$('#main');m.innerHTML=(loadNote?'<p class="note">'+esc(loadNote)+'</p>':'')+(firstRun()?seedBanner():'')+({hoy:vHoy,agenda:vAgenda,nuevo:vNuevo,registros:vReg,informe:vInf,mod:vMod,control:vCtl}[view])()}
+function render(){syncBadge();if(!user){vLogin();return}if(!ready&&!loadNote)return;const m=$('#main');m.innerHTML=(loadNote?'<p class="note">'+esc(loadNote)+'</p>':'')+(firstRun()?seedBanner():'')+({hoy:vHoy,agenda:vAgenda,nuevo:vNuevo,registros:vReg,informe:vInf,mod:vMod,control:vCtl,fotos:vFotos}[view])()}
 const R=k=>S[k]||[];
 const row=(o)=>`<div class="row ${o.click?'click':''}" ${o.click?`data-act="${o.click}" tabindex="0"`:''}>${o.left||''}<div class="tx"><b>${esc(o.t)}</b>${o.s?`<small>${esc(o.s)}</small>`:''}</div>${o.tag?`<span class="tag ${o.tag[0]}">${esc(o.tag[1])}</span>`:''}${o.right||''}</div>`;
 
@@ -193,7 +193,7 @@ function vHoy(){const t=today(),d=pd(t);
  ${venc.length+hoy.length?`<section><div class="sh"><h2>Pendiente</h2></div><div class="card">${[...venc,...hoy].map(task).join('')}</div></section>`:''}
  ${act.length?`<section><div class="sh"><h2>Preoperatorio de hoy</h2><small>${falta.length?'Toca un equipo para registrarlo':'Todos los equipos activos revisados'}</small></div><div class="chips">${act.map(e=>`<button class="chip" data-act="${con.has(e.inv)?'goto:insp':'pre:'+esc(e.inv)}" style="${con.has(e.inv)?'border-color:var(--ok);color:var(--ok)':''}">${con.has(e.inv)?'✓ ':''}${esc(e.inv)}</button>`).join('')}</div></section>`:''}
  ${ch.length?`<section><div class="sh"><h2>Charla del día</h2></div><div class="card">${ch.map(c=>row({t:c.tema,s:(c.area||'')+' · '+nAs(c)+' asistentes',tag:c.estado==='Impartida'?['ok','Impartida']:['yl','Programada'],click:'edit:charlas:'+c.id})).join('')}</div></section>`:''}
- ${(()=>{const p=pace(),late=p.filter(x=>x.st==='late');return p.length?`<section><div class="sh"><h2>Control de riesgo del mes</h2><a href="#control">Ver tabla</a></div><div class="card">${p.map(x=>`<div class="row click" data-act="new:${x.a.go}" tabindex="0"><div class="tx"><b>${esc(x.a.n)}</b><div class="bar" style="margin-top:6px"><i style="width:${Math.min(100,Math.round(x.v/x.obj*100))}%;background:${x.st==='late'?'var(--bad)':x.st==='on'?'var(--or)':'var(--ok)'}"></i></div></div><span class="tag ${x.st==='late'?'bad':x.st==='ok'?'ok':'or'}">${x.v} / ${x.obj}</span></div>`).join('')}</div><p class="hint">${late.length?late.length+' actividad'+(late.length>1?'es van':' va')+' atrasada'+(late.length>1?'s':'')+' respecto al día del mes.':'Todas las actividades van al día con su meta.'}</p></section>`:''})()}<section id="alertas"><div class="sh"><h2>Alertas</h2></div><div class="card">${al.length?al.map(row).join(''):'<p class="empty">Nada vencido ni por vencer. Las licencias, extintores, sucesos abiertos y hallazgos aparecerán aquí.</p>'}</div></section>
+ ${(()=>{const p=pace(),late=p.filter(x=>x.st==='late');return p.length?`<section><div class="sh"><h2>Control de riesgo del mes</h2><a href="#control">Ver tabla</a></div><div class="card">${p.map(x=>`<div class="row click" data-act="new:${x.a.go}" tabindex="0"><div class="tx"><b>${esc(x.a.n)}</b><div class="bar" style="margin-top:6px"><i style="width:${Math.min(100,Math.round(x.v/x.obj*100))}%;background:${x.st==='late'?'var(--bad)':x.st==='on'?'var(--or)':'var(--ok)'}"></i></div></div><span class="tag ${x.st==='late'?'bad':x.st==='ok'?'ok':'or'}">${x.v} / ${x.obj}</span></div>`).join('')}</div><p class="hint">${late.length?late.length+' actividad'+(late.length>1?'es van':' va')+' atrasada'+(late.length>1?'s':'')+' respecto al día del mes.':'Todas las actividades van al día con su meta.'}</p></section>`:''})()}${(()=>{const n=ORDER.reduce((a,k)=>a+R(k).filter(r=>r.fecha===today()).reduce((b,r)=>b+(r.fotos||[]).length,0),0);return n?`<section><div class="sh"><h2>Fotos de hoy</h2><a href="#fotos">Ver y compartir (${n})</a></div></section>`:''})()}<section id="alertas"><div class="sh"><h2>Alertas</h2></div><div class="card">${al.length?al.map(row).join(''):'<p class="empty">Nada vencido ni por vencer. Las licencias, extintores, sucesos abiertos y hallazgos aparecerán aquí.</p>'}</div></section>
  <section><div class="sh"><h2>Próximos 7 días</h2><a href="#agenda">Ver agenda</a></div><div class="card">${prox.length?prox.map(task).join(''):'<p class="empty">Sin entregas programadas.</p>'}</div></section>`}
 
 let agMes=today().slice(0,7);
@@ -204,7 +204,7 @@ function vAgenda(){const[y,mo]=agMes.split('-').map(Number),from=agMes+'-01',to=
  <p class="note" style="margin-top:16px">Rutina diaria: checklist preoperatorio de cada equipo, charla de 5 minutos (lunes, miércoles y jueves en campo; martes en oficinas) y pruebas de alcohol programadas.</p>`}
 
 function vNuevo(){return `<h2 style="margin-bottom:14px">¿Qué vas a registrar?</h2><div class="grid">${ORDER.map(k=>`<button class="tile" data-act="new:${k}"><b>${M[k].s}</b><small>${M[k].d}</small></button>`).join('')}</div>`}
-function vReg(){return `<div class="sh"><h2>Registros</h2><button class="btn sm" data-act="xall">Exportar todo a Excel</button></div><div class="grid">`+['epp','botiquin'].map(k=>{const sm=Object.values(stockMap(M[k].inv));return `<a class="tile inv" href="#m-${k}" style="text-decoration:none"><b>Inventario de ${k==='epp'?'EPP':'botiquín'}</b><small>${sm.length} artículos · ${sm.reduce((a,v)=>a+Math.max(0,v.ex),0)} en existencia</small></a>`}).join('')+`${ORDER.map(k=>`<a class="tile" href="#m-${k}" style="text-decoration:none"><b>${M[k].n}</b><small>${R(k).length} registro${R(k).length===1?'':'s'}</small></a>`).join('')}</div>`}
+function vReg(){return `<div class="sh"><h2>Registros</h2><button class="btn sm" data-act="xall">Exportar todo a Excel</button></div><div class="grid"><a class="tile inv" href="#fotos" style="text-decoration:none"><b>Fotos del día</b><small>Ver, descargar y compartir por WhatsApp</small></a>`+['epp','botiquin'].map(k=>{const sm=Object.values(stockMap(M[k].inv));return `<a class="tile inv" href="#m-${k}" style="text-decoration:none"><b>Inventario de ${k==='epp'?'EPP':'botiquín'}</b><small>${sm.length} artículos · ${sm.reduce((a,v)=>a+Math.max(0,v.ex),0)} en existencia</small></a>`}).join('')+`${ORDER.map(k=>`<a class="tile" href="#m-${k}" style="text-decoration:none"><b>${M[k].n}</b><small>${R(k).length} registro${R(k).length===1?'':'s'}</small></a>`).join('')}</div>`}
 
 function invTable(c){const sm=stockMap(c),rows=Object.values(sm).sort((a,b)=>String(a.cat?a.cat.nombre:a.name).localeCompare(String(b.cat?b.cat.nombre:b.name)));
  return `<section style="margin-top:0"><div class="sh"><h3>Inventario real</h3><div class="tools" style="margin:0"><button class="btn sm" data-act="new:${c}">+ Artículo</button><button class="btn sm" data-act="inmov:${M[c].mov}">+ Entrada</button></div></div>
@@ -267,7 +267,7 @@ function fieldHTML(f,r){const v=r[f.k]??'',id='f_'+f.k,ro=f.ro?'readonly':'';let
 function chkHTML(f,r){const its=f.o(r),cur=r[f.k]||{},lb=f.labels||['Cumple','No cumple','N/A'];
  return `<div style="display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap"><button type="button" class="btn sm" data-act="allC:${f.k}">Todo ${lb[0].toLowerCase()}</button><small style="color:var(--mut);align-self:center">C = ${lb[0]} · X = ${lb[1]} · NA = ${lb[2]}</small></div>`+its.map((it,i)=>{const v=cur[it]||'C';return`<div class="ci"><span>${esc(it)}</span><div class="seg" data-it="${esc(it)}">${[['C','C'],['N','X'],['A','NA']].map(([c,t])=>`<button type="button" class="${v===c?c:''}" data-v="${c}" aria-label="${esc(it)}: ${[lb[0],lb[1],lb[2]][['C','N','A'].indexOf(c)]}">${t}</button>`).join('')}</div></div>`}).join('')}
 const liRow=(i,vida)=>`<div class="li-row ${vida&&vida!=='0'?'':'nv'}"><input class="li-a" list="dl_cat" value="${esc(i.art||'')}" placeholder="Buscar artículo…" aria-label="Artículo" autocomplete="off"><input class="li-c" type="number" inputmode="numeric" min="1" value="${esc(i.cant||1)}" aria-label="Cantidad">${vida==='est'?`<input class="li-e" value="${esc(i.est||'')}" placeholder="12+300" aria-label="Estación" autocomplete="off">`:vida&&vida!=='0'?`<input class="li-v" type="number" inputmode="numeric" value="${esc(i.vida||'')}" aria-label="Vida útil en meses">`:''}<button type="button" class="btn sm" data-act="rmli" aria-label="Quitar artículo">✕</button></div>`;
-function fotosHTML(){const f=cur?cur.fotos:[];return f.map((id,i)=>`<div class="ph"><img data-sid="${esc(id)}" alt="Foto ${i+1}"><button type="button" data-act="rmph:${i}" aria-label="Quitar foto">✕</button></div>`).join('')+(cur&&cur.up?`<div class="ph" style="display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--mut)">Subiendo ${cur.up}…</div>`:'')+(as&&navigator.onLine?`<label class="addph">+ Foto<br>cámara o galería<input class="phin" type="file" accept="image/*" multiple></label>`:'<small style="color:var(--mut)">Sin conexión: las fotos se agregan cuando vuelva la señal.</small>')}
+function fotosHTML(){const f=cur?cur.fotos:[];return f.map((id,i)=>`<div class="ph"><img data-sid="${esc(id)}" alt="Foto ${i+1}" data-act="viewph:${i}" role="button" tabindex="0" style="cursor:zoom-in"><button type="button" data-act="rmph:${i}" aria-label="Quitar foto">✕</button></div>`).join('')+(cur&&cur.up?`<div class="ph" style="display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--mut)">Subiendo ${cur.up}…</div>`:'')+(as&&navigator.onLine?`<label class="addph">+ Foto<br>cámara o galería<input class="phin" type="file" accept="image/*" multiple></label>`:'<small style="color:var(--mut)">Sin conexión: las fotos se agregan cuando vuelva la señal.</small>')}
 function sigHTML(){if(cur&&cur.firma&&!cur.resign)return `<img data-sid="${esc(cur.firma)}" alt="Firma"><div class="sr"><small>Firmado${cur.r.firmaFecha?' el '+fmt(cur.r.firmaFecha):''}</small><button type="button" class="btn sm" data-act="resign">Volver a firmar</button></div>`;
  return `<canvas id="sigc" aria-label="Recuadro para firmar con el dedo"></canvas><div class="sr"><small>Que la persona firme con el dedo dentro del recuadro</small><button type="button" class="btn sm" data-act="sigclear">Borrar</button></div>`}
 function initSig(){const c=$('#sigc');if(!c)return;const b=c.getBoundingClientRect(),dpr=window.devicePixelRatio||1;c.width=Math.round(b.width*dpr);c.height=Math.round(b.height*dpr);const x=c.getContext('2d');x.scale(dpr,dpr);x.lineWidth=2.6;x.lineCap='round';x.lineJoin='round';x.strokeStyle='#111';let dn=false;
@@ -488,6 +488,51 @@ async function stamp(c,st){const x=c.getContext('2d'),W=c.width,H=c.height,u=Mat
  x.shadowColor='transparent';
  x.font=`600 ${Math.round(u*0.55)}px Barlow,Arial,sans-serif`;x.fillStyle='rgba(255,255,255,.75)';x.textAlign='right';x.fillText('SISO · '+(cfg.empresa||"Cordon's Heavy Equipment"),W-pad,H-pad-Math.round(u*0.6));x.textAlign='left'}
 const pad2=n=>String(n).padStart(2,'0');
+
+/* ---------- fotos: ver, descargar y compartir (con marca de agua) ---------- */
+const phBlob={};
+function getPh(id){return phBlob[id]||(phBlob[id]=fileBlob(id).catch(e=>{delete phBlob[id];throw e}))}
+const quien=(k,r)=>r.equipo||r.persona||r.involucrado||r.tema||r.frente||(r.sol||'').replace(/ · .*/,'')||r.tipo||r.senal||'';
+const phName=(k,r,i)=>(fdmy(r.fecha||today())+' '+M[k].s+(quien(k,r)?' - '+quien(k,r):'')+' ('+(i+1)+').jpg').replace(/[\\/:*?"<>|]/g,'').replace(/\s+/g,' ');
+async function shareFiles(files,title){
+ if(navigator.canShare&&navigator.canShare({files})){try{await navigator.share({files,title,text:title});return true}catch(e){if(e&&e.name==='AbortError')return true}}
+ for(const f of files){await saveFile(f.name,f);await new Promise(r=>setTimeout(r,350))}toast(files.length>1?files.length+' fotos descargadas':'Foto descargada');return true}
+/* visor a pantalla completa */
+let vw=null;
+function viewer(k,r,i){const id=(r.fotos||[])[i];if(!id)return;getPh(id).catch(()=>{});
+ if(!vw){vw=document.createElement('div');vw.id='viewer';document.body.appendChild(vw)}
+ const n=(r.fotos||[]).length;
+ vw.innerHTML=`<div class="vw-top"><span>${esc(M[k].s)} · ${fdmy(r.fecha)} · ${i+1} de ${n}</span><button class="btn sm dk" data-act="vwclose" aria-label="Cerrar">✕</button></div>
+ <div class="vw-img"><img data-sid="${esc(id)}" alt="Foto ${i+1}"></div>
+ <div class="vw-bar">${n>1?`<button class="btn" data-act="vwgo:${i-1}" ${i?'':'disabled'} aria-label="Foto anterior">‹</button>`:''}<button class="btn pri" data-act="vwshare">Compartir</button><button class="btn" data-act="vwdl">Descargar</button>${n>1?`<button class="btn" data-act="vwgo:${i+1}" ${i<n-1?'':'disabled'} aria-label="Foto siguiente">›</button>`:''}</div>`;
+ vw.dataset.k=k;vw.dataset.i=i;vw._r=r;vw.classList.add('on')}
+/* galería del día */
+let galDate=today(),galMod='',sel=new Set();
+function galItems(){const out=[];for(const k of ORDER){if(galMod&&k!==galMod)continue;for(const r of R(k))if(r.fecha===galDate&&(r.fotos||[]).length)out.push({k,r})}return out.sort((a,b)=>String(a.r.creado||'').localeCompare(String(b.r.creado||'')))}
+function vFotos(){const it=galItems(),all=it.flatMap(x=>x.r.fotos.map((id,i)=>({...x,id,i}))),ns=[...sel].filter(id=>all.some(a=>a.id===id)).length;
+ const mods=[...new Set(ORDER.filter(k=>R(k).some(r=>r.fecha===galDate&&(r.fotos||[]).length)))];
+ return `<div class="sh"><h2>Fotos del día</h2><a href="#registros">Registros</a></div>
+ <div class="tools"><input id="galdate" type="date" value="${galDate}" aria-label="Fecha"><select id="galmod" aria-label="Formato"><option value="">Todos los formatos</option>${mods.map(k=>`<option value="${k}" ${k===galMod?'selected':''}>${esc(M[k].n)}</option>`).join('')}</select></div>
+ ${all.length?`<div class="tools"><button class="btn" data-act="galall">${ns===all.length?'Quitar selección':'Seleccionar todas'}</button><button class="btn pri" data-act="galshare" ${ns?'':'disabled'}>Compartir (${ns})</button><button class="btn" data-act="galdl" ${ns?'':'disabled'}>Descargar (${ns})</button></div>
+ ${it.map(x=>`<section style="margin:16px 0"><h3 style="margin-bottom:6px">${esc(M[x.k].s)}${quien(x.k,x.r)?' · '+esc(quien(x.k,x.r)):''}</h3><div class="gal">${x.r.fotos.map((id,i)=>`<div class="gph ${sel.has(id)?'sel':''}"><img data-sid="${esc(id)}" alt="Foto ${i+1}" data-act="galview:${x.k}:${esc(x.r.id)}:${i}" role="button" tabindex="0"><button class="ck" data-act="galtog:${esc(id)}" aria-pressed="${sel.has(id)}" aria-label="Seleccionar foto ${i+1}">✓</button></div>`).join('')}</div></section>`).join('')}`
+ :`<p class="empty card">No hay fotos registradas el ${fdmy(galDate)}.</p>`}
+ <p class="hint">Toca una foto para verla, descargarla o compartirla. Marca varias con ✓ para mandarlas juntas. Las fotos se descargan y comparten tal como se guardaron, con su marca de agua. En el celular, “Compartir” abre WhatsApp y las demás apps.</p>`}
+async function filesOf(ids){const all=galItems().flatMap(x=>x.r.fotos.map((id,i)=>({...x,id,i})));const out=[];for(const id of ids){const a=all.find(x=>x.id===id);try{const b=await getPh(id);out.push(new File([b],a?phName(a.k,a.r,a.i):'foto.jpg',{type:b.type||'image/jpeg'}))}catch(e){}}return out}
+document.addEventListener('click',async ev=>{const b=ev.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
+ if(a.startsWith('viewph:')&&cur){let cv={};try{cv=collect()}catch(e){}viewer(cur.k,{...cur.r,...cv,fotos:cur.fotos,fecha:cv.fecha||cur.r.fecha||today()},+a.slice(7));return}
+ if(a==='vwclose'){vw.classList.remove('on');vw.innerHTML='';return}
+ if(a.startsWith('vwgo:')){viewer(vw.dataset.k,vw._r,+a.slice(5));return}
+ if(a==='vwshare'||a==='vwdl'){const k=vw.dataset.k,i=+vw.dataset.i,r=vw._r,id=r.fotos[i];b.disabled=true;try{const bl=await getPh(id);const f=new File([bl],phName(k,r,i),{type:bl.type||'image/jpeg'});if(a==='vwshare')await shareFiles([f],M[k].s+' '+fdmy(r.fecha));else{await saveFile(f.name,f);toast('Foto descargada')}}catch(e){toast('No se pudo obtener la foto (revisa la señal)')}b.disabled=false;return}
+ if(a.startsWith('galtog:')){const id=a.slice(7);if(sel.has(id))sel.delete(id);else{sel.add(id);getPh(id).catch(()=>{})}render();return}
+ if(a==='galall'){const all=galItems().flatMap(x=>x.r.fotos);const ns=[...sel].filter(id=>all.includes(id)).length;if(ns===all.length)sel.clear();else for(const id of all){sel.add(id);getPh(id).catch(()=>{})}render();return}
+ if(a.startsWith('galview:')){const [,k,id,i]=a.split(':');const r=R(k).find(x=>x.id===id);if(r)viewer(k,r,+i||0);return}
+ if(a==='galshare'||a==='galdl'){const all=galItems().flatMap(x=>x.r.fotos);const ids=[...sel].filter(id=>all.includes(id));if(!ids.length)return;b.disabled=true;b.textContent='Preparando…';
+  const fs=await filesOf(ids);if(!fs.length){toast('No se pudieron obtener las fotos (revisa la señal)');render();return}
+  if(a==='galshare')await shareFiles(fs,'Informe diario SISO '+fdmy(galDate)+' · '+(cfg.proyecto||''));else{for(const f of fs){await saveFile(f.name,f);await new Promise(r=>setTimeout(r,350))}toast(fs.length+' fotos descargadas')}
+  render();return}
+});
+document.addEventListener('change',e=>{if(e.target.id==='galdate'){galDate=e.target.value||today();galMod='';render()}if(e.target.id==='galmod'){galMod=e.target.value;render()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&vw&&vw.classList.contains('on')){vw.classList.remove('on');vw.innerHTML=''}});
 
 /* ---------- PDF ---------- */
 let pdfP=null;

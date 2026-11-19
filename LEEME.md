@@ -88,6 +88,11 @@ En **Registrar → Despliegue de señalización del día** anotas el frente de t
 
 Cada foto se guarda con el logo, día y hora, clima, lugar, coordenadas GPS, el registro (con equipo, persona o estación) y el proyecto. La primera vez el teléfono pide permiso de ubicación: acéptalo. Sin señal salen fecha, hora, coordenadas y registro (el clima y el lugar necesitan internet). Se puede apagar en **Proyecto**.
 
+## Descargar y compartir fotos
+
+- **Toca cualquier foto** (dentro de un registro o en la galería) para verla en grande con dos botones: **Compartir** (abre WhatsApp y las demás apps) y **Descargar**. La foto sale con su marca de agua y con un nombre claro, por ejemplo `19-11-2026 Charla de seguridad - Ojos y mente en la tarea (1).jpg`.
+- **Registros → Fotos del día** (o el enlace *Fotos de hoy* en Hoy) junta todas las fotos de una fecha. Marca varias con ✓ y usa **Compartir** para mandarlas juntas al grupo del informe diario.
+
 ## Fotos y firmas en el Excel
 
 - La **firma** aparece como imagen dentro de su celda.

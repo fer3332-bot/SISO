@@ -1,5 +1,5 @@
 // Service worker: la app abre sin señal con la última versión guardada.
-const VER = 'siso-v9-2026-11-18';
+const VER = 'siso-v10-2026-11-19';
 const SHELL = ['./', './index.html', './app.js', './config.js', './manifest.webmanifest', './datos-iniciales.json',
   './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './icons/logo-empresa.png'];
 const CDN = /^https:\/\/(cdn\.jsdelivr\.net|cdnjs\.cloudflare\.com|fonts\.googleapis\.com|fonts\.gstatic\.com)\//;
