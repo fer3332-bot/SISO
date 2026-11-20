@@ -153,7 +153,7 @@ new MutationObserver(hydrate).observe(document.body,{childList:true,subtree:true
 async function fileBlob(id){const {data,error}=await sb.storage.from(BUCKET).download(id);if(error)throw error;return data}
 async function openFile(id){const w=window.open('','_blank');try{const [u]=await signed([id]);if(!u)throw 0;if(w)w.location.href=u;else location.href=u}catch(e){if(w)w.close();toast('No se pudo abrir el archivo (revisa la conexión)')}}
 async function saveFile(name,blob){const f=new File([blob],name,{type:blob.type||'application/octet-stream'});
- if(/iPhone|iPad|iPod/.test(navigator.userAgent)&&navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:name});return}catch(e){if(e&&e.name==='AbortError')return}}
+ if(/iPhone|iPad|iPod/.test(navigator.userAgent)&&navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f]});return}catch(e){if(e&&e.name==='AbortError')return}}
  const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),60000)}
 /* acceso */
 function vLogin(){const m=$('#main');
@@ -504,7 +504,7 @@ function getPh(id){return phBlob[id]||(phBlob[id]=fileBlob(id).catch(e=>{delete 
 const quien=(k,r)=>r.equipo||r.persona||r.involucrado||r.tema||r.frente||(r.sol||'').replace(/ · .*/,'')||r.tipo||r.senal||'';
 const phName=(k,r,i)=>(fdmy(r.fecha||today())+' '+M[k].s+(quien(k,r)?' - '+quien(k,r):'')+' ('+(i+1)+').jpg').replace(/[\\/:*?"<>|]/g,'').replace(/\s+/g,' ');
 async function shareFiles(files,title){
- if(navigator.canShare&&navigator.canShare({files})){try{await navigator.share({files,title,text:title});return true}catch(e){if(e&&e.name==='AbortError')return true}}
+ if(navigator.canShare&&navigator.canShare({files})){try{await navigator.share({files});return true}catch(e){if(e&&e.name==='AbortError')return true}}
  for(const f of files){await saveFile(f.name,f);await new Promise(r=>setTimeout(r,350))}toast(files.length>1?files.length+' fotos descargadas':'Foto descargada');return true}
 /* visor a pantalla completa */
 let vw=null;
