@@ -103,6 +103,14 @@ Donde un documento lleva firma aparece el botón **Firmar**. Se abre una hoja en
 - Cada **foto** aparece como un enlace “Ver foto 1”, “Ver foto 2”… que abre o descarga la imagen. Los enlaces funcionan **1 año** desde que descargas el Excel; si necesitas uno más reciente, vuelve a descargarlo. Cualquier persona que tenga el Excel puede abrir esas fotos.
 - Para generar el Excel con fotos y firmas necesitas señal.
 
+## Reporte de sucesos en Excel
+Cada suceso se descarga con el botón **Reporte en Excel**, usando el formato de la empresa (FORMATO_REPORTE_DE_SUCESOS). El archivo tiene tres hojas:
+- **REPORTE DE SUCESOS**: el formato completo de una hoja, con las casillas marcadas (tipo, clima, clasificación de causas, daños personales y materiales). Si una versión es muy larga, las filas se agrandan solas.
+- **VERSIONES**: la hoja de versión de cada participante y la versión técnica, con su firma y la del inspector SISO.
+- **RESPALDO FOTOGRÁFICO**: las fotos del suceso, tres por fila. Necesita conexión para bajarlas.
+
+En la clasificación de causas puedes marcar varias. Al escoger el nombre de cada participante se llenan solos el cargo y el número de identidad (si lo tiene registrado en Personal).
+
 ## Respaldo
 
 En **Proyecto → Descargar respaldo** obtienes un `.json` con todo. Con **Importar respaldo** lo restauras.

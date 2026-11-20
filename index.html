@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#141414">
-<meta name="description" content="Control diario SISO del proyecto: inspecciones, charlas, EPP, botiquín, sucesos y entregas.">
+<meta name="description" content="Control diario de Seguridad Industrial y Salud Ocupacional (SISO) del proyecto: inspecciones, charlas, EPP, botiquín, sucesos y entregas.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -68,6 +68,7 @@ section{margin:22px 0}
 .chk{width:44px;height:44px;flex:none;border-radius:8px;border:2px solid var(--line);background:var(--card);cursor:pointer;font:800 22px Barlow,system-ui,sans-serif;color:var(--ok)}
 .chk.done{background:var(--ok);border-color:var(--ok);color:#fff}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
+.multi{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px}.multi label{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--card);font:500 14px Barlow,system-ui,sans-serif;cursor:pointer;min-height:40px}.multi input{width:20px;height:20px;flex:none;accent-color:#c0392b}.multi label:has(input:checked){border-color:#c0392b;background:#fdecea}
 .chip{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:6px 12px;font:600 14px Barlow,system-ui,sans-serif;cursor:pointer;min-height:36px;color:var(--ink)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
 .tile{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;cursor:pointer;text-align:left;color:var(--ink);font:inherit;min-height:84px}

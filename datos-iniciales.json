@@ -200,6 +200,16 @@
     "asignado": "Merlin Adalid Ramos Diaz",
     "estado": "Activo",
     "marca": "Foton"
+   },
+   {
+    "id": "PS-757",
+    "inv": "PS-757",
+    "tipo": "Pick-up",
+    "marca": "Foton",
+    "modelo": "Tunland",
+    "placa": "",
+    "asignado": "",
+    "estado": "Activo"
    }
   ],
   "personal": [
@@ -243,14 +253,18 @@
     "items": {
      "Seguro": "C",
      "Pasador": "C",
-     "Boquilla / manguera": "C",
+     "Boquilla": "C",
+     "Manguera / boquilla": "C",
      "Manómetro": "C",
      "Palanca de disparo": "C",
-     "Arnés o base": "C",
-     "Cilindro": "C"
+     "Arnés o base del extintor": "C",
+     "Estado del cilindro": "C"
     },
     "obs": "Etiqueta de recarga y vencimiento ilegible. Cargado del archivo de inspección de extintores de noviembre 2026.",
-    "fotos": []
+    "fotos": [],
+    "tipoeq": "Tractor",
+    "modelo": "CAT D6T",
+    "etq": "No se lee"
    },
    {
     "id": "x-T-REY",
@@ -262,14 +276,18 @@
     "items": {
      "Seguro": "A",
      "Pasador": "A",
-     "Boquilla / manguera": "C",
+     "Boquilla": "C",
+     "Manguera / boquilla": "C",
      "Manómetro": "C",
      "Palanca de disparo": "C",
-     "Arnés o base": "C",
-     "Cilindro": "N"
+     "Arnés o base del extintor": "C",
+     "Estado del cilindro": "N"
     },
     "obs": "Sin seguro ni pasador; cilindro en mal estado; etiqueta ilegible. Cargado del archivo de inspección de extintores de noviembre 2026.",
-    "fotos": []
+    "fotos": [],
+    "tipoeq": "Tractor",
+    "modelo": "CAT D6H",
+    "etq": "No se lee"
    },
    {
     "id": "x-TA-141",
@@ -281,14 +299,18 @@
     "items": {
      "Seguro": "C",
      "Pasador": "C",
-     "Boquilla / manguera": "C",
+     "Boquilla": "C",
+     "Manguera / boquilla": "C",
      "Manómetro": "C",
      "Palanca de disparo": "C",
-     "Arnés o base": "C",
-     "Cilindro": "C"
+     "Arnés o base del extintor": "C",
+     "Estado del cilindro": "C"
     },
     "obs": "Cargado del archivo de inspección de extintores de noviembre 2026.",
-    "fotos": []
+    "fotos": [],
+    "tipoeq": "Tanque de agua",
+    "modelo": "Mack MACK",
+    "etq": "Legible"
    },
    {
     "id": "x-TA-342",
@@ -300,14 +322,18 @@
     "items": {
      "Seguro": "C",
      "Pasador": "C",
-     "Boquilla / manguera": "C",
+     "Boquilla": "C",
+     "Manguera / boquilla": "C",
      "Manómetro": "C",
      "Palanca de disparo": "C",
-     "Arnés o base": "C",
-     "Cilindro": "N"
+     "Arnés o base del extintor": "C",
+     "Estado del cilindro": "N"
     },
     "obs": "Cilindro pelado. Cargado del archivo de inspección de extintores de noviembre 2026.",
-    "fotos": []
+    "fotos": [],
+    "tipoeq": "Tanque de agua",
+    "modelo": "Mack MACK",
+    "etq": "Legible"
    },
    {
     "id": "x-CZ-236",
@@ -319,14 +345,18 @@
     "items": {
      "Seguro": "C",
      "Pasador": "C",
-     "Boquilla / manguera": "C",
+     "Boquilla": "C",
+     "Manguera / boquilla": "C",
      "Manómetro": "C",
      "Palanca de disparo": "C",
-     "Arnés o base": "C",
-     "Cilindro": "C"
+     "Arnés o base del extintor": "C",
+     "Estado del cilindro": "C"
     },
     "obs": "Cargado del archivo de inspección de extintores de noviembre 2026.",
-    "fotos": []
+    "fotos": [],
+    "tipoeq": "Cabezal",
+    "modelo": "Mack MACK",
+    "etq": "Legible"
    }
   ],
   "catepp": [
