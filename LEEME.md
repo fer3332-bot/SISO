@@ -93,6 +93,10 @@ Cada foto se guarda con el logo, día y hora, clima, lugar, coordenadas GPS, el 
 - **Toca cualquier foto** (dentro de un registro o en la galería) para verla en grande con dos botones: **Compartir** (abre WhatsApp y las demás apps) y **Descargar**. La foto sale con su marca de agua y con un nombre claro, por ejemplo `19-11-2026 Charla de seguridad - Ojos y mente en la tarea (1).jpg`.
 - **Registros → Fotos del día** (o el enlace *Fotos de hoy* en Hoy) junta todas las fotos de una fecha. Marca varias con ✓ y usa **Compartir** para mandarlas juntas al grupo del informe diario.
 
+## Firmas
+
+Donde un documento lleva firma aparece el botón **Firmar**. Se abre una hoja en blanco a pantalla completa y en horizontal (si el teléfono no gira solo, la hoja ya viene girada: voltea el teléfono de lado). La persona firma sobre la línea y tocas **Listo**; la firma se guarda al tocar **Guardar** en el formulario.
+
 ## Fotos y firmas en el Excel
 
 - La **firma** aparece como imagen dentro de su celda.

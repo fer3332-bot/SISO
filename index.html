@@ -120,6 +120,12 @@ table.ctl td.m.ok{background:light-dark(#d9f2e9,#16382d);color:var(--ok);font-we
 .gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px}.gph{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;border:3px solid transparent;background:var(--line)}.gph img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in}
 .gph .ck{position:absolute;top:5px;right:5px;width:34px;height:34px;border-radius:50%;border:2px solid #fff;background:rgba(0,0,0,.45);color:transparent;font:800 18px Barlow,sans-serif;cursor:pointer}.gph.sel{border-color:var(--or)}.gph.sel .ck{background:var(--or);color:#141414;border-color:var(--or)}
 .fh{grid-column:1/-1;margin:18px 0 10px;padding:8px 10px;background:#17324D;color:#fff;border-radius:6px;font-size:17px}
+#sigpad{position:fixed;inset:0;z-index:80;background:#fff;display:flex;flex-direction:column;color:#141414}
+#sigpad.rot{inset:auto;top:0;left:100vw;width:100vh;height:100vw;transform-origin:top left;transform:rotate(90deg)}
+.sp-top{display:flex;align-items:center;gap:8px;padding:8px 12px;padding-top:max(8px,env(safe-area-inset-top));background:#141414;color:#fff}.sp-t{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.2}.sp-t b{font:700 17px "Barlow Condensed",Barlow,sans-serif}.sp-t span{font-size:13px;color:#cfcac0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sp-area{position:relative;flex:1;min-height:0;background:#fff}.sp-area canvas{position:absolute;inset:0;touch-action:none;z-index:1}
+.sp-line{position:absolute;left:8%;right:8%;bottom:24%;border-top:2px dashed #b9b4aa;pointer-events:none}.sp-line span{position:absolute;left:0;top:6px;font:600 13px Barlow,sans-serif;color:#9a958c}
+.sigbtn{display:inline-flex;align-items:center;gap:8px;min-height:52px;padding:0 22px;font-size:17px}
 .autof{background:var(--soft)!important;border-color:var(--or)!important}
 @media(max-width:480px){.top h1{font-size:20px}.top h1 small{font-size:12px}}
 @media(prefers-reduced-motion:no-preference){.sheet{animation:up .18s ease-out}@keyframes up{from{transform:translateY(14px);opacity:.6}}}

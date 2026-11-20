@@ -274,8 +274,10 @@ function chkHTML(f,r){const its=f.o(r),cur=r[f.k]||{},lb=f.labels||['Cumple','No
  return `<div style="display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap"><button type="button" class="btn sm" data-act="allC:${f.k}">Todo ${lb[0].toLowerCase()}</button><small style="color:var(--mut);align-self:center">C = ${lb[0]} · X = ${lb[1]} · NA = ${lb[2]}</small></div>`+its.map((it,i)=>{const v=cur[it]||'C';return`<div class="ci"><span>${esc(it)}</span><div class="seg" data-it="${esc(it)}">${[['C','C'],['N','X'],['A','NA']].map(([c,t])=>`<button type="button" class="${v===c?c:''}" data-v="${c}" aria-label="${esc(it)}: ${[lb[0],lb[1],lb[2]][['C','N','A'].indexOf(c)]}">${t}</button>`).join('')}</div></div>`}).join('')}
 const liRow=(i,vida)=>`<div class="li-row ${vida&&vida!=='0'?'':'nv'}"><input class="li-a" list="dl_cat" value="${esc(i.art||'')}" placeholder="Buscar artículo…" aria-label="Artículo" autocomplete="off"><input class="li-c" type="number" inputmode="numeric" min="1" value="${esc(i.cant||1)}" aria-label="Cantidad">${vida==='est'?`<input class="li-e" value="${esc(i.est||'')}" placeholder="12+300" aria-label="Estación" autocomplete="off">`:vida&&vida!=='0'?`<input class="li-v" type="number" inputmode="numeric" value="${esc(i.vida||'')}" aria-label="Vida útil en meses">`:''}<button type="button" class="btn sm" data-act="rmli" aria-label="Quitar artículo">✕</button></div>`;
 function fotosHTML(){const f=cur?cur.fotos:[];return f.map((id,i)=>`<div class="ph"><img data-sid="${esc(id)}" alt="Foto ${i+1}" data-act="viewph:${i}" role="button" tabindex="0" style="cursor:zoom-in"><button type="button" data-act="rmph:${i}" aria-label="Quitar foto">✕</button></div>`).join('')+(cur&&cur.up?`<div class="ph" style="display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--mut)">Subiendo ${cur.up}…</div>`:'')+(as&&navigator.onLine?`<label class="addph">+ Foto<br>cámara o galería<input class="phin" type="file" accept="image/*" multiple></label>`:'<small style="color:var(--mut)">Sin conexión: las fotos se agregan cuando vuelva la señal.</small>')}
-function sigHTML(k='firma'){const g=cur&&cur.sig[k]||{};if(g.id&&!g.resign)return `<img data-sid="${esc(g.id)}" alt="Firma"><div class="sr"><small>Firmado${cur.r[k+'Fecha']?' el '+fdmy(cur.r[k+'Fecha']):''}</small><button type="button" class="btn sm" data-act="resign:${k}">Volver a firmar</button></div>`;
- return `<canvas id="sigc_${k}" class="sigc" data-k="${k}" aria-label="Recuadro para firmar con el dedo"></canvas><div class="sr"><small>Que la persona firme con el dedo dentro del recuadro</small><button type="button" class="btn sm" data-act="sigclear:${k}">Borrar</button></div>`}
+function sigHTML(k='firma'){const g=cur&&cur.sig[k]||{};
+ if(g.prev)return `<img src="${g.prev}" alt="Firma"><div class="sr"><small>Firma nueva, se guarda al tocar Guardar</small><button type="button" class="btn sm" data-act="sigopen:${k}">Volver a firmar</button></div>`;
+ if(g.id)return `<img data-sid="${esc(g.id)}" alt="Firma"><div class="sr"><small>Firmado${cur.r[k+'Fecha']?' el '+fdmy(cur.r[k+'Fecha']):''}</small><button type="button" class="btn sm" data-act="sigopen:${k}">Volver a firmar</button></div>`;
+ return `<button type="button" class="btn pri sigbtn" data-act="sigopen:${k}"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17c3-1 4-6 6-6s1 5 3 5 3-4 5-4 2 2 4 2"/><path d="M3 21h18"/></svg>Firmar</button><small class="hint" style="display:block">Se abre a pantalla completa; gira el teléfono en horizontal.</small>`}
 function initSig(){for(const c of document.querySelectorAll('canvas.sigc'))initSig1(c)}
 function initSig1(c){if(c.dataset.ok)return;c.dataset.ok='1';const k=c.dataset.k;const b=c.getBoundingClientRect(),dpr=window.devicePixelRatio||1;c.width=Math.round(b.width*dpr);c.height=Math.round(b.height*dpr);const x=c.getContext('2d');x.scale(dpr,dpr);x.lineWidth=2.6;x.lineCap='round';x.lineJoin='round';x.strokeStyle='#111';let dn=false;
  const pt=e=>{const r=c.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}};
@@ -583,6 +585,38 @@ async function pdfSuc(doc,r,T){const W=215.9,X=12,CW=W-2*X;let y=34;
   if(i0<ph.length){doc.addPage();y=18;doc.setFont('helvetica','bold');doc.setFontSize(11);doc.text('Evidencia fotográfica',X,y);y+=6;const c2=(CW-6)/2;let col=0,rh=0;
    for(let i=i0;i<ph.length;i++){let im;try{im=await imgOf(ph[i])}catch(e){continue}let w=c2,h=w*im.h/im.w;if(h>80){h=80;w=h*im.w/im.h}if(col===0&&y+h>262){doc.addPage();y=18}doc.addImage(im.du,im.fmt,X+col*(c2+6)+(c2-w)/2,y,w,h);rh=Math.max(rh,h+5);if(col){y+=rh;rh=0;col=0}else col=1}}}}
 
+/* ---------- firma a pantalla completa, en horizontal ---------- */
+const SIGNAME={firma1:'n1',firma2:'n2',firmaT:'nT'};
+function signerOf(k){const nk=SIGNAME[k];const g=id=>{const e=$('#f_'+id);return e&&e.value?e.value.trim():''};return (nk&&g(nk))||g('persona')||g('involucrado')||g('conductor')||''}
+let spad=null;
+async function openPad(k){const f=M[cur.k].f.find(x=>x.k===k);const who=signerOf(k);
+ spad=document.createElement('div');spad.id='sigpad';spad.innerHTML=`<div class="sp-top"><div class="sp-t"><b>${esc(f?f.l:'Firma')}</b>${who?`<span>${esc(who)}</span>`:''}</div><button class="btn sm" data-act="padclear">Borrar</button><button class="btn sm" data-act="padcancel">Cancelar</button><button class="btn sm pri" data-act="padok">Listo</button></div><div class="sp-area"><canvas></canvas><div class="sp-line"><span>Firme sobre la línea</span></div></div>`;
+ spad.dataset.k=k;document.body.appendChild(spad);
+ const tmo=(p,ms)=>Promise.race([p,new Promise((_,no)=>setTimeout(()=>no(new Error('t')),ms))]);
+ try{if(document.documentElement.requestFullscreen&&!document.fullscreenElement)await tmo(document.documentElement.requestFullscreen({navigationUI:'hide'}),700)}catch(e){}
+ let locked=false;try{if(screen.orientation&&screen.orientation.lock){await tmo(screen.orientation.lock('landscape'),900);locked=true}}catch(e){}
+ const layout=()=>{const rot=!locked&&innerHeight>innerWidth;spad.classList.toggle('rot',rot);spad._rot=rot;const c=spad.querySelector('canvas'),a=spad.querySelector('.sp-area');setTimeout(()=>{const w=a.clientWidth,h=a.clientHeight,dpr=window.devicePixelRatio||1;if(c._w===w&&c._h===h)return;const old=c._w?c.toDataURL():null;c.width=Math.round(w*dpr);c.height=Math.round(h*dpr);c.style.width=w+'px';c.style.height=h+'px';c._w=w;c._h=h;const x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.lineWidth=Math.max(2.6,Math.min(w,h)/110);x.lineCap='round';x.lineJoin='round';x.strokeStyle='#111';if(old){const im=new Image();im.onload=()=>x.drawImage(im,0,0,w,h);im.src=old}},30)};
+ layout();spad._lay=()=>setTimeout(layout,250);addEventListener('resize',spad._lay);
+ const c=spad.querySelector('canvas'),x=()=>c.getContext('2d');let dn=false;spad._ink=false;
+ const pt=e=>{const r=c.getBoundingClientRect();if(spad._rot)return{x:e.clientY-r.top,y:r.right-e.clientX};return{x:e.clientX-r.left,y:e.clientY-r.top}};
+ c.onpointerdown=e=>{e.preventDefault();dn=true;try{c.setPointerCapture(e.pointerId)}catch(_){}const p=pt(e);const g=x();g.beginPath();g.moveTo(p.x,p.y);g.lineTo(p.x+.1,p.y+.1);g.stroke();spad._ink=true};
+ c.onpointermove=e=>{if(!dn)return;e.preventDefault();const p=pt(e),g=x();g.lineTo(p.x,p.y);g.stroke()};
+ c.onpointerup=c.onpointercancel=()=>{dn=false}}
+async function closePad(){if(!spad)return;removeEventListener('resize',spad._lay);spad.remove();spad=null;try{if(screen.orientation&&screen.orientation.unlock)screen.orientation.unlock()}catch(e){}try{if(document.fullscreenElement)await document.exitFullscreen()}catch(e){}}
+function trimSig(c){const w=c.width,h=c.height,d=c.getContext('2d').getImageData(0,0,w,h).data;let x0=w,y0=h,x1=-1,y1=-1;
+ for(let y=0;y<h;y+=2)for(let x=0;x<w;x+=2){if(d[(y*w+x)*4+3]>20){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}}
+ if(x1<0)return null;const p=Math.round(Math.min(w,h)*0.04);x0=Math.max(0,x0-p);y0=Math.max(0,y0-p);x1=Math.min(w,x1+p);y1=Math.min(h,y1+p);
+ const sw=x1-x0,sh=y1-y0,k=Math.min(1,1000/sw),o=document.createElement('canvas');o.width=Math.round(sw*k);o.height=Math.round(sh*k);o.getContext('2d').drawImage(c,x0,y0,sw,sh,0,0,o.width,o.height);return o}
+function sigPreview(k){const el=$('#f_'+k);if(el)el.innerHTML=sigHTML(k)}
+document.addEventListener('click',async ev=>{const b=ev.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
+ if(a.startsWith('sigopen:')){if(cur)openPad(a.slice(8));return}
+ if(a==='padclear'&&spad){const c=spad.querySelector('canvas');c.getContext('2d').clearRect(0,0,c._w||c.width,c._h||c.height);spad._ink=false;return}
+ if(a==='padcancel'){await closePad();return}
+ if(a==='padok'&&spad){if(!spad._ink){toast('Firme dentro del recuadro');return}const k=spad.dataset.k,o=trimSig(spad.querySelector('canvas'));if(!o){toast('Firme dentro del recuadro');return}
+  const blob=await new Promise(ok=>o.toBlob(ok,'image/png'));const prev=o.toDataURL('image/png');await closePad();
+  cur.sig[k]={...(cur.sig[k]||{}),blob,prev,dirty:true,resign:false};sigPreview(k);toast('Firma lista: se guarda al tocar Guardar');return}
+});
+
 /* ---------- PDF ---------- */
 let pdfP=null;
 function loadPdf(){return pdfP||(pdfP=new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';s.onload=()=>ok(window.jspdf.jsPDF);s.onerror=()=>{pdfP=null;no()};document.head.appendChild(s)}))}
@@ -661,7 +695,7 @@ document.addEventListener('click',async ev=>{
   if(cur.k==='equipos'&&!cur.id&&R('equipos').some(e=>e.inv===o.inv)){toast('Ese inventario ya existe');return}
   if(a==='dup'){const k=cur.k,c={...o};delete c.codigo;for(const f of m.f.filter(f=>f.t==='firma')){delete c[f.k];delete c[f.k+'Fecha']}delete c.comprobante;c.fotos=[];if(!m.nodate)c.fecha=today();closeM();openForm(k,null,c);toast('Copia lista: revisa y guarda');return}
   b.disabled=true;
-  const sk=Object.keys(cur.sig).filter(k=>cur.sig[k].dirty&&$('#sigc_'+k));if(sk.length){if(!as||!navigator.onLine){toast('Sin conexión: la firma necesita señal para guardarse');b.disabled=false;return}try{for(const k of sk){const bl=await new Promise(ok=>$('#sigc_'+k).toBlob(ok,'image/png'));const up=await as.upload(bl,{type:'image/png'});o[k]=up.id;o[k+'Fecha']=today();cur.sig[k]={id:up.id,dirty:false,resign:false};cur.r[k+'Fecha']=o[k+'Fecha']}}catch(e){toast('No se pudo guardar la firma: '+(e&&e.message||'revisa la conexión'));b.disabled=false;return}}
+  const sk=Object.keys(cur.sig).filter(k=>cur.sig[k].dirty&&cur.sig[k].blob);if(sk.length){if(!as||!navigator.onLine){toast('Sin conexión: la firma necesita señal para guardarse');b.disabled=false;return}try{for(const k of sk){const bl=cur.sig[k].blob;const up=await as.upload(bl,{type:'image/png'});o[k]=up.id;o[k+'Fecha']=today();cur.sig[k]={id:up.id,dirty:false,resign:false};cur.r[k+'Fecha']=o[k+'Fecha']}}catch(e){toast('No se pudo guardar la firma: '+(e&&e.message||'revisa la conexión'));b.disabled=false;return}}
   if(cur.r.comprobante)o.comprobante=cur.r.comprobante;
   const id=cur.id||(cur.k==='equipos'?o.inv.replace(/[^\w.~@+-]/g,'_'):'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,6));
   const ok=await save(cur.k,id,o);if(!ok){b.disabled=false;return}
