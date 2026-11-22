@@ -791,21 +791,35 @@ async function reporteDiario(dia){let J;try{J=await loadPdf()}catch(e){toast('No
  doc.setFillColor(244,246,249);doc.setDrawColor(205,212,222);doc.roundedRect(X,y-5,CW,ih+5,2,2,'FD');
  for(const [l,ln] of ils){doc.setFont('helvetica','bold');doc.setTextColor(80);doc.text(T(l),X+4,y);doc.setFont('helvetica','normal');doc.setTextColor(20);doc.text(ln,X+48,y);y+=ln.length*4.4+2.2}
  y+=8;
- const H=t=>{need(16);doc.setFont('helvetica','bold');doc.setFontSize(12.5);doc.setTextColor(23,50,77);doc.text(T(t),X,y);doc.setDrawColor(255,90,0);doc.setLineWidth(.7);doc.line(X,y+1.8,X+CW,y+1.8);y+=8;doc.setTextColor(20)};
+ const H=t=>{need(34);doc.setFont('helvetica','bold');doc.setFontSize(12.5);doc.setTextColor(23,50,77);doc.text(T(t),X,y);doc.setDrawColor(255,90,0);doc.setLineWidth(.7);doc.line(X,y+1.8,X+CW,y+1.8);y+=8;doc.setTextColor(20)};
  // resumen
  H('Resumen de actividades del día');
  const by={};for(const a of acts)(by[a.k]=by[a.k]||[]).push(a);
  const nfot=acts.reduce((s,a)=>s+(a.r.fotos||[]).length,0);
  if(!acts.length){doc.setFont('helvetica','italic');doc.setFontSize(10);doc.text('No hay actividades registradas en esta fecha.',X,y);y+=8}else{
   doc.setFillColor(23,50,77);doc.rect(X,y-4.5,CW,7,'F');doc.setTextColor(255);doc.setFont('helvetica','bold');doc.setFontSize(9.5);doc.text('Actividad',X+2,y);doc.text('Cant.',X+70,y,{align:'right'});doc.text('Detalle',X+76,y);y+=6;doc.setTextColor(20);
-  let z=0;for(const k of Object.keys(by)){const l=by[k];const det=l.map(a=>{const sm=M[a.k].sum?M[a.k].sum(a.r):[];return(a.h?a.h+' ':'')+(sm[0]||'')+(sm[2]&&sm[2][1]?' ('+sm[2][1]+')':'')}).join('; ');
+  let z=0;for(const k of Object.keys(by)){const l=by[k];const det=l.map(a=>{if(a.k==='sucesos')return 'REPSUC '+(a.r.codigo||'')+' - '+(a.r.relato||'');const sm=M[a.k].sum?M[a.k].sum(a.r):[];return(a.h?a.h+' ':'')+(sm[0]||'')+(sm[2]&&sm[2][1]?' ('+sm[2][1]+')':'')}).join('; ');
    doc.setFont('helvetica','normal');doc.setFontSize(9);const ln=doc.splitTextToSize(T(det),CW-78);const hh=ln.length*4+2.6;need(hh);
    if(z++%2){doc.setFillColor(246,247,249);doc.rect(X,y-4,CW,hh,'F')}
    doc.setFont('helvetica','bold');doc.text(T(M[k].n),X+2,y,{maxWidth:60});doc.text(String(l.length),X+70,y,{align:'right'});doc.setFont('helvetica','normal');doc.text(ln,X+76,y);y+=hh}
   y+=2;doc.setFontSize(9);doc.setTextColor(90);doc.text(T(acts.length+' actividades registradas · '+nfot+' fotografías'),X,y);doc.setTextColor(20);y+=9}
+ // reportes de sucesos: solo lista numerada con número, evento e imagen
+ const sucs=acts.filter(a=>a.k==='sucesos'),resto=acts.filter(a=>a.k!=='sucesos');
+ if(sucs.length){H('Reportes de sucesos (REPSUC)');let i=0;
+  for(const a of sucs){i++;const r=a.r;const ttl=i+'. REPSUC '+(r.codigo||'')+' - '+(r.relato||'Sin título');
+   doc.setFontSize(10.5);doc.setFont('helvetica','bold');const ln=doc.splitTextToSize(T(ttl),CW-34);const fs=r.fotos||[];const cols=3,gap=4,cw=(CW-gap*(cols-1))/cols,chh=cw*0.75;
+   need(ln.length*5+6+(fs.length?chh+8:0));doc.setFillColor(255,240,230);doc.rect(X,y-5,CW,ln.length*5+3,'F');doc.setFillColor(255,90,0);doc.rect(X,y-5,1.6,ln.length*5+3,'F');
+   doc.setTextColor(20);doc.text(ln,X+4,y);doc.setFontSize(9.5);doc.setTextColor(23,50,77);doc.text(T(a.h||''),X+CW-2,y,{align:'right'});doc.setTextColor(20);y+=ln.length*5+3;
+   if(fs.length){for(let i2=0;i2<fs.length;i2+=cols){need(chh+8);const rowY=y;
+     for(let j=0;j<cols&&i2+j<fs.length;j++){const p=await thumbDU(fs[i2+j]);const cx=X+j*(cw+gap);doc.setDrawColor(210);doc.setFillColor(240,240,240);doc.rect(cx,rowY,cw,chh,'FD');
+      if(p){const sc=Math.min(cw/p.w,chh/p.h),w2=p.w*sc,h2=p.h*sc;doc.addImage(p.du,'JPEG',cx+(cw-w2)/2,rowY+(chh-h2)/2,w2,h2)}else{doc.setFontSize(8);doc.setTextColor(120);doc.text('Foto no disponible sin conexión',cx+cw/2,rowY+chh/2,{align:'center'});doc.setTextColor(20)}
+      doc.setFontSize(7.5);doc.setTextColor(90);doc.text(T('Foto '+(i2+j+1)+' - REPSUC '+(r.codigo||'')),cx,rowY+chh+3.5,{maxWidth:cw});doc.setTextColor(20)}
+     y=rowY+chh+7}}else{doc.setFont('helvetica','italic');doc.setFontSize(9);doc.setTextColor(120);doc.text('Sin fotografía',X+4,y);doc.setTextColor(20);y+=6}
+   y+=4}
+  y+=2}
  // detalle de cada actividad
- if(acts.length)H('Detalle de actividades y reporte fotográfico');
- let n=0;for(const a of acts){n++;const m=M[a.k];const sm=m.sum?m.sum(a.r):[];
+ if(resto.length)H('Detalle de actividades y reporte fotográfico');
+ let n=0;for(const a of resto){n++;const m=M[a.k];const sm=m.sum?m.sum(a.r):[];
   need(22);doc.setFillColor(255,240,230);doc.rect(X,y-5,CW,8,'F');doc.setFillColor(255,90,0);doc.rect(X,y-5,1.6,8,'F');
   doc.setFont('helvetica','bold');doc.setFontSize(10.5);doc.setTextColor(20);doc.text(T(n+'. '+m.s+(sm[0]?' - '+sm[0]:'')),X+4,y,{maxWidth:CW-34});
   doc.setFontSize(9.5);doc.setTextColor(23,50,77);doc.text(T(fdmy(a.r.fecha)+(a.h?'  '+a.h:'')),X+CW-2,y,{align:'right'});y+=8;doc.setTextColor(20);
