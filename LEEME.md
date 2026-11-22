@@ -103,6 +103,19 @@ Donde un documento lleva firma aparece el botón **Firmar**. Se abre una hoja en
 - Cada **foto** aparece como un enlace “Ver foto 1”, “Ver foto 2”… que abre o descarga la imagen. Los enlaces funcionan **1 año** desde que descargas el Excel; si necesitas uno más reciente, vuelve a descargarlo. Cualquier persona que tenga el Excel puede abrir esas fotos.
 - Para generar el Excel con fotos y firmas necesitas señal.
 
+## Agenda sugerida de charlas
+En **Charlas de seguridad** aparece la tarjeta **Agenda sugerida de charlas** (de martes a jueves, 10 minutos al cierre de la jornada; noviembre y diciembre 2026). Toca **Revisar y cargar**: puedes desmarcar las que no quieras, cambiar el tema (escribiendo o escogiendo de la lista, que incluye temas de la etapa de limpieza del derecho de vía) y fijar la hora. Se guardan como **Programadas** y salen en Hoy el día que toca. Después de darla, abre la charla, ponla como **Impartida** y anota los asistentes.
+
+## Reporte diario SISO (PDF)
+En la pantalla **Hoy** está la tarjeta **Reporte diario SISO**: escoge la fecha (por defecto hoy) y toca **Generar PDF**. El documento trae:
+- Encabezado con el título REPORTE DIARIO SISO, el logo y el día.
+- Datos del proyecto, contratista, responsable del informe y fecha y hora en que se generó.
+- Una tabla resumen con cada tipo de actividad, cuántas se hicieron y su detalle con la hora.
+- El detalle de cada actividad en orden de hora, con todos sus datos y sus fotos (tres por fila).
+- La firma del responsable SISO y el número de página.
+
+La hora de cada actividad es la que anotaste en el formulario (hora, hora de inicio) y, si no tiene, la hora en que se registró. Las fotos se bajan de la nube, así que genera el reporte con conexión.
+
 ## Inspección de vehículos y equipo
 Es una inspección mensual por equipo, con el formato del proyecto (ya no hay preoperatorio diario ni auditoría):
 - **Camiones** (volquetas, cabezales, tanques, low boy): 24 puntos.

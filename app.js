@@ -197,6 +197,7 @@ function vHoy(){const t=today(),d=pd(t);
  const task=o=>{const dn=done(o);return row({left:`<div class="day">${pd(o.due).getDate()}<small>${DIA[pd(o.due).getDay()]}</small></div>`,t:o.t.t,s:dn?'Entregado el '+fmt(dn.hecho):(o.due<t?'Atrasado '+diff(t,o.due)+' días':o.due===t?'Vence hoy':'En '+diff(o.due,t)+' días'),tag:dn?null:o.due<t?['bad','Atrasado']:o.due===t?['or','Hoy']:null,right:`<button class="chk ${dn?'done':''}" data-act="tick:${o.t.id}_${o.due}" aria-label="Marcar entregado">${dn?'✓':''}</button>`,click:'goto:'+o.t.m})};
  return `<div class="hero"><div class="date"><span>${['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'][d.getDay()]}</span><b>${d.getDate()} de ${MES[d.getMonth()]}</b><span>${venc.length?venc.length+' entrega'+(venc.length>1?'s':'')+' atrasada'+(venc.length>1?'s':''):'Sin entregas atrasadas'}${hoy.length?' · '+hoy.length+' vence'+(hoy.length>1?'n':'')+' hoy':''}</span></div>
  <div class="stats"><div class="stat ${act.length&&falta.length?'warn':'good'}" data-act="new:insp"><b>${act.length-falta.length}/${act.length}</b><small>Inspección de vehículos del mes</small></div><div class="stat" data-act="new:charlas"><b>${ch.filter(c=>c.estado==='Impartida').length}/${ch.length}</b><small>Charlas de hoy</small></div><div class="stat" data-act="new:alcohol"><b>${alc.length}</b><small>Pruebas de alcohol hoy</small></div><div class="stat ${al.length?'warn':'good'}" data-act="scroll:alertas"><b>${al.length}</b><small>Alertas abiertas</small></div></div></div>
+ <section><div class="card" style="padding:12px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><div style="flex:1 1 170px"><b>Reporte diario SISO</b><br><small class="muted">PDF con las actividades y fotos del día</small></div><input type="date" id="rdfecha" value="${t}" style="min-height:44px;border:1px solid var(--line);border-radius:8px;padding:0 8px;font:inherit"><button class="btn pri" data-act="rdiario">Generar PDF</button></div></section>
  ${venc.length+hoy.length?`<section><div class="sh"><h2>Pendiente</h2></div><div class="card">${[...venc,...hoy].map(task).join('')}</div></section>`:''}
  ${act.length&&falta.length?`<section>${inspPend()}</section>`:''}
  ${ch.length?`<section><div class="sh"><h2>Charla del día</h2></div><div class="card">${ch.map(c=>row({t:c.tema,s:(c.area||'')+' · '+nAs(c)+' asistentes',tag:c.estado==='Impartida'?['ok','Impartida']:['yl','Programada'],click:'edit:charlas:'+c.id})).join('')}</div></section>`:''}
@@ -224,7 +225,7 @@ function vMod(){const k=modOpen,m=M[k];let rs=R(k).slice();
  const meses=[...new Set(R(k).map(r=>String(r.fecha||'').slice(0,7)).filter(Boolean).concat(today().slice(0,7)))].sort().reverse();
  return `<div class="sh"><h2>${m.n}</h2><div class="tools" style="margin:0"><button class="btn pri" data-act="new:${k}">+ Nuevo</button>${k==='despliegue'?'<button class="btn" data-act="duplast">Duplicar el último</button>':''}<button class="btn" data-act="x:${k}">Excel</button></div></div>
  <div class="tools"><input id="q" type="search" placeholder="Buscar…" value="${esc(filt.q)}">${m.nodate?'':`<select id="mes"><option value="">Todos los meses</option>${meses.map(x=>`<option value="${x}" ${x===filt.mes?'selected':''}>${MES[+x.slice(5)-1]} ${x.slice(0,4)}</option>`).join('')}</select>`}</div>
- ${m.inv?invTable(m.inv):k==='extintores'?extPend():k==='insp'?inspPend():''}
+ ${m.inv?invTable(m.inv):k==='extintores'?extPend():k==='insp'?inspPend():k==='charlas'?agendaBox():''}
  <div class="card">${rs.length?rs.map(r=>{const s=m.sum(r);return row({left:m.nodate?'':`<div class="day">${r.fecha?pd(r.fecha).getDate():'–'}<small>${r.fecha?MES[pd(r.fecha).getMonth()].slice(0,3):''}</small></div>`,t:s[0]||'(sin nombre)',s:(s[1]||'')+((r.fotos||[]).length?' · '+r.fotos.length+' foto'+(r.fotos.length>1?'s':''):''),tag:s[2]&&s[2][1]?s[2]:null,click:'edit:'+k+':'+r.id})}).join(''):`<p class="empty">${R(k).length?'Nada coincide con el filtro.':'Aún no hay registros. Usa “+ Nuevo”.'}</p>`}</div>`}
 
 /* ---------- informe mensual ---------- */
@@ -756,6 +757,117 @@ function inspSheets(list,sfx){return ['Camión','Pick-up','Equipo amarillo'].map
 function inspPend(){const mes=filt.mes||today().slice(0,7);const done=new Set(R('insp').filter(r=>String(r.fecha||'').startsWith(mes)).map(r=>String(r.equipo||'').toUpperCase()));
  const act=R('equipos').filter(e=>e.estado!=='Inactivo'&&e.estado!=='En taller');const n=act.filter(e=>done.has(String(e.inv).toUpperCase())).length;
  return `<section style="margin-top:0"><div class="sh"><h3>Inspección de ${MES[+mes.slice(5)-1]}: ${n} de ${act.length}</h3><small>${n<act.length?'Toca un equipo pendiente':'Todos los equipos inspeccionados'}</small></div>${['Camión','Pick-up','Equipo amarillo'].map(g=>{const l=act.filter(e=>inspGrp(e.inv)===g);return l.length?`<div class="muted" style="font-size:12px;margin:6px 0 4px">${g}</div><div class="chips" style="margin-bottom:8px">${l.map(e=>{const ok=done.has(String(e.inv).toUpperCase());return`<button class="chip" data-act="${ok?'goto:insp':'pre:'+esc(e.inv)}" style="${ok?'border-color:var(--ok);color:var(--ok)':''}">${ok?'✓ ':''}${esc(e.inv)}</button>`}).join('')}</div>`:''}).join('')}</section>`}
+
+/* ---------- REPORTE DIARIO SISO (PDF con todas las actividades del día y sus fotos) ---------- */
+const recTime=r=>{const m=/^r([0-9a-z]+)[0-9a-z]{4}$/.exec(r.id||'');if(!m)return '';const d=new Date(parseInt(m[1],36));return isNaN(d)||d.getFullYear()<2024?'':pad(d.getHours())+':'+pad(d.getMinutes())};
+const horaDe=(k,r)=>r.hora||r.hi||recTime(r);
+async function thumbDU(id,max=1000){try{const b=await fileBlob(id);const u=URL.createObjectURL(b);const im=await loadIm(u);URL.revokeObjectURL(u);const s=Math.min(1,max/Math.max(im.naturalWidth,im.naturalHeight));const c=document.createElement('canvas');c.width=Math.round(im.naturalWidth*s);c.height=Math.round(im.naturalHeight*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);return{du:c.toDataURL('image/jpeg',.78),w:c.width,h:c.height}}catch(e){return null}}
+function rdFields(k,r){const out=[];const fx=r.fecha;
+ for(const f of M[k].f){const v=r[f.k];if(['hdr','fotos'].includes(f.t)||f.k==='fecha')continue;
+  if(f.t==='firma'){if(v)out.push([f.l,'Firmado']);continue}
+  if(f.t==='chk'){const it=v||{};const n=Object.entries(it).filter(x=>x[1]==='N').map(x=>x[0]);const tot=Object.keys(it).length;if(tot)out.push([f.l,n.length?(f.labels?f.labels[1]:'No cumple')+' ('+n.length+' de '+tot+'): '+n.join(', '):'Todo '+(f.labels?f.labels[0].toLowerCase():'cumple')+' ('+tot+' puntos)']);continue}
+  if(f.t==='lista'){const its=eitems(r);if(its.length)out.push([f.l,its.map(i=>(i.cant||1)+' '+i.art+(i.vida?' ('+i.vida+')':'')).join(', ')]);continue}
+  if(f.t==='multi'){const a=Array.isArray(v)?v:(v?[v]:[]);if(a.length)out.push([f.l,a.join(', ')]);continue}
+  if(v===''||v==null)continue;
+  let t=f.t==='date'?fdmy(v):String(v);if(f.t==='area'&&t.length>700)t=t.slice(0,700)+'…';out.push([f.l,t])}
+ return out}
+async function reporteDiario(dia){let J;try{J=await loadPdf()}catch(e){toast('No se pudo cargar el generador de PDF (revisa la conexión)');return}
+ const acts=[];for(const k of ORDER){if(M[k].nodate||M[k].cat)continue;for(const r of R(k))if(r.fecha===dia)acts.push({k,r,h:horaDe(k,r)})}
+ acts.sort((a,b)=>(a.h||'99').localeCompare(b.h||'99')||ORDER.indexOf(a.k)-ORDER.indexOf(b.k));
+ const doc=new J({unit:'mm',format:'letter'}),W=215.9,HP=279.4,X=14,CW=W-2*X;let y=0;
+ const T=v=>String(v??'').replace(/[–—]/g,'-').replace(/[“”]/g,'"').replace(/[‘’]/g,"'").replace(/×/g,'x').replace(/[✓☒]/g,'Sí').replace(/·/g,'-').replace(/[^\x00-\xFF]/g,'');
+ const need=h=>{if(y+h>HP-16){doc.addPage();y=16;return true}return false};
+ const d=pd(dia),dn=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'][d.getDay()];
+ // encabezado
+ doc.setFillColor(23,50,77);doc.rect(0,0,W,30,'F');doc.setFillColor(255,90,0);doc.rect(0,30,W,2.2,'F');
+ let lg=null;try{lg=await loadLogo()}catch(e){}
+ if(lg){doc.setFillColor(255,255,255);doc.roundedRect(W-X-62,5,62,20,2,2,'F');const lh=13,lw=Math.min(56,lh*lg.w/lg.h);doc.addImage(lg.du,'PNG',W-X-31-lw/2,5+(20-lw*lg.h/lg.w)/2,lw,lw*lg.h/lg.w)}
+ doc.setTextColor(255);doc.setFont('helvetica','bold');doc.setFontSize(20);doc.text('REPORTE DIARIO SISO',X,14);
+ doc.setFont('helvetica','normal');doc.setFontSize(9.5);doc.text(T('Seguridad Industrial y Salud Ocupacional (SISO)'),X,20.5);doc.text(T(dn+' '+fdmy(dia)),X,26);
+ y=40;doc.setTextColor(20);
+ // datos del proyecto
+ const info=[['Proyecto',PROY_TITULO()],['Contratista',cfg.empresa||"Cordon's Heavy Equipment"],['Responsable del informe',RESP()],['Fecha del reporte',dn+' '+fdmy(dia)],['Generado',fdmy(today())+' '+pad(new Date().getHours())+':'+pad(new Date().getMinutes())]];
+ doc.setFontSize(9.5);let ih=0;const ils=info.map(([l,v])=>{const ln=doc.splitTextToSize(T(v),CW-48);ih+=ln.length*4.4+2.2;return[l,ln]});
+ doc.setFillColor(244,246,249);doc.setDrawColor(205,212,222);doc.roundedRect(X,y-5,CW,ih+5,2,2,'FD');
+ for(const [l,ln] of ils){doc.setFont('helvetica','bold');doc.setTextColor(80);doc.text(T(l),X+4,y);doc.setFont('helvetica','normal');doc.setTextColor(20);doc.text(ln,X+48,y);y+=ln.length*4.4+2.2}
+ y+=8;
+ const H=t=>{need(16);doc.setFont('helvetica','bold');doc.setFontSize(12.5);doc.setTextColor(23,50,77);doc.text(T(t),X,y);doc.setDrawColor(255,90,0);doc.setLineWidth(.7);doc.line(X,y+1.8,X+CW,y+1.8);y+=8;doc.setTextColor(20)};
+ // resumen
+ H('Resumen de actividades del día');
+ const by={};for(const a of acts)(by[a.k]=by[a.k]||[]).push(a);
+ const nfot=acts.reduce((s,a)=>s+(a.r.fotos||[]).length,0);
+ if(!acts.length){doc.setFont('helvetica','italic');doc.setFontSize(10);doc.text('No hay actividades registradas en esta fecha.',X,y);y+=8}else{
+  doc.setFillColor(23,50,77);doc.rect(X,y-4.5,CW,7,'F');doc.setTextColor(255);doc.setFont('helvetica','bold');doc.setFontSize(9.5);doc.text('Actividad',X+2,y);doc.text('Cant.',X+70,y,{align:'right'});doc.text('Detalle',X+76,y);y+=6;doc.setTextColor(20);
+  let z=0;for(const k of Object.keys(by)){const l=by[k];const det=l.map(a=>{const sm=M[a.k].sum?M[a.k].sum(a.r):[];return(a.h?a.h+' ':'')+(sm[0]||'')+(sm[2]&&sm[2][1]?' ('+sm[2][1]+')':'')}).join('; ');
+   doc.setFont('helvetica','normal');doc.setFontSize(9);const ln=doc.splitTextToSize(T(det),CW-78);const hh=ln.length*4+2.6;need(hh);
+   if(z++%2){doc.setFillColor(246,247,249);doc.rect(X,y-4,CW,hh,'F')}
+   doc.setFont('helvetica','bold');doc.text(T(M[k].n),X+2,y,{maxWidth:60});doc.text(String(l.length),X+70,y,{align:'right'});doc.setFont('helvetica','normal');doc.text(ln,X+76,y);y+=hh}
+  y+=2;doc.setFontSize(9);doc.setTextColor(90);doc.text(T(acts.length+' actividades registradas · '+nfot+' fotografías'),X,y);doc.setTextColor(20);y+=9}
+ // detalle de cada actividad
+ if(acts.length)H('Detalle de actividades y reporte fotográfico');
+ let n=0;for(const a of acts){n++;const m=M[a.k];const sm=m.sum?m.sum(a.r):[];
+  need(22);doc.setFillColor(255,240,230);doc.rect(X,y-5,CW,8,'F');doc.setFillColor(255,90,0);doc.rect(X,y-5,1.6,8,'F');
+  doc.setFont('helvetica','bold');doc.setFontSize(10.5);doc.setTextColor(20);doc.text(T(n+'. '+m.s+(sm[0]?' - '+sm[0]:'')),X+4,y,{maxWidth:CW-34});
+  doc.setFontSize(9.5);doc.setTextColor(23,50,77);doc.text(T(fdmy(a.r.fecha)+(a.h?'  '+a.h:'')),X+CW-2,y,{align:'right'});y+=8;doc.setTextColor(20);
+  for(const [l,v] of rdFields(a.k,a.r)){doc.setFontSize(9);const ln=doc.splitTextToSize(T(v),CW-50);for(let i=0;i<ln.length;i+=40){const part=ln.slice(i,i+40);need(part.length*4+1.5);doc.setFont('helvetica','bold');doc.setTextColor(95);if(i===0)doc.text(T(l),X+2,y,{maxWidth:44});doc.setFont('helvetica','normal');doc.setTextColor(20);doc.text(part,X+48,y);y+=part.length*4+1.5}}
+  const fs=a.r.fotos||[];
+  if(fs.length){y+=1;const cols=3,gap=4,cw=(CW-gap*(cols-1))/cols,chh=cw*0.75;
+   for(let i=0;i<fs.length;i+=cols){need(chh+8);const rowY=y;
+    for(let j=0;j<cols&&i+j<fs.length;j++){const p=await thumbDU(fs[i+j]);const cx=X+j*(cw+gap);doc.setDrawColor(210);doc.setFillColor(240,240,240);doc.rect(cx,rowY,cw,chh,'FD');
+     if(p){const s=Math.min(cw/p.w,chh/p.h),iw=p.w*s,ih2=p.h*s;doc.addImage(p.du,'JPEG',cx+(cw-iw)/2,rowY+(chh-ih2)/2,iw,ih2)}else{doc.setFontSize(8);doc.setTextColor(120);doc.text('Foto no disponible sin conexión',cx+cw/2,rowY+chh/2,{align:'center'});doc.setTextColor(20)}
+     doc.setFontSize(7.5);doc.setTextColor(90);doc.text(T('Foto '+(i+j+1)+' - '+m.s),cx,rowY+chh+3.5,{maxWidth:cw});doc.setTextColor(20)}
+    y=rowY+chh+7}}
+  y+=5}
+ // firma del responsable
+ need(32);y+=10;doc.setDrawColor(60);doc.setLineWidth(.3);doc.line(X+CW/2-40,y+12,X+CW/2+40,y+12);doc.setFont('helvetica','bold');doc.setFontSize(10);doc.text(T(RESP().replace(/ – .*/,'')),X+CW/2,y+17,{align:'center'});doc.setFont('helvetica','normal');doc.setFontSize(9);doc.text(T('Responsable SISO - Elaboró'),X+CW/2,y+21.5,{align:'center'});
+ // pie de página
+ const np=doc.getNumberOfPages();for(let i=1;i<=np;i++){doc.setPage(i);doc.setFontSize(8);doc.setTextColor(120);doc.setDrawColor(220);doc.line(X,HP-11,W-X,HP-11);doc.text(T('Reporte diario SISO - '+fdmy(dia)+' - '+(cfg.empresa||"Cordon's Heavy Equipment")),X,HP-7);doc.text('Página '+i+' de '+np,W-X,HP-7,{align:'right'})}
+ const blob=doc.output('blob');await saveFile('Reporte diario SISO '+fdmy(dia)+'.pdf',blob);return{acts:acts.length,fotos:nfot,pages:np}}
+document.addEventListener('click',async ev=>{const b=ev.target.closest('[data-act="rdiario"]');if(!b)return;const dia=($('#rdfecha')&&$('#rdfecha').value)||today();
+ b.disabled=true;const t0=b.textContent;b.textContent='Generando…';try{const r=await reporteDiario(dia);if(r)toast('Reporte diario listo: '+r.acts+' actividades, '+r.fotos+' fotos')}catch(e){toast('No se pudo generar el reporte'+(navigator.onLine?'':' (revisa la conexión)'))}b.disabled=false;b.textContent=t0});
+
+/* ---------- agenda sugerida de charlas (10 min al cierre de la jornada) ---------- */
+const AGENDA=[
+ ['2026-11-24','Banderilleros y control de tránsito en el frente de trabajo'],
+ ['2026-11-25','Distancia segura y radio de giro de excavadora, tractor y cargadora'],
+ ['2026-11-26','Nunca te ubiques en la línea de fuego'],
+ ['2026-11-27','Puntos ciegos y maniobras en reversa de volquetas y cargadora'],
+ ['2026-11-30','Hidratación y golpe de calor en jornadas al sol'],
+ ['2026-12-01','Ojos y mente en la tarea'],
+ ['2026-12-02','Inspección preoperacional 360° de equipo móvil'],
+ ['2026-12-03','Cuidado y conservación del EPP'],
+ ['2026-12-08','Riesgos en la limpieza del derecho de vía: caída de árboles, ramas, animales e insectos'],
+ ['2026-12-09','Qué hacer en caso de una emergencia'],
+ ['2026-12-10','Manejo de extintores y sus tipos'],
+ ['2026-12-15','Levantamiento manual de carga'],
+ ['2026-12-16','Fatiga y somnolencia en la conducción'],
+ ['2026-12-17','Prevención de derrames al abastecer combustible a la maquinaria'],
+ ['2026-12-22','Política de alcohol y drogas'],
+ ['2026-12-23','Qué hacer en caso de averías y accidentes en carretera'],
+ ['2026-12-29','Condición insegura y acto inseguro'],
+ ['2026-12-30','Errores críticos que causan incidentes']];
+const TEMAS_ETAPA=['Distancia segura y radio de giro de excavadora, tractor y cargadora','Puntos ciegos y maniobras en reversa de volquetas y cargadora','Riesgos en la limpieza del derecho de vía: caída de árboles, ramas, animales e insectos','Hidratación y golpe de calor en jornadas al sol','Prevención de derrames al abastecer combustible a la maquinaria','Carga segura de volquetas con excavadora y cargadora','Trabajo seguro en taludes y bordes de corte','Polvo en el frente de trabajo: protección respiratoria y visual','Comunicación con señales entre operador y ayudante','Terracería: compactación y tránsito de equipo en capas'];
+const agFree=()=>AGENDA.filter(([d])=>d>=today()&&!R('charlas').some(c=>c.fecha===d));
+function agendaBox(){const n=agFree().length;if(!n)return '';return `<section style="margin-top:0"><div class="card" style="padding:12px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><div style="flex:1 1 200px"><b>Agenda sugerida de charlas</b><br><small class="muted">${n} charla${n>1?'s':''} de 10 min al cierre de la jornada, para cumplir las 12 del mes. Revísalas y cambia el tema que no te sirva.</small></div><button class="btn pri" data-act="agview">Revisar y cargar</button></div></section>`}
+function agView(){const L=agFree();const dn=d=>['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'][pd(d).getDay()];
+ const opts=[...new Set([...TEMAS_ETAPA,...TEMAS,...AGENDA.map(a=>a[1])])];
+ $('#sheet').innerHTML=`<div class="hd"><h3>Agenda sugerida de charlas</h3><button class="btn sm dk" data-act="close">✕</button></div><div class="bd">
+ <p class="note" style="margin-top:0">Desmarca las que no quieras y cambia el tema escribiendo o escogiendo de la lista. Se guardan como <b>Programadas</b>; después puedes editarlas o borrarlas desde el módulo.</p>
+ <datalist id="dl_ag">${opts.map(t=>`<option value="${esc(t)}">`).join('')}</datalist>
+ ${L.map(([d,t],i)=>`<div style="display:flex;gap:8px;align-items:center;border-bottom:1px solid var(--line);padding:8px 0"><input type="checkbox" class="ag-on" data-i="${i}" checked style="width:22px;height:22px;flex:none"><div style="flex:none;width:64px;font-size:13px"><b>${dn(d)} ${pd(d).getDate()}</b><br><small class="muted">${MES[pd(d).getMonth()].slice(0,3)}</small></div><input class="ag-t" data-i="${i}" list="dl_ag" value="${esc(t)}" style="flex:1;min-width:0;min-height:42px;border:1px solid var(--line);border-radius:8px;padding:0 8px;font:inherit"></div>`).join('')}
+ <label style="display:flex;gap:8px;align-items:center;margin-top:12px"><span style="flex:none">Hora</span><input id="ag-h" type="time" value="${esc(cfg.horaCharla||'16:45')}" style="min-height:42px;border:1px solid var(--line);border-radius:8px;padding:0 8px;font:inherit"><small class="muted">10 minutos al cierre</small></label>
+ <div style="display:flex;gap:8px;margin-top:14px"><button class="btn pri" data-act="agsave" style="flex:1">Cargar seleccionadas</button></div></div>`;
+ $('#modal').classList.add('on');agView.L=L}
+async function agSave(){const L=agView.L||[];const h=$('#ag-h').value||'16:45';const ins=cfg.siso||'Fernando Domínguez';let n=0;
+ const on=[...document.querySelectorAll('.ag-on')].filter(x=>x.checked).map(x=>+x.dataset.i);
+ for(const i of on){const t=(document.querySelector('.ag-t[data-i="'+i+'"]').value||'').trim();if(!t)continue;const [d]=L[i];
+  const end=(()=>{const [a,b]=h.split(':').map(Number);const m=a*60+b+10;return pad(Math.floor(m/60)%24)+':'+pad(m%60)})();
+  await save('charlas','ag-'+d,{estado:'Programada',fecha:d,tema:t,area:'Campo',instructor:ins,hi:h,hf:end,asist:''});n++}
+ if(cfg.horaCharla!==h)await save('config','proyecto',{...cfg,horaCharla:h});
+ closeM();toast(n+' charlas programadas')}
+document.addEventListener('click',ev=>{const b=ev.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
+ if(a==='agview')agView();if(a==='agsave'){b.disabled=true;agSave()}});
+for(const t of TEMAS_ETAPA)if(!TEMAS.includes(t))TEMAS.push(t);
 
 /* ---------- PDF ---------- */
 let pdfP=null;
