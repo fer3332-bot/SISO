@@ -103,6 +103,14 @@ Donde un documento lleva firma aparece el botón **Firmar**. Se abre una hoja en
 - Cada **foto** aparece como un enlace “Ver foto 1”, “Ver foto 2”… que abre o descarga la imagen. Los enlaces funcionan **1 año** desde que descargas el Excel; si necesitas uno más reciente, vuelve a descargarlo. Cualquier persona que tenga el Excel puede abrir esas fotos.
 - Para generar el Excel con fotos y firmas necesitas señal.
 
+## Inspección de vehículos y equipo
+Es una inspección mensual por equipo, con el formato del proyecto (ya no hay preoperatorio diario ni auditoría):
+- **Camiones** (volquetas, cabezales, tanques, low boy): 24 puntos.
+- **Pick-ups**: 19 puntos.
+- **Equipo amarillo**: los mismos puntos del camión, pero sin placa.
+
+Arriba de la lista se ven los equipos que faltan este mes; tócalos para abrir el formulario con la placa y la persona asignada ya puestos. El Excel sale con una hoja por grupo (Camión, Pick-up, Equipo amarillo) y las columnas Mes, Fecha, Inventario, Placa, Asignado a, cada punto con ✓ o X, y Observaciones.
+
 ## Reporte de sucesos en Excel
 Cada suceso se descarga con el botón **Reporte en Excel**, usando el formato de la empresa (FORMATO_REPORTE_DE_SUCESOS). El archivo tiene tres hojas:
 - **REPORTE DE SUCESOS**: el formato completo de una hoja, con las casillas marcadas (tipo, clima, clasificación de causas, daños personales y materiales). Si una versión es muy larga, las filas se agrandan solas.
