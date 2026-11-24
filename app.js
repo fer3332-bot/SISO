@@ -33,19 +33,26 @@ const M={
   sum:r=>[(r.equipo||'')+' · '+(r.conductor||'sin asignar'),inspGrp(r.equipo),nc(r.items)?['bad',nc(r.items)+' no cumple']:['ok','Cumple']]},
  sucesos:{n:'Reporte de sucesos',s:'Reporte de suceso (REPSUC)',d:'Accidentes, incidentes, siniestros, robos, pérdidas',f:[F('codigo','Código','text',null,{ro:1}),F('tipo','Tipo','sel',['Incidente','Accidente','Siniestro','Robo','Pérdida']),F('fechaRep','Fecha del reporte','date'),F('fecha','Fecha del suceso','date'),F('hora','Hora','time'),F('lugar','Lugar / estación','text'),F('clima','Datos del clima','sel',['Soleado','Llovizna','Lluvia','Neblina']),F('relato','Evento (título del suceso)','text',null,{w:1,req:1}),
  F('h0','Afectado','hdr'),F('participante','Persona(s) afectada(s)','area',null,{w:1}),F('equipo','Equipo afectado (inventario)','eq'),F('otro','Otro (equipo o bien de terceros)','text'),F('dano','Daño','area',null,{w:1}),
- F('h1','Versión del participante 1','hdr'),F('n1','Nombre','per'),F('c1','Cargo','text'),F('i1','Número de identidad','text'),F('vPart','Versión','area',null,{w:1}),F('firma1','Firma del participante 1','firma',null,{w:1}),
- F('h2','Versión del participante 2','hdr'),F('n2','Nombre','per'),F('c2','Cargo','text'),F('i2','Número de identidad','text'),F('vTest','Versión','area',null,{w:1}),F('firma2','Firma del participante 2','firma',null,{w:1}),
- F('h3','Versión técnica','hdr'),F('nT','Responsable','per'),F('cT','Cargo','text'),F('iT','Número de identidad','text'),F('opinion','Versión técnica','area',null,{w:1}),F('firmaT','Firma de la versión técnica','firma',null,{w:1}),
+ F('h1','Versión del participante','hdr',null,{note:'Debe ir redactada en primera persona por cada participante. Pregunta al menos: ¿Quién? ¿Qué? ¿Cómo? ¿Cuándo? ¿Dónde? ¿Por qué? Si la persona no puede escribir, un testigo la levanta, firma y la persona coloca su huella.'}),F('n1','Nombre completo','per'),F('c1','Puesto que desempeña','text'),F('i1','Número de identidad','text'),F('vPart','Versión (en primera persona)','area',null,{w:1,ph:'Yo, ... me encontraba ... cuando ...'}),F('firma1','Firma del participante','firma',null,{w:1}),F('lv1','Levantada por (solo si el participante no puede escribir)','per'),F('firmaL1','Firma de quien levantó la versión','firma',null,{w:1}),F('hu1','Huella del participante','img'),
+ F('h2','Versión del testigo','hdr',null,{note:'En primera persona. Pregunta al testigo: ¿Quién? ¿Qué? ¿Cómo? ¿Cuándo? ¿Dónde? ¿Por qué?'}),F('n2','Nombre completo','per'),F('c2','Puesto que desempeña','text'),F('i2','Número de identidad','text'),F('vTest','Versión (en primera persona)','area',null,{w:1,ph:'Yo, ... vi que ...'}),F('firma2','Firma del testigo','firma',null,{w:1}),F('lv2','Levantada por (solo si el testigo no puede escribir)','per'),F('firmaL2','Firma de quien levantó la versión','firma',null,{w:1}),F('hu2','Huella del testigo','img'),
+ F('h3','Opinión técnica','hdr',null,{note:'La da una persona capacitada en el tema (experiencia o conocimiento técnico), en primera persona. No debe repetir la versión del participante: es su criterio profesional para determinar si hubo responsabilidad y si el evento era evitable.'}),F('nT','Nombre completo','per'),F('cT','Puesto que desempeña','text'),F('iT','Número de identidad','text'),F('opinion','Opinión técnica (en primera persona)','area',null,{w:1,ph:'Según mi experiencia ...'}),F('firmaT','Firma de la opinión técnica','firma',null,{w:1}),
  F('h4','Análisis','hdr'),F('causaP','Causa presunta','area',null,{w:1}),F('criterio','Criterio de análisis','area',null,{w:1}),F('causas','Clasificación de causas (marca las que apliquen)','multi',CAUSAS,{w:1}),F('danoP','Daños personales','sel',['Ninguno','Leves','Medios','Mayor','Inservible']),F('danoM','Daños materiales','sel',['Ninguno','Leves','Medios','Mayor','Inservible']),F('obsD','Observaciones de los daños','area',null,{w:1}),F('factor','Factor','sel',['Humano','Externo']),F('clasif','Clasificación del evento','sel',CLASIF),
- F('h6','Inspector SISO','hdr'),F('firmaS','Firma del inspector SISO','firma',null,{w:1}),
+ F('h6','Supervisor SISO','hdr',null,{note:'El reporte debe enviarse a oficinas centrales CHE dentro de las 48 horas después de notificado el suceso. Si falta una casilla se considera incompleto y se regresa.'}),F('firmaS','Firma del supervisor SISO','firma',null,{w:1}),F('enviado','Fecha de envío a oficinas centrales','date'),
  F('h5','Respuesta de gerencia (se llena cuando respondan)','hdr'),F('costo','Costo estimado (L)','num'),F('cobro','Cobro','sel',['Pendiente','No','Sí']),F('resp','Responsabilidad','sel',['Pendiente','Responsable','No responsable']),F('acciones','Acciones a tomar','area',null,{w:1}),F('estado','Estado','sel',['Abierto','Cerrado'])],
   sum:r=>[(r.codigo||'')+' · '+(r.tipo||'')+(r.relato?' · '+r.relato:''),[r.equipo,(Array.isArray(r.causas)?r.causas.join(', '):r.causa)].filter(Boolean).join(' · '),r.estado==='Cerrado'?['ok','Cerrado']:(!r.resp||r.resp==='Pendiente'||r.resp==='Por definir')?['yl','Espera gerencia']:['bad','Abierto']]},
  desvios:{n:'Desviaciones conductuales',s:'Desviación conductual',d:'Cuadro de los lunes',f:[F('fecha','Fecha','date'),F('involucrado','Nombre del involucrado','per',null,{req:1}),F('reporte','Desviación observada','area',null,{w:1}),F('accion','Acción realizada','area',null,{w:1}),F('obs','Observaciones','text'),F('coment','Comentarios SISO','text'),F('firma','Firma del involucrado','firma',null,{w:1})],
   sum:r=>[r.involucrado,r.reporte,null]},
  charlas:{n:'Charlas de seguridad',s:'Charla de seguridad',d:'Programadas e impartidas, con asistencia',f:[F('estado','Estado','sel',['Programada','Impartida']),F('fecha','Fecha','date'),F('tema','Tema','list',TEMAS,{w:1,req:1}),F('area','Área','sel',['Campo','Plantel','Oficinas','Primer ingreso']),F('instructor','Instructor','per'),F('hi','Hora inicio','time'),F('hf','Hora final','time'),F('asist','Asistentes (uno por línea: nombre – cargo)','area',null,{w:1})],
   sum:r=>[r.tema,(r.area||'')+' · '+nAs(r)+' asistentes',r.estado==='Impartida'?['ok','Impartida']:['yl','Programada']]},
- alcohol:{n:'Pruebas de alcohol',s:'Prueba de alcoholimetría',d:'Pruebas programadas al personal',f:[F('fecha','Fecha','date'),F('persona','Persona','per',null,{req:1}),F('cargo','Cargo','text'),F('resultado','Resultado','sel',['Negativo','Positivo']),F('lectura','Lectura (g/L)','text'),F('obs','Observaciones','text',null,{w:1}),F('firma','Firma del evaluado','firma',null,{w:1})],
-  sum:r=>[r.persona,r.cargo,r.resultado==='Positivo'?['bad','Positivo']:['ok','Negativo']]},
+ alcohol:{n:'Pruebas de alcohol',s:'Prueba de alcoholemia',d:'Lunes fija, rotación 15% jueves a sábado',f:[F('fecha','Fecha','date'),F('hora','Hora de la prueba','time'),F('lugar','Lugar','text'),F('motivo','Tipo de prueba','sel',['Lunes (prueba fija)','Rotación / aleatoria (15%)','Reincorporación','Otra']),
+ F('persona','Nombre completo','per',null,{req:1}),F('cargo','Cargo','text'),F('ayuno','Confirmó no haber ingerido alimentos, chicles, enjuagues o bebidas 20 minutos antes','sel',['Sí','No'],{w:1}),
+ F('lectura','Lectura (% de alcohol en aliento)','text'),F('resultado','Resultado','sel',['Negativo','Positivo']),F('nqf','Firma del evaluado','sel',['Sí, firmó','Se rehúsa a firmar (N.Q.F.)']),F('firma','Firma del evaluado (de acuerdo con la lectura)','firma',null,{w:1}),F('obs','Observación','text',null,{w:1}),
+ F('hN','Si se rehúsa a firmar','hdr',null,{note:'Se anotan las iniciales N.Q.F. y firman dos testigos la hoja de control.'}),F('t1','Testigo 1','per'),F('firmaT1','Firma del testigo 1','firma',null,{w:1}),F('t2','Testigo 2','per'),F('firmaT2','Firma del testigo 2','firma',null,{w:1}),
+ F('hP','Si la lectura es positiva','hdr',null,{note:'Espera de 10 a 15 minutos y aplica una segunda prueba. Si vuelve a salir positiva, el empleado no ingresa a la planta: pregúntale la razón, notifica al ingeniero del proyecto y envía el reporte a RRHH dentro de 1 hora con la versión del testigo y las fotos de las lecturas.'}),
+ F('hora2','Hora de la segunda prueba','time'),F('lectura2','Lectura de la segunda prueba (%)','text'),F('medida','Medida disciplinaria según la tabla','text',null,{w:1,ro:1}),
+ F('razon','Razón que da el empleado','area',null,{w:1}),F('testigo','Testigo','per'),F('vTestigo','Versión del testigo','area',null,{w:1}),F('firmaTes','Firma del testigo','firma',null,{w:1}),
+ F('ingeniero','Ingeniero del proyecto notificado','per'),F('rrhh','Hora de envío del reporte a RRHH','time')],
+  sum:r=>[r.persona,[r.hora,r.lectura!==''&&r.lectura!=null?'Lectura '+r.lectura+(r.lectura2?' / '+r.lectura2:''):'',r.motivo].filter(Boolean).join(' · '),r.resultado==='Positivo'?['bad',r.rrhh?'Positivo':'Positivo · RRHH']:['ok','Negativo']]},
  extintores:{n:'Extintores',s:'Inspección de extintor',d:'Inspección del 27, recarga y vencimiento',f:[F('fecha','Fecha de inspección','date'),F('equipo','Inventario del equipo','eq',null,{req:1,free:1}),F('tipoeq','Tipo de equipo','text'),F('modelo','Modelo','text'),F('cap','Capacidad (lbs)','num'),F('etq','Etiqueta del extintor','sel',['Legible','No se lee','No tiene etiqueta']),F('recarga','Última recarga','date'),F('vence','Etiqueta de vencimiento','date'),F('items','Estado','chk',()=>IT_EXT,{w:1,labels:['Bueno','Malo','No tiene']}),F('obs','Observaciones','area',null,{w:1})],
   sum:r=>[(r.equipo||'')+' · '+(r.cap?r.cap+' lb':'s/capacidad'),r.vence?'Vence '+fmt(r.vence):'Sin etiqueta de vencimiento',venceTag(r.vence)||(ncx(r.items)?['bad',ncx(r.items)+' con falla']:['ok','Bien'])]},
  epp:{n:'EPP',s:'Entrega / movimiento de EPP',d:'Inventario real, entregas con firma y comprobante',inv:'catepp',f:[F('fecha','Fecha','date'),F('mov','Movimiento','sel',['Entrega a personal','Entrada / compra','Baja']),F('persona','Entregado a / proveedor','per'),F('cargo','Cargo','text'),F('lista','Artículos','lista',()=>catNames('catepp'),{w:1,vida:1}),F('obs','Observaciones','text',null,{w:1}),F('firma','Firma de quien recibe','firma',null,{w:1})],
@@ -179,6 +186,8 @@ const row=(o)=>`<div class="row ${o.click?'click':''}" ${o.click?`data-act="${o.
 
 function alerts(){const t=today(),a=[];
  if(R('senal').length&&pd(t).getDay()!==0&&!R('despliegue').some(d=>d.fecha===t)&&(!cfg.inicio||t>=cfg.inicio))a.push({t:'Despliegue de señalización de hoy',s:'Registra dónde quedaron los rótulos (puedes duplicar el de ayer)',tag:['yl','Pendiente'],click:'duplast'});
+ for(const r of R('alcohol'))if(r.resultado==='Positivo'&&!r.rrhh)a.push({t:'Prueba de alcohol positiva: '+(r.persona||''),s:'Enviar reporte a RRHH dentro de 1 hora ('+fdmy(r.fecha)+(r.hora?' '+r.hora:'')+')',tag:['bad','RRHH'],click:'edit:alcohol:'+r.id});
+ for(const {r,h} of sucPend48())a.push({t:'Enviar REPSUC '+(r.codigo||'')+' a oficinas centrales',s:(r.relato||'')+(h>=0?' · quedan '+h+' h de las 48':' · plazo de 48 h vencido'),tag:h<0?['bad','Vencido']:h<=12?['yl',h+' h']:['yl','48 h'],click:'edit:sucesos:'+r.id});
  for(const p of R('personal'))if(p.estado!=='Inactivo'&&p.lvence&&p.lic!=='No tiene'){const d=diff(p.lvence,t);if(d<=30)a.push({t:'Licencia de '+p.nombre,s:d<0?'Venció el '+fmt(p.lvence):'Vence el '+fmt(p.lvence),tag:d<0?['bad','Vencida']:['yl',d+' días'],click:'edit:personal:'+p.id})}
  const lastExt={};for(const e of R('extintores'))if(!lastExt[e.equipo]||e.fecha>lastExt[e.equipo].fecha)lastExt[e.equipo]=e;
  for(const e of Object.values(lastExt)){if(e.etq&&e.etq!=='Legible')a.push({t:'Extintor de '+e.equipo,s:'Etiqueta: '+e.etq.toLowerCase()+' (revisar recarga)',tag:['yl','Etiqueta'],click:'edit:extintores:'+e.id});const d=e.vence?diff(e.vence,t):null,f=Object.entries(e.items||{}).filter(x=>x[1]!=='C').map(x=>x[0]+(x[1]==='A'?' (no tiene)':''));if(d!=null&&d<=30)a.push({t:'Extintor de '+e.equipo,s:'Etiqueta '+(d<0?'vencida el ':'vence el ')+fmt(e.vence),tag:d<0?['bad','Vencido']:['yl',d+' días'],click:'edit:extintores:'+e.id});if(f.length)a.push({t:'Extintor de '+e.equipo,s:'Falla: '+f.join(', '),tag:['bad','Revisar'],click:'edit:extintores:'+e.id})}
@@ -225,7 +234,7 @@ function vMod(){const k=modOpen,m=M[k];let rs=R(k).slice();
  const meses=[...new Set(R(k).map(r=>String(r.fecha||'').slice(0,7)).filter(Boolean).concat(today().slice(0,7)))].sort().reverse();
  return `<div class="sh"><h2>${m.n}</h2><div class="tools" style="margin:0"><button class="btn pri" data-act="new:${k}">+ Nuevo</button>${k==='despliegue'?'<button class="btn" data-act="duplast">Duplicar el último</button>':''}<button class="btn" data-act="x:${k}">Excel</button></div></div>
  <div class="tools"><input id="q" type="search" placeholder="Buscar…" value="${esc(filt.q)}">${m.nodate?'':`<select id="mes"><option value="">Todos los meses</option>${meses.map(x=>`<option value="${x}" ${x===filt.mes?'selected':''}>${MES[+x.slice(5)-1]} ${x.slice(0,4)}</option>`).join('')}</select>`}</div>
- ${m.inv?invTable(m.inv):k==='extintores'?extPend():k==='insp'?inspPend():k==='charlas'?agendaBox():''}
+ ${m.inv?invTable(m.inv):k==='extintores'?extPend():k==='insp'?inspPend():k==='charlas'?agendaBox():k==='alcohol'?alcPend():''}
  <div class="card">${rs.length?rs.map(r=>{const s=m.sum(r);return row({left:m.nodate?'':`<div class="day">${r.fecha?pd(r.fecha).getDate():'–'}<small>${r.fecha?MES[pd(r.fecha).getMonth()].slice(0,3):''}</small></div>`,t:s[0]||'(sin nombre)',s:(s[1]||'')+((r.fotos||[]).length?' · '+r.fotos.length+' foto'+(r.fotos.length>1?'s':''):''),tag:s[2]&&s[2][1]?s[2]:null,click:'edit:'+k+':'+r.id})}).join(''):`<p class="empty">${R(k).length?'Nada coincide con el filtro.':'Aún no hay registros. Usa “+ Nuevo”.'}</p>`}</div>`}
 
 /* ---------- informe mensual ---------- */
@@ -262,8 +271,9 @@ function infText(){const[y,mo]=infMes.split('-').map(Number),d=infData(infMes),L
 let cur=null;
 function fieldHTML(f,r){const v=r[f.k]??'',id='f_'+f.k,ro=f.ro?'readonly':'';let inp;
  if(f.t==='sel')inp=`<select id="${id}">${f.o.map(o=>`<option ${o===v?'selected':''}>${esc(o)}</option>`).join('')}</select>`;
- else if(f.t==='area')inp=`<textarea id="${id}">${esc(v)}</textarea>`;
- else if(f.t==='hdr')return `<h3 class="fh">${esc(f.l)}</h3>`;
+ else if(f.t==='area')inp=`<textarea id="${id}"${f.ph?` placeholder="${esc(f.ph)}"`:''}>${esc(v)}</textarea>`;
+ else if(f.t==='hdr')return `<h3 class="fh">${esc(f.l)}</h3>${f.note?`<p class="hint f w" style="margin:-4px 0 10px;font-size:13px;color:var(--mut)">${esc(f.note)}</p>`:''}`;
+ else if(f.t==='img')inp=imgHTML(f,v);
  else if(f.t==='fotos')return `<div class="f w" style="margin-bottom:12px"><span style="display:block;font:600 14px Barlow,sans-serif;color:var(--mut);margin-bottom:4px">${esc(f.l)}</span><div class="fotos" id="f_fotos">${fotosHTML()}</div></div>`;
  else if(f.t==='firma')return `<div class="f w sig" style="margin-bottom:12px"><span style="display:block;font:600 14px Barlow,sans-serif;color:var(--mut);margin-bottom:4px">${esc(f.l)}</span><div id="f_${f.k}">${sigHTML(f.k)}</div></div>`;
  else if(f.t==='lista')return `<div class="f w" style="margin-bottom:12px"><span style="display:block;font:600 14px Barlow,sans-serif;color:var(--mut);margin-bottom:4px">${esc(f.l)}</span><div class="li-h ${f.vida?'':'nv'}"><span>Artículo</span><span>Cant.</span>${f.vida==='est'?'<span>Estación</span>':f.vida?'<span>Vida útil (meses)</span>':''}<span></span></div><div id="f_lista" data-vida="${f.vida||0}">${(eitems(r).length?eitems(r):[{art:'',cant:1}]).map(i=>liRow(i,f.vida)).join('')}</div><datalist id="dl_cat">${f.o().map(o=>`<option value="${esc(o)}">`).join('')}</datalist><p class="hint">${f.o().length?'Elige el artículo del inventario para que se sume o descuente en su fila.':'Tip: crea primero los artículos en el inventario (botón “+ Artículo”) para llevar la existencia real.'}</p><button type="button" class="btn sm" data-act="addli">+ Otro artículo</button></div>`;
@@ -305,12 +315,12 @@ function openForm(k,id,pre={}){const m=M[k];let r=id?{...R(k).find(x=>x.id===id)
  $('#modal').classList.add('on');initSig();
 const eqI=$('#f_equipo');if(eqI&&m.f.some(f=>f.t==='chk')&&k==='insp')eqI.addEventListener('change',()=>{const f=m.f.find(f=>f.t==='chk');const tmp={...r,equipo:eqI.value,[f.k]:readChk(f)};$('#f_'+f.k).innerHTML=chkHTML(f,tmp)})}
 function nextCode(){const y=today().slice(0,4),n=R('sucesos').filter(s=>String(s.codigo||'').includes('-'+y+'-')).map(s=>+String(s.codigo).split('-').pop()||0);return 'RS-'+y+'-'+pad(Math.max(0,...n)+1).padStart(3,'0')}
-function collect(){const m=M[cur.k],o={};for(const f of m.f){if(f.t==='hdr')continue;if(f.t==='chk'){o[f.k]=readChk(f);continue}if(f.t==='fotos'){o.fotos=cur.fotos.slice();continue}if(f.t==='firma'){o[f.k]=cur.sig[f.k].id||'';if(cur.r[f.k+'Fecha'])o[f.k+'Fecha']=cur.r[f.k+'Fecha'];continue}if(f.t==='lista'){o.lista=[...document.querySelectorAll('#f_lista .li-row')].map(x=>({art:x.querySelector('.li-a').value.trim(),cant:+x.querySelector('.li-c').value||1,vida:x.querySelector('.li-v')?x.querySelector('.li-v').value:'',est:x.querySelector('.li-e')?x.querySelector('.li-e').value.trim():''})).filter(i=>i.art);continue}if(f.t==='multi'){o[f.k]=readMulti(f.k);continue}let v=$('#f_'+f.k).value.trim();if(f.t==='num'&&v!=='')v=+v;o[f.k]=v}return o}
-function pdfLabel(k,r){return k==='sucesos'?'Reporte en Excel':k==='epp'?'Comprobante PDF':k==='botiquin'?'Comprobante PDF':'PDF con evidencia'}
+function collect(){const m=M[cur.k],o={};for(const f of m.f){if(f.t==='hdr')continue;if(f.t==='chk'){o[f.k]=readChk(f);continue}if(f.t==='fotos'){o.fotos=cur.fotos.slice();continue}if(f.t==='firma'){o[f.k]=cur.sig[f.k].id||'';if(cur.r[f.k+'Fecha'])o[f.k+'Fecha']=cur.r[f.k+'Fecha'];continue}if(f.t==='lista'){o.lista=[...document.querySelectorAll('#f_lista .li-row')].map(x=>({art:x.querySelector('.li-a').value.trim(),cant:+x.querySelector('.li-c').value||1,vida:x.querySelector('.li-v')?x.querySelector('.li-v').value:'',est:x.querySelector('.li-e')?x.querySelector('.li-e').value.trim():''})).filter(i=>i.art);continue}if(f.t==='multi'){o[f.k]=readMulti(f.k);continue}if(f.t==='img'){o[f.k]=cur.img&&f.k in cur.img?cur.img[f.k]:(cur.r[f.k]||'');continue}let v=$('#f_'+f.k).value.trim();if(f.t==='num'&&v!=='')v=+v;o[f.k]=v}return o}
+function pdfLabel(k,r){return k==='sucesos'?'Reporte en Excel':k==='alcohol'&&r&&r.resultado==='Positivo'?'Reporte a RRHH (PDF)':k==='epp'?'Comprobante PDF':k==='botiquin'?'Comprobante PDF':'PDF con evidencia'}
 function closeM(){$('#modal').classList.remove('on');cur=null;render()}
 
 /* ---------- excel ---------- */
-function rowsFor(k,list){if(k==='extintores')return extRows(list||R(k));const m=M[k];return(list||R(k)).slice().sort((a,b)=>String(a.fecha||'').localeCompare(String(b.fecha||''))).map(r=>{const o={};for(const f of m.f){if(f.t==='hdr')continue;if(f.t==='chk'){for(const it of f.o(r)){const v=(r[f.k]||{})[it];o[it]=v==='N'?'X':v==='A'?((f.labels||[])[2]==='No tiene'?'NT':'N/A'):'✓'}}else if(f.t==='fotos'){}else if(f.t==='firma')o[f.l]='';else if(f.t==='lista')o[f.l]=eitems(r).map(i=>(i.cant||1)+' '+i.art+(i.vida?' ('+i.vida+' meses)':'')+(i.est?' en '+i.est:'')).join(', ');else if(f.t==='multi')o[f.l]=(Array.isArray(r[f.k])?r[f.k]:[r[f.k]||r.causa].filter(Boolean)).join(', ');else o[f.l]=f.t==='date'&&r[f.k]?r[f.k]:r[f.k]??''}if(k==='charlas')o['N° asistentes']=nAs(r);if(k==='senal'){const dd=depOf(r.senal);o['En uso hoy']=usoOf(r);o['Existencia en plantel']=exist(r);o['Ubicación hoy']=dd?dd.est:(r.ubic||'')}const fl=m.f.find(f=>f.t==='firma');o[META]={fotos:(r.fotos||[]).slice(),firmas:m.f.filter(f=>f.t==='firma').map(f=>({col:f.l,id:r[f.k]||''})),needSig:!!fl&&!(m.inv&&(isIn(r)||String(r.mov||'').startsWith('Baja')))};return o})}
+function rowsFor(k,list){if(k==='extintores')return extRows(list||R(k));const m=M[k];return(list||R(k)).slice().sort((a,b)=>String(a.fecha||'').localeCompare(String(b.fecha||''))).map(r=>{const o={};for(const f of m.f){if(f.t==='hdr')continue;if(f.t==='chk'){for(const it of f.o(r)){const v=(r[f.k]||{})[it];o[it]=v==='N'?'X':v==='A'?((f.labels||[])[2]==='No tiene'?'NT':'N/A'):'✓'}}else if(f.t==='fotos'){}else if(f.t==='firma')o[f.l]='';else if(f.t==='lista')o[f.l]=eitems(r).map(i=>(i.cant||1)+' '+i.art+(i.vida?' ('+i.vida+' meses)':'')+(i.est?' en '+i.est:'')).join(', ');else if(f.t==='img')o[f.l]=r[f.k]?'Sí':'';else if(f.t==='multi')o[f.l]=(Array.isArray(r[f.k])?r[f.k]:[r[f.k]||r.causa].filter(Boolean)).join(', ');else o[f.l]=f.t==='date'&&r[f.k]?r[f.k]:r[f.k]??''}if(k==='charlas')o['N° asistentes']=nAs(r);if(k==='senal'){const dd=depOf(r.senal);o['En uso hoy']=usoOf(r);o['Existencia en plantel']=exist(r);o['Ubicación hoy']=dd?dd.est:(r.ubic||'')}const fl=m.f.find(f=>f.t==='firma');o[META]={fotos:(r.fotos||[]).slice(),firmas:m.f.filter(f=>f.t==='firma').map(f=>({col:f.l,id:r[f.k]||''})),needSig:!!fl&&!(m.inv&&(isIn(r)||String(r.mov||'').startsWith('Baja')))};return o})}
 let xlsxP=null,logoP=null;
 const META=Symbol('meta');
 async function longLinks(paths){const out={};if(!paths.length||!sb||!navigator.onLine)return out;for(let i=0;i<paths.length;i+=100){try{const {data}=await sb.storage.from(BUCKET).createSignedUrls(paths.slice(i,i+100),31536000);for(const d of data||[])if(d&&d.signedUrl&&d.path)out[d.path]=d.signedUrl}catch(e){}}return out}
@@ -395,7 +405,7 @@ function eqInfo(e){const pl=$('#f_placa');if(pl&&e){const am=e.tipo!=='Pick-up'&
 function autoFill(t,src){if(!cur)return;const k=t.id.slice(2);const f=M[cur.k].f.find(x=>x.k===k);if(!f)return;
  if(f.t==='eq'){const e=findEq(t.value);eqInfo(e);if(!e)return;fillF('marca',e.marca);fillF('modelo',e.modelo);fillF('placa',e.placa);fillF('tipoeq',e.tipo);
   const p=perOfEq(e);if(p){for(const pk of ['conductor','participante','persona'])if(M[cur.k].f.some(x=>x.k===pk)){fillF(pk,p.nombre);break}fillF('cargo',p.cargo);if(cur.k==='insp')setTimeout(()=>markLic(p),0)}}
- if(f.t==='per'){const p=findPer(t.value);if(!p)return;if(t.value!==p.nombre)t.value=p.nombre;fillF('cargo',p.cargo);const sx={n1:'1',n2:'2',nT:'T'}[k];if(sx){fillF('c'+sx,p.cargo);fillF('i'+sx,p.identidad);return}
+ if(f.t==='per'){const p=findPer(t.value);if(!p)return;if(t.value!==p.nombre)t.value=p.nombre;fillF('cargo',p.cargo);if(k==='lv1'||k==='lv2')return;const sx={n1:'1',n2:'2',nT:'T'}[k];if(sx){fillF('c'+sx,p.cargo);fillF('i'+sx,p.identidad);return}
   if(p.unidad){const e=findEq(p.unidad);if(e&&M[cur.k].f.some(x=>x.k==='equipo')&&fillF('equipo',e.inv)){eqInfo(e);fillF('marca',e.marca);fillF('modelo',e.modelo);fillF('placa',e.placa);const eq=$('#f_equipo');if(eq&&cur.k==='insp')eq.dispatchEvent(new Event('change'))}}
   if(cur.k==='insp')setTimeout(()=>markLic(p),0)}}
 document.addEventListener('change',e=>{const t=e.target;if(t.id&&t.id.startsWith('f_')&&t.closest('#modal'))autoFill(t,'change')});
@@ -644,25 +654,35 @@ function multiHTML(f,r){const v=Array.isArray(r[f.k])?r[f.k]:(r[f.k]?[r[f.k]]:[]
 const readMulti=k=>[...document.querySelectorAll('#f_'+k+' input:checked')].map(x=>x.value);
 function wrapC(x,t,w){const out=[];for(const par of String(t||'').split('\n')){const ws=par.split(/\s+/);let ln='';for(const wd of ws){const tr=ln?ln+' '+wd:wd;if(x.measureText(tr).width>w&&ln){out.push(ln);ln=wd}else ln=tr}out.push(ln)}return out}
 const loadIm=du=>new Promise((ok,no)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=no;i.src=du});
-/* hoja de versión (como la hoja que firma cada participante) */
+/* hoja de versión (formato FORMATO_VERSION_REPSUC) */
 async function verImg(r,v,logo){const W=1100,H=1420,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
- x.fillStyle='#fff';x.fillRect(0,0,W,H);x.strokeStyle='#17324d';x.lineWidth=3;x.strokeRect(30,30,W-60,H-60);let y=60;
- if(logo){try{const im=await loadIm(logo.du);const h=72,w=h*logo.w/logo.h;x.drawImage(im,60,y,Math.min(w,520),h)}catch(e){}}
- x.fillStyle='#555';x.font='600 22px Arial';x.textAlign='right';x.fillText('REPORTE DE SUCESOS',W-60,y+28);x.fillText((r.codigo||'')+'',W-60,y+58);x.textAlign='left';
- y+=120;x.fillStyle='#17324d';x.font='bold 38px Arial';x.textAlign='center';x.fillText(v.t.toUpperCase(),W/2,y);x.textAlign='left';y+=50;
+ x.fillStyle='#fff';x.fillRect(0,0,W,H);let y=50;const L=80,R2=W-80;
+ if(logo){try{const im=await loadIm(logo.du);const w=Math.min(R2-L,(130)*logo.w/logo.h),h=w*logo.h/logo.w;x.drawImage(im,(W-w)/2,y,w,h);y+=h+18}catch(e){y+=20}}
+ x.fillStyle='#17324d';x.font='bold 26px Arial';x.textAlign='right';x.fillText(v.t.toUpperCase()+'  ·  REPSUC '+(r.codigo||''),R2,y+6);x.textAlign='left';y+=36;
  const e=findEq(r.equipo)||{};
- const F2=[['INVENTARIO',[r.equipo,e.tipo].filter(Boolean).join(' · ')],['FECHA',fdmy(r.fecha)],['HORA',r.hora||''],['NOMBRE',v.n||''],['NÚMERO DE IDENTIDAD',v.i||''],['CARGO U OCUPACIÓN',v.c||'']];
- for(const [l,val] of F2){x.fillStyle='#111';x.font='bold 24px Arial';x.fillText(l+':',60,y);const lw=x.measureText(l+': ').width;x.font='24px Arial';x.fillText(String(val),60+lw,y);x.strokeStyle='#999';x.lineWidth=1;x.beginPath();x.moveTo(60+lw,y+6);x.lineTo(W-60,y+6);x.stroke();y+=44}
- y+=10;x.font='bold 26px Arial';x.textAlign='center';x.fillText('VERSIÓN',W/2,y);x.textAlign='left';y+=16;
- const bx=60,bw=W-120,bTop=y,bH=H-y-330;x.strokeStyle='#333';x.lineWidth=1.5;x.strokeRect(bx,bTop,bw,bH);
- let fs=26,lines;for(;fs>=14;fs-=1){x.font=fs+'px Arial';lines=wrapC(x,v.txt||'Sin versión registrada',bw-30);if(lines.length*fs*1.35<=bH-24)break}
- x.fillStyle='#111';lines.forEach((ln,i)=>{if((i+1)*fs*1.35<bH-12)x.fillText(ln,bx+15,bTop+14+(i+1)*fs*1.35-fs*.3)});
- y=bTop+bH+60;
- const sigRow=async(lbl,id,name)=>{x.fillStyle='#111';x.font='bold 24px Arial';x.fillText(lbl,60,y+70);const lx=60+x.measureText(lbl+' ').width;x.strokeStyle='#333';x.lineWidth=1.5;x.beginPath();x.moveTo(lx,y+74);x.lineTo(lx+460,y+74);x.stroke();
-  if(id){const s=await sigImg(id);if(s){try{const im=await loadIm(s.du);const h=90,w=Math.min(440,h*s.w/s.h);x.drawImage(im,lx+10,y+74-h+8,w,w*s.h/s.w>h?h:w*s.h/s.w)}catch(e){}}}
-  x.font='20px Arial';x.fillStyle='#444';x.fillText(name||'',lx,y+100);y+=125};
- await sigRow('Firma:',v.f,v.n);await sigRow('Inspector SISO:',r.firmaS,RESP().replace(/ – .*/,''));
+ const line=(lbl,val,x0=L,x1=R2)=>{x.fillStyle='#111';x.font='22px Arial';x.fillText(lbl,x0,y);const lw=x.measureText(lbl).width+6;x.strokeStyle='#444';x.lineWidth=1;x.beginPath();x.moveTo(x0+lw,y+5);x.lineTo(x1,y+5);x.stroke();x.font='bold 22px Arial';let t=String(val||'');while(t&&x.measureText(t).width>x1-x0-lw-8)t=t.slice(0,-1);x.fillText(t,x0+lw+6,y)};
+ line('INVENTARIO DEL EQUIPO:',[r.equipo,e.tipo].filter(Boolean).join(' · ')+(r.otro?' / '+r.otro:''));y+=40;
+ line('TIPO SUCESO:',r.tipo);y+=40;
+ line('FECHA SUCESO:',fdmy(r.fecha),L,L+520);line('HORA SUCESO:',r.hora,L+560,R2);y+=40;
+ line('NOMBRE DEL PARTICIPANTE(S):',r.n1);y+=40;line('NOMBRE DEL TESTIGO:',r.n2);y+=40;line('NOMBRE OPINIÓN TÉCNICA:',r.nT);y+=40;
+ line('NÚMERO IDENTIDAD:',v.i);y+=40;line('CARGO U OCUPACIÓN DESEMPEÑA:',v.c);y+=46;
+ x.font='bold 24px Arial';x.textAlign='center';x.fillStyle='#111';x.fillText('DESCRIPCIÓN DEL SUCESO.',W/2,y);x.textAlign='left';y+=16;
+ const hasLv=!!v.lv;const bTop=y,bH=H-y-(hasLv?330:220);const lh0=38;x.strokeStyle='#222';x.lineWidth=1.5;x.strokeRect(L-20,bTop,R2-L+40,bH);
+ x.strokeStyle='#999';x.lineWidth=1;for(let yy=bTop+lh0;yy<bTop+bH-4;yy+=lh0){x.beginPath();x.moveTo(L-20,yy);x.lineTo(R2+20,yy);x.stroke()}
+ let fs=22,lines,lh=lh0;for(;fs>=13;fs--){x.font=fs+'px Arial';lines=wrapC(x,v.txt||'',R2-L);lh=Math.max(fs*1.4,Math.min(lh0,(bH-10)/Math.max(1,lines.length)));if(lines.length*lh<=bH-8)break}
+ x.fillStyle='#111';lines.forEach((ln,i)=>{const yy=bTop+(i+1)*lh-8;if(yy<bTop+bH-4)x.fillText(ln,L-6,yy)});
+ y=bTop+bH+56;
+ const sig=async(lbl,id,name,x0)=>{x.fillStyle='#111';x.font='22px Arial';x.fillText(lbl,x0,y);const lx=x0+x.measureText(lbl).width+8;x.strokeStyle='#333';x.lineWidth=1.2;x.beginPath();x.moveTo(lx,y+4);x.lineTo(lx+330,y+4);x.stroke();
+  if(id){const s=await sigImg(id);if(s){try{const im=await loadIm(s.du);const h=80,w=Math.min(320,h*s.w/s.h),hh=w*s.h/s.w;x.drawImage(im,lx+5,y+4-hh,w,hh)}catch(e){}}}
+  if(name){x.font='17px Arial';x.fillStyle='#444';x.fillText(name,lx,y+26)}};
+ await sig('Firma:',v.f,v.n,L);
+ if(hasLv&&v.hu){try{const p=await photoDU(v.hu);if(p){const im=await loadIm(p.du);const h=150,w=Math.min(150,h*p.w/p.h);x.drawImage(im,R2-w,y-110,w,w*p.h/p.w>h?h:w*p.h/p.w);x.strokeStyle='#333';x.strokeRect(R2-w,y-110,w,h);x.font='16px Arial';x.fillStyle='#444';x.fillText('Huella',R2-w,y+60)}}catch(e){}}
+ y+=80;if(hasLv){await sig('Levantada por:',v.fl,v.lv,L);y+=80}
+ await sig('Inspector SISO:',r.firmaS,RESP().replace(/ – .*/,''),L);
  return c.toDataURL('image/jpeg',.88)}
+async function sigCap(id,label){const c=document.createElement('canvas');c.width=460;c.height=150;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,460,150);
+ if(id){const s=await sigImg(id);if(s){try{const im=await loadIm(s.du);const h=95,w=Math.min(420,h*s.w/s.h),hh=w*s.h/s.w;x.drawImage(im,(460-w)/2,110-hh,w,hh)}catch(e){}}}
+ x.strokeStyle='#000';x.lineWidth=2;x.beginPath();x.moveTo(30,112);x.lineTo(430,112);x.stroke();x.fillStyle='#000';x.font='bold 22px Arial';x.textAlign='center';x.fillText(label,230,140);return c.toDataURL('image/png')}
 async function photoDU(id){try{const b=await fileBlob(id);const u=URL.createObjectURL(b);const im=await loadIm(u);URL.revokeObjectURL(u);const s=Math.min(1,1280/Math.max(im.naturalWidth,im.naturalHeight));const c=document.createElement('canvas');c.width=Math.round(im.naturalWidth*s);c.height=Math.round(im.naturalHeight*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);return{du:c.toDataURL('image/jpeg',.82),w:c.width,h:c.height}}catch(e){return null}}
 async function sucX(r){const X=await loadX();const logo=await loadLogo();const wb=new X.Workbook();wb.creator=cfg.siso||'SISO';wb.created=new Date();
  const AR='Arial',thin={style:'thin',color:{argb:'FF000000'}},GR='FFD9D9D9',NAVY='FF002060';
@@ -696,12 +716,12 @@ async function sucX(r){const X=await loadX();const logo=await loadLogo();const w
  // relato y versiones
  mg('B8:L8');put('B8','RELATO DE LO SUCEDIDO'+(r.relato?' — '+r.relato:''),{b:1,sz:13,h:'center',fill:GR});
  mg('M8:T8');put('M8','CAUSA PRESUNTA',{b:1,sz:13,h:'center',fill:GR});
- const vh=(n,c,t)=>t+(n?' '+n:'')+(c?'          CARGO: '+c:'          CARGO:');
- mg('B9:L9');put('B9',vh(r.n1,r.c1,'VERSIÓN DEL PARTICIPANTE 1:'),{b:1});
+ const vh=(n,c,t)=>t+(n?' '+n:'')+(c?'          PUESTO: '+c:'          PUESTO:');
+ mg('B9:L9');put('B9',vh(r.n1,r.c1,'VERSIÓN DEL PARTICIPANTE:'),{b:1});
  mg('B10:L15');put('B10',r.vPart||'',{sz:10,v:'top'});
- mg('B16:L16');put('B16',vh(r.n2,r.c2,'VERSIÓN DEL PARTICIPANTE 2:'),{b:1});
+ mg('B16:L16');put('B16',vh(r.n2,r.c2,'VERSIÓN DEL TESTIGO:'),{b:1});
  mg('B17:L24');put('B17',r.vTest||'',{sz:10,v:'top'});
- mg('B25:L25');put('B25',vh(r.nT,r.cT,'VERSIÓN TÉCNICA:'),{b:1});
+ mg('B25:L25');put('B25',vh(r.nT,r.cT,'OPINIÓN TÉCNICA:'),{b:1});
  mg('B26:L42');put('B26',r.opinion||'',{sz:10,v:'top'});
  mg('M9:T12');put('M9',r.causaP||'',{sz:10,v:'top'});
  mg('M13:T13');put('M13','CRITERIO DE ANÁLISIS',{b:1,sz:13,h:'center',fill:GR});
@@ -716,13 +736,16 @@ async function sucX(r){const X=await loadX();const logo=await loadLogo();const w
  mg('M39:T39');put('M39','ACCIONES A TOMAR :',{b:1});mg('M40:T42');put('M40',r.acciones||'',{sz:10,v:'top'});
  // cajas de texto largas: agrandar filas si el texto no cabe
  const wOf=(a,b)=>{let s=0;for(let i=a.charCodeAt(0);i<=b.charCodeAt(0);i++)s+=CW[String.fromCharCode(i)];return s};
- const fit=(t,c1,c2,r1,r2,sz)=>{if(!t)return;const cpl=Math.max(10,wOf(c1,c2)*1.18*10/sz);const ln=String(t).split('\n').reduce((a,p)=>a+Math.max(1,Math.ceil(p.length/cpl)),0);const need=ln*sz*1.32+8;let have=0;for(let i=r1;i<=r2;i++)have+=ws.getRow(i).height;if(need>have){const add=(need-have)/(r2-r1+1);for(let i=r1;i<=r2;i++)ws.getRow(i).height+=add}};
- fit(r.vPart,'B','L',10,15,10);fit(r.vTest,'B','L',17,24,10);fit(r.opinion,'B','L',26,42,10);fit(r.causaP,'M','T',9,12,10);fit(r.criterio,'M','T',14,23,10);fit(r.acciones,'M','T',40,42,10);
+ const fit=(t,c1,c2,r1,r2,sz,ex=0)=>{if(!t)return;const cpl=Math.max(10,wOf(c1,c2)*1.18*10/sz);const ln=String(t).split('\n').reduce((a,p)=>a+Math.max(1,Math.ceil(p.length/cpl)),0);const need=ln*sz*1.32+8+ex;let have=0;for(let i=r1;i<=r2;i++)have+=ws.getRow(i).height;if(need>have){const add=(need-have)/(r2-r1+1);for(let i=r1;i<=r2;i++)ws.getRow(i).height+=add}};
+ fit(r.vPart,'B','L',10,15,10,62);fit(r.vTest,'B','L',17,24,10,62);fit(r.opinion,'B','L',26,42,10,62);fit(r.causaP,'M','T',9,12,10);fit(r.criterio,'M','T',14,23,10,62);fit(r.acciones,'M','T',40,42,10);
  for(const a of M_)merge(ws,a);
  if(logo){const id=wb.addImage({base64:logo.du,extension:'png'});const h=50,w=Math.min(285,h*logo.w/logo.h);ws.addImage(id,{tl:{col:1.15,row:1.25},ext:{width:w,height:w*logo.h/logo.w},editAs:'oneCell'})}
+ {const rowTop=n=>{let p=0;for(let i=1;i<n;i++)p+=(ws.getRow(i).height||15)*96/72;return p};const pxRow=px=>{let p=0;for(let i=1;i<200;i++){const h=(ws.getRow(i).height||15)*96/72;if(p+h>px)return i-1+(px-p)/h;p+=h}return 0};
+ const put2=async(id,label,col,lastRow)=>{const du=await sigCap(id,label);const im=wb.addImage({base64:du,extension:'png'});const w=200,h=65;const bottom=rowTop(lastRow+1)-4;ws.addImage(im,{tl:{col,row:pxRow(bottom-h)},ext:{width:w,height:h},editAs:'oneCell'})};
+ await put2(r.firma1,'FIRMA DEL PARTICIPANTE',8.4,15);await put2(r.firma2,'FIRMA DEL TESTIGO',8.4,24);await put2(r.firmaT,'FIRMA OPINIÓN TÉCNICA',8.4,42);await put2(r.firmaS,'Supervisor SISO',17.2,23)}
  ws.pageSetup={orientation:'landscape',paperSize:1,fitToPage:true,fitToWidth:1,fitToHeight:1,horizontalCentered:true,margins:{left:.25,right:.25,top:.3,bottom:.3,header:.1,footer:.1},printArea:'A1:U43'};
  /* ===== hoja 2: VERSIONES (hoja firmada de cada participante) ===== */
- const V=[{t:'Versión del participante 1',n:r.n1,c:r.c1,i:r.i1,txt:r.vPart,f:r.firma1},{t:'Versión del participante 2',n:r.n2,c:r.c2,i:r.i2,txt:r.vTest,f:r.firma2},{t:'Versión técnica',n:r.nT,c:r.cT,i:r.iT,txt:r.opinion,f:r.firmaT}].filter(v=>v.n||v.txt||v.f);
+ const V=[{t:'Versión del participante',n:r.n1,c:r.c1,i:r.i1,txt:r.vPart,f:r.firma1,lv:r.lv1,fl:r.firmaL1,hu:r.hu1},{t:'Versión del testigo',n:r.n2,c:r.c2,i:r.i2,txt:r.vTest,f:r.firma2,lv:r.lv2,fl:r.firmaL2,hu:r.hu2},{t:'Opinión técnica',n:r.nT,c:r.cT,i:r.iT,txt:r.opinion,f:r.firmaT}].filter(v=>v.n||v.txt||v.f);
  if(V.length){const w2=wb.addWorksheet('VERSIONES',{views:[{showGridLines:false}]});for(let i=1;i<=19;i++)w2.getColumn(i).width=i%6===1?2.5:10.5;
   for(let i=1;i<=31;i++)w2.getRow(i).height=15;
   const slot=['B','H','N'],end=['F','L','R'];
@@ -883,6 +906,78 @@ document.addEventListener('click',ev=>{const b=ev.target.closest('[data-act]');i
  if(a==='agview')agView();if(a==='agsave'){b.disabled=true;agSave()}});
 for(const t of TEMAS_ETAPA)if(!TEMAS.includes(t))TEMAS.push(t);
 
+/* ---------- procedimiento de reporte de sucesos (CHE) ---------- */
+{const m=M.sucesos;const i=m.f.findIndex(x=>x.t==='fotos');if(i>=0){m.f[i].l='Fotos (mínimo 2)';m.f.splice(i,0,F('h7','Evidencia fotográfica','hdr',null,{note:'Fotografías panorámicas del lugar desde diferentes ángulos y fotografías del daño (mínimo 2). Daño en llantas: 1 foto del daño y 1 foto del modelo, y llenar el formato de información de la llanta. Las unidades no deben moverse hasta tomar la evidencia.'}))}}
+function imgHTML(f,v){const id=(cur&&cur.img&&f.k in cur.img)?cur.img[f.k]:v;return `<div class="imgf" id="f_${f.k}">${id?`<div class="ph" style="width:110px;height:110px"><img data-sid="${esc(id)}" alt="${esc(f.l)}"><button type="button" data-act="rmimg:${f.k}" aria-label="Quitar">✕</button></div>`:(cur&&cur.imgUp===f.k?'<small class="muted">Subiendo…</small>':(as&&navigator.onLine?`<label class="addph" style="width:110px;height:110px">+ Foto<input class="imgin" data-k="${f.k}" type="file" accept="image/*" capture="environment"></label>`:'<small class="muted">Sin conexión</small>'))}</div>`}
+function refreshImg(k){const f=M[cur.k].f.find(x=>x.k===k);const el=$('#f_'+k);if(f&&el)el.outerHTML=imgHTML(f,cur.r[k])}
+document.addEventListener('change',async ev=>{const t=ev.target;if(!t.classList||!t.classList.contains('imgin')||!cur)return;const k=t.dataset.k,file=t.files&&t.files[0];if(!file)return;const c0=cur;c0.img=c0.img||{};c0.imgUp=k;refreshImg(k);
+ try{const b=await compress(file,null);const r=await as.upload(b,{type:'image/jpeg'});c0.img[k]=r.id}catch(e){toast('No se pudo subir la foto: '+(e&&e.message||'revisa la conexión'))}c0.imgUp=null;if(cur===c0)refreshImg(k)});
+document.addEventListener('click',ev=>{const b=ev.target.closest('[data-act^="rmimg:"]');if(!b||!cur)return;const k=b.dataset.act.slice(6);cur.img=cur.img||{};cur.img[k]='';refreshImg(k)});
+const SUC_REQ=[['tipo','Tipo'],['fechaRep','Fecha del reporte'],['fecha','Fecha del suceso'],['hora','Hora'],['lugar','Lugar'],['clima','Clima'],['relato','Evento'],['dano','Daño'],['n1','Nombre del participante'],['c1','Puesto del participante'],['vPart','Versión del participante'],['firma1','Firma del participante'],['n2','Nombre del testigo'],['c2','Puesto del testigo'],['vTest','Versión del testigo'],['firma2','Firma del testigo'],['nT','Nombre de la opinión técnica'],['cT','Puesto de la opinión técnica'],['opinion','Opinión técnica'],['firmaT','Firma de la opinión técnica'],['causaP','Causa presunta'],['criterio','Criterio de análisis'],['causas','Clasificación de causas'],['danoP','Daños personales'],['danoM','Daños materiales'],['obsD','Observaciones'],['acciones','Acciones a tomar'],['firmaS','Firma del supervisor SISO']];
+function sucFaltan(o){const f=SUC_REQ.filter(([k])=>{const v=o[k];return Array.isArray(v)?!v.length:!String(v??'').trim()}).map(x=>x[1]);
+ if(!o.participante&&!o.equipo&&!o.otro)f.unshift('Afectado (persona, equipo u otro)');
+ if((o.fotos||[]).length<2)f.push('Evidencia fotográfica (mínimo 2 fotos)');
+ for(const [s,n] of [['1','participante'],['2','testigo']])if(o['lv'+s]&&(!o['firmaL'+s]||!o['hu'+s]))f.push('Firma y huella de la versión del '+n+' levantada por tercero');
+ return f}
+function sucPend48(){const out=[];const now=Date.now();for(const r of R('sucesos')){if(r.enviado||!r.fecha)continue;const t0=new Date(r.fecha+'T'+(r.hora||'00:00')).getTime();if(isNaN(t0))continue;const h=Math.round((t0+48*3600e3-now)/3600e3);out.push({r,h})}return out}
+
+/* ---------- pruebas de alcoholemia (PRO-SISO-CORDON-001) ---------- */
+const alcNum=v=>{const n=parseFloat(String(v??'').replace(',','.'));return isNaN(n)?null:n};
+function alcMedida(r){const a=alcNum(r.lectura),b=alcNum(r.lectura2);const v=b!=null?b:a;if(v==null||v<=0)return '';if(b==null&&a>0)return 'Pendiente segunda prueba (10 a 15 min)';
+ return v<0.04?'Acta de constatación de hechos, acta de descargo y suspensión de 1 a 2 días sin goce de salario':v<0.07?'Acta de constatación de hechos, acta de descargo y suspensión de 3 a 8 días sin goce de salario':'Acta de constatación de hechos y terminación del contrato de trabajo'}
+function alcResultado(r){const a=alcNum(r.lectura),b=alcNum(r.lectura2);if(a==null&&b==null)return r.resultado||'';if(b!=null)return b>0?'Positivo':'Negativo';return a>0?'Positivo':'Negativo'}
+document.addEventListener('input',ev=>{if(!cur||cur.k!=='alcohol')return;const id=ev.target.id;if(id!=='f_lectura'&&id!=='f_lectura2')return;
+ const r={lectura:$('#f_lectura').value,lectura2:$('#f_lectura2')?$('#f_lectura2').value:''};const res=alcResultado(r);if(res&&$('#f_resultado'))$('#f_resultado').value=res;if($('#f_medida'))$('#f_medida').value=alcMedida(r)});
+const alcDay=()=>{const d=pd(today()).getDay();return d===1?'lunes':(d===4||d===5||d===6)?'rot':''};
+function alcSorteo(){try{return JSON.parse(localStorage.getItem('siso_sorteo_'+today())||'null')}catch(e){return null}}
+function alcActivos(){return R('personal').filter(p=>p.estado!=='Inactivo').sort((a,b)=>String(a.nombre).localeCompare(String(b.nombre)))}
+function alcPend(){const t=today(),done=new Set(R('alcohol').filter(r=>r.fecha===t).map(r=>norm(r.persona))),act=alcActivos(),dy=alcDay(),s=alcSorteo();
+ const chips=l=>`<div class="chips" style="margin:8px 0">${l.map(p=>{const ok=done.has(norm(p.nombre));return`<button class="chip" data-act="${ok?'goto:alcohol':'alcnew:'+esc(p.nombre)}" style="${ok?'border-color:var(--ok);color:var(--ok)':''}">${ok?'✓ ':''}${esc(p.nombre)}</button>`}).join('')}</div>`;
+ const n15=Math.max(1,Math.ceil(act.length*0.15));
+ let h='';if(dy==='lunes')h=`<div class="sh"><h3>Prueba fija de los lunes: ${act.filter(p=>done.has(norm(p.nombre))).length} de ${act.length}</h3></div>${chips(act)}`;
+ h+=`<div class="sh" style="margin-top:6px"><h3>Selección aleatoria (15%)</h3><small>${dy==='rot'?'Hoy toca rotación':'Jueves, viernes y sábado, o reincorporación'}</small></div>`+(s?`<small class="muted">Sorteo de las ${esc(s.h)}: ${s.l.length} de ${s.n} personas</small>${chips(s.l.map(n=>act.find(p=>p.nombre===n)||{nombre:n}))}<button class="btn sm" data-act="alcsort">Volver a sortear</button>`:`<p class="hint" style="margin:6px 0">Selecciona al azar ${n15} de ${act.length} personas activas. Graba la pantalla al sortear para enviar el video a SISO oficina central.</p><button class="btn pri" data-act="alcsort">Sortear ${n15} personas</button>`);
+ h+=`<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px;border-top:1px solid var(--line);padding-top:10px"><b style="flex:1 1 160px">Hoja de control del día</b><input type="date" id="alcdia" value="${t}" style="min-height:42px;border:1px solid var(--line);border-radius:8px;padding:0 8px;font:inherit"><button class="btn" data-act="alcxls">Excel</button></div><small class="muted">Sale con todo el personal activo; si no hay pruebas ese día sirve para imprimir en blanco.</small><div></div>`;
+ return `<section style="margin-top:0"><div class="card" style="padding:12px 14px">${h}</div></section>`}
+document.addEventListener('click',async ev=>{const b=ev.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
+ if(a==='alcsort'){const act=alcActivos(),n=Math.max(1,Math.ceil(act.length*0.15)),pool=act.map(p=>p.nombre);for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}
+  const d=new Date();localStorage.setItem('siso_sorteo_'+today(),JSON.stringify({h:pad(d.getHours())+':'+pad(d.getMinutes()),n:act.length,l:pool.slice(0,n)}));render();toast('Seleccionadas '+n+' personas');return}
+ if(a.startsWith('alcnew:')){const nm=a.slice(7),p=findPer(nm)||{};const last=R('alcohol').filter(r=>r.lugar).sort((x,y)=>String(y.fecha).localeCompare(String(x.fecha)))[0];const d=new Date();const s=alcSorteo();
+  openForm('alcohol',null,{persona:nm,cargo:p.cargo||'',lugar:last?last.lugar:'PROYECTO '+(cfg.proyecto||'Yorito - Empalme RN23'),hora:pad(d.getHours())+':'+pad(d.getMinutes()),motivo:alcDay()==='lunes'?'Lunes (prueba fija)':(s&&s.l.includes(nm))?'Rotación / aleatoria (15%)':'Otra',lectura:'0.00',resultado:'Negativo',ayuno:'Sí',nqf:'Sí, firmó'});return}
+ if(a==='alcxls'){const dia=($('#alcdia')&&$('#alcdia').value)||today();const l=R('alcohol').filter(r=>r.fecha===dia);
+  b.disabled=true;try{const blob=await alcX(dia,l);await saveFile('Control pruebas de alcoholemia '+fdmy(dia)+'.xlsx',blob);toast('Hoja de control lista')}catch(e){toast('No se pudo generar el Excel'+(navigator.onLine?'':' (revisa la conexión)'))}b.disabled=false}});
+async function alcX(dia,list){const X=await loadX();const logo=await loadLogo();const wb=new X.Workbook();const ws=wb.addWorksheet('CONTROL ALCOHOLEMIA',{views:[{showGridLines:false}]});
+ const AR='Calibri',thin={style:'thin',color:{argb:'FF000000'}},B={top:thin,left:thin,bottom:thin,right:thin};
+ [['A',1.5],['B',4],['C',34],['D',26],['E',9],['F',10],['G',17],['H',30]].forEach(([c,w])=>ws.getColumn(c).width=w);
+ const put=(a,v,o={})=>{const c=ws.getCell(a);c.value=v;c.font={name:AR,size:o.sz||10,bold:!!o.b,color:{argb:o.col||'FF000000'}};c.alignment={horizontal:o.h||'left',vertical:'middle',wrapText:true};if(o.fill)c.fill={type:'pattern',pattern:'solid',fgColor:{argb:o.fill}};if(o.bd)c.border=B;return c};
+ const mg=a=>ws.mergeCellsWithoutStyle?ws.mergeCellsWithoutStyle(a):ws.mergeCells(a);
+ ws.getRow(1).height=20;ws.getRow(2).height=20;ws.getRow(3).height=6;
+ for(const a of ['B1','C1','D1','E1','F1','G1','H1','B2','C2','D2','E2','F2','G2','H2'])ws.getCell(a).border={...(a[1]==='1'?{top:thin}:{bottom:thin}),...(a[0]==='B'?{left:thin}:{}),...(a[0]==='H'?{right:thin}:{})};
+ put('D2','CONTROL DE PRUEBAS DE ALCOHOLEMIA',{b:1,h:'center',sz:10});mg('D2:F2');
+ put('G1','SEGURIDAD INDUSTRIAL Y SALUD OCUPACIONAL',{b:1,h:'right',sz:10});mg('G1:H1');put('G2','PROYECTO: '+(cfg.proyecto||'Yorito - Empalme RN23'),{b:1,h:'right',sz:10});mg('G2:H2');mg('B1:C2');
+ const lug=[...new Set(list.map(r=>r.lugar).filter(Boolean))].join(' / ')||'PROYECTO '+(cfg.proyecto||'Yorito - Empalme RN23');const hrs=list.map(r=>r.hora).filter(Boolean).sort();
+ put('C4','LUGAR: '+lug,{b:1});put('F4','HORA: '+(hrs.length?hrs[0]+(hrs.length>1?' a '+hrs[hrs.length-1]:''):'________'),{});mg('F4:G4');
+ put('C5','FECHA: '+fdmy(dia),{});
+ const H0=6;['#','NOMBRE COMPLETO','PUESTO','HORA','LECTURA','FIRMA','OBSERVACIÓN'].forEach((t,i)=>put(String.fromCharCode(66+i)+H0,t,{b:1,h:i>1?'center':'left',bd:1}));
+ const byN={};for(const r of list)byN[norm(r.persona)]=r;
+ const people=alcActivos().map(p=>({nombre:p.nombre,cargo:p.cargo||''}));for(const r of list)if(!people.some(p=>norm(p.nombre)===norm(r.persona)))people.push({nombre:r.persona,cargo:r.cargo||''});
+ const N=Math.max(people.length,15);
+ for(let i=0;i<N;i++){const p=people[i],rr=H0+1+i,r=p?byN[norm(p.nombre)]:null;ws.getRow(rr).height=r?30:20;put('B'+rr,i+1,{h:'center',bd:1,sz:9});
+  put('C'+rr,p?p.nombre:'',{bd:1});put('D'+rr,p?p.cargo:'',{h:'center',bd:1});
+  if(!r){for(const c of 'EFGH')put(c+rr,'',{bd:1});continue}
+  const pos=r.resultado==='Positivo',nqf=String(r.nqf||'').includes('N.Q.F');
+  const lec=[r.lectura,r.lectura2].filter(x=>x!==''&&x!=null).join(' / ');
+  const ob=pos?['POSITIVO',alcNum(r.lectura2)!=null?'2ª prueba '+(r.hora2||'')+': '+r.lectura2:'',r.obs].filter(Boolean).join(' · '):[r.obs||'Habilitado'].join('');
+  put('E'+rr,r.hora||'',{h:'center',bd:1});put('F'+rr,lec,{h:'center',bd:1,b:pos,col:pos?'FFC00000':'FF000000'});put('G'+rr,nqf?'N.Q.F.':'',{h:'center',bd:1,b:nqf});put('H'+rr,ob+(nqf?' · Testigos: '+[r.t1,r.t2].filter(Boolean).join(' y '):''),{bd:1,sz:9,b:pos,col:pos?'FFC00000':'FF000000'});
+  if(!nqf&&r.firma){const s=await sigImg(r.firma);if(s){const id=wb.addImage({base64:s.du,extension:'png'});const h=34,w=Math.min(115,h*s.w/s.h);ws.addImage(id,{tl:{col:6+(125-w)/2/125,row:rr-1+0.05},ext:{width:w,height:Math.min(h,w*s.h/s.w)},editAs:'oneCell'})}}}
+ let fr=H0+N+3;
+ put('C'+fr,'APLICADOR: ______________________',{sz:10});put('C'+(fr+1),RESP().replace(/ – .*/,''),{sz:8,col:'FF555555'});
+ put('F'+fr,'TESTIGO 1: ______________________',{sz:10});mg('F'+fr+':H'+fr);fr+=3;
+ put('C'+fr,'OBSERVADOR: ______________________',{sz:10});put('F'+fr,'TESTIGO 2: ______________________',{sz:10});mg('F'+fr+':H'+fr);
+ if(logo){const id=wb.addImage({base64:logo.du,extension:'png'});const w=Math.min(250,46*logo.w/logo.h);ws.addImage(id,{tl:{col:1.05,row:0.08},ext:{width:w,height:w*logo.h/logo.w},editAs:'oneCell'})}
+ ws.pageSetup={orientation:'landscape',paperSize:1,fitToPage:true,fitToWidth:1,fitToHeight:0,horizontalCentered:true,margins:{left:.4,right:.4,top:.5,bottom:.5,header:.2,footer:.2}};
+ const buf=await wb.xlsx.writeBuffer();return new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})}
+
+{const m=M.alcohol;const i=m.f.findIndex(x=>x.t==='fotos');if(i>=0){m.f[i].l='Fotos de cada lectura';m.f.splice(i,0,F('hF','Evidencia fotográfica','hdr',null,{note:'Toma foto del momento de la prueba y del resultado en la pantalla del alcoholímetro (cada lectura).'}))}}
 /* ---------- PDF ---------- */
 let pdfP=null;
 function loadPdf(){return pdfP||(pdfP=new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';s.onload=()=>ok(window.jspdf.jsPDF);s.onerror=()=>{pdfP=null;no()};document.head.appendChild(s)}))}
@@ -902,7 +997,7 @@ async function makePDF(k,r){const J=await loadPdf(),doc=new J({unit:'mm',format:
  doc.setFontSize(9);doc.text(T((r.codigo?r.codigo+'  |  ':'')+'Fecha: '+fdmy(r.fecha||today())),W-X,23,{align:'right'});
  y=40;doc.setTextColor(20);
  if(k==='sucesos')await pdfSuc(doc,r,T);else{
- const m=M[k];const plain=m.f.filter(f=>!['chk','fotos','firma','lista','area','hdr','multi'].includes(f.t)),areas=m.f.filter(f=>f.t==='area');
+ const m=M[k];const plain=m.f.filter(f=>!['chk','fotos','firma','lista','area','hdr','multi','img'].includes(f.t)),areas=m.f.filter(f=>f.t==='area');
  H('Datos del registro');for(const f of plain){let v=r[f.k];if(f.t==='date')v=v?fdmy(v):'';kv(f.l,v)}
  for(const f of m.f.filter(f=>f.t==='lista')){const its=eitems(r);H(f.l);need(8);doc.setFillColor(245,242,238);doc.rect(X,y-4.5,CW,7,'F');doc.setFont('helvetica','bold');doc.setFontSize(10);doc.text('Artículo',X+2,y);doc.text('Cantidad',X+CW-(f.vida?60:2),y,{align:'right'});if(f.vida)doc.text(f.vida==='est'?'Estación':'Vida útil',X+CW-2,y,{align:'right'});y+=7;doc.setFont('helvetica','normal');
   for(const i of its){need(7);doc.text(T(i.art),X+2,y);doc.text(String(i.cant||1),X+CW-(f.vida?60:2),y,{align:'right'});if(f.vida)doc.text(f.vida==='est'?T(i.est||'-'):i.vida?T(i.vida+' meses'):'-',X+CW-2,y,{align:'right'});doc.setDrawColor(220);doc.setLineWidth(.2);doc.line(X,y+2,X+CW,y+2);y+=7}
@@ -969,7 +1064,7 @@ document.addEventListener('click',async ev=>{
   if(cur.k==='personal'&&o.unidad){const e=findEq(o.unidad);if(e&&e.asignado!==o.nombre){const {id:eid,...d}=e;d.asignado=o.nombre;await save('equipos',eid,d)}}
   if(a==='save'){b.disabled=false;toast('Guardado');closeM();return}
   cur.id=id;cur.r={...o};const k=cur.k;
-  if(k==='sucesos'){b.textContent='Generando Excel…';try{const blob=await sucX(o);closeM();await saveFile(sucFile(o),blob);toast('Reporte de suceso en Excel listo')}catch(e){b.disabled=false;b.textContent=pdfLabel(k,o);toast('No se pudo generar el Excel'+(navigator.onLine?'':' (revisa la conexión)'))}return}
+  if(k==='sucesos'){const fl=sucFaltan(o);if(fl.length&&!confirm('El reporte está incompleto ('+fl.length+'):\n• '+fl.slice(0,12).join('\n• ')+(fl.length>12?'\n• …':'')+'\n\nSegún el procedimiento se regresará si falta una casilla. ¿Generar el Excel de todos modos?')){b.disabled=false;b.textContent=pdfLabel(k,o);return}b.textContent='Generando Excel…';try{const blob=await sucX(o);closeM();await saveFile(sucFile(o),blob);toast('Reporte de suceso en Excel listo')}catch(e){b.disabled=false;b.textContent=pdfLabel(k,o);toast('No se pudo generar el Excel'+(navigator.onLine?'':' (revisa la conexión)'))}return}
   b.textContent='Generando PDF…';
   try{const blob=await makePDF(k,o);let pid='';if(as&&navigator.onLine){try{pid=(await as.upload(blob,{type:'application/pdf'})).id;await save(k,id,{...o,comprobante:pid})}catch(e){}}
    closeM();await saveFile(pdfName(k,o)+'.pdf',blob);toast(pid?'PDF guardado en el registro y descargado':'PDF descargado (sin señal no se guardó copia en el registro)')}

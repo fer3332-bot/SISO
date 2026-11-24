@@ -103,6 +103,13 @@ Donde un documento lleva firma aparece el botón **Firmar**. Se abre una hoja en
 - Cada **foto** aparece como un enlace “Ver foto 1”, “Ver foto 2”… que abre o descarga la imagen. Los enlaces funcionan **1 año** desde que descargas el Excel; si necesitas uno más reciente, vuelve a descargarlo. Cualquier persona que tenga el Excel puede abrir esas fotos.
 - Para generar el Excel con fotos y firmas necesitas señal.
 
+## Pruebas de alcoholemia (PRO-SISO-CORDON-001)
+- **Lunes:** prueba fija; en el módulo salen todos los activos para tocar y registrar.
+- **Jueves, viernes y sábado (o reincorporación):** botón **Sortear 15%** que escoge al azar; graba la pantalla al sortear para el video que pide SISO oficina central.
+- El formulario pide hora, lugar, confirmación de no haber comido/chicle/enjuague 20 min antes, lectura (% en aliento), firma o N.Q.F. con dos testigos.
+- Si la lectura es mayor a 0.00 marca Positivo, pide la segunda prueba (10–15 min) y calcula la medida disciplinaria según la tabla. También pide la razón del empleado, la versión y firma del testigo, el ingeniero notificado y la hora de envío a RRHH (alerta de 1 hora en Hoy). El PDF del registro sirve como reporte a RRHH con las fotos de las lecturas.
+- **Hoja de control del día (Excel):** el formato CONTROL DE PRUEBAS DE ALCOHOLEMIA con todo el personal activo, puesto, hora, lectura, firma y observación (Habilitado / Positivo). Sin pruebas sirve para imprimir en blanco.
+
 ## Agenda sugerida de charlas
 En **Charlas de seguridad** aparece la tarjeta **Agenda sugerida de charlas** (de martes a jueves, 10 minutos al cierre de la jornada; noviembre y diciembre 2026). Toca **Revisar y cargar**: puedes desmarcar las que no quieras, cambiar el tema (escribiendo o escogiendo de la lista, que incluye temas de la etapa de limpieza del derecho de vía) y fijar la hora. Se guardan como **Programadas** y salen en Hoy el día que toca. Después de darla, abre la charla, ponla como **Impartida** y anota los asistentes.
 
@@ -129,6 +136,8 @@ Cada suceso se descarga con el botón **Reporte en Excel**, usando el formato de
 - **REPORTE DE SUCESOS**: el formato completo de una hoja, con las casillas marcadas (tipo, clima, clasificación de causas, daños personales y materiales). Si una versión es muy larga, las filas se agrandan solas.
 - **VERSIONES**: la hoja de versión de cada participante y la versión técnica, con su firma y la del inspector SISO.
 - **RESPALDO FOTOGRÁFICO**: las fotos del suceso, tres por fila. Necesita conexión para bajarlas.
+
+- **Procedimiento CHE:** las versiones son del *participante*, del *testigo* y la *opinión técnica*, en primera persona (el formulario recuerda las preguntas ¿Quién? ¿Qué? ¿Cómo? ¿Cuándo? ¿Dónde? ¿Por qué?). Si alguien no puede escribir, anota quién levantó la versión, su firma y una foto de la huella. Al generar el Excel la app avisa qué casillas faltan (incluye mínimo 2 fotos) y en Hoy aparece la alerta de envío a oficinas centrales dentro de 48 h hasta que pongas la fecha de envío.
 
 En la clasificación de causas puedes marcar varias. Al escoger el nombre de cada participante se llenan solos el cargo y el número de identidad (si lo tiene registrado en Personal).
 
