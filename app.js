@@ -916,7 +916,7 @@ function rdFields(k,r){const out=[];const fx=r.fecha;
   let t=f.t==='date'?fdmy(v):String(v);if(f.t==='area'&&t.length>700)t=t.slice(0,700)+'…';out.push([f.l,t])}
  return out}
 async function reporteDiario(dia){let J;try{J=await loadPdf()}catch(e){toast('No se pudo cargar el generador de PDF (revisa la conexión)');return}
- const acts=[];for(const k of ORDER){if(M[k].nodate||M[k].cat)continue;for(const r of R(k))if(r.fecha===dia)acts.push({k,r,h:horaDe(k,r)})}
+ const acts=[];for(const k of ORDER){if(M[k].nodate||M[k].cat)continue;for(const r of R(k))if(r.fecha===dia&&!(k==='charlas'&&r.estado==='Programada'))acts.push({k,r,h:horaDe(k,r)})}
  acts.sort((a,b)=>(a.h||'99').localeCompare(b.h||'99')||ORDER.indexOf(a.k)-ORDER.indexOf(b.k));
  const doc=new J({unit:'mm',format:'letter'}),W=215.9,HP=279.4,X=14,CW=W-2*X;let y=0;
  const T=v=>String(v??'').replace(/[–—]/g,'-').replace(/[“”]/g,'"').replace(/[‘’]/g,"'").replace(/×/g,'x').replace(/[✓☒]/g,'Sí').replace(/·/g,'-').replace(/[^\x00-\xFF]/g,'');
@@ -942,7 +942,7 @@ async function reporteDiario(dia){let J;try{J=await loadPdf()}catch(e){toast('No
  const nfot=acts.reduce((s,a)=>s+(a.r.fotos||[]).length,0);
  if(!acts.length){doc.setFont('helvetica','italic');doc.setFontSize(10);doc.text('No hay actividades registradas en esta fecha.',X,y);y+=8}else{
   doc.setFillColor(23,50,77);doc.rect(X,y-4.5,CW,7,'F');doc.setTextColor(255);doc.setFont('helvetica','bold');doc.setFontSize(9.5);doc.text('Actividad',X+2,y);doc.text('Cant.',X+70,y,{align:'right'});doc.text('Detalle',X+76,y);y+=6;doc.setTextColor(20);
-  let z=0;for(const k of Object.keys(by)){const l=by[k];const det=l.map(a=>{if(a.k==='sucesos')return 'REPSUC '+(a.r.codigo||'')+' - '+(a.r.relato||'');if(a.k==='actnr')return (a.h?a.h+' ':'')+(a.r.lugar||'');const sm=M[a.k].sum?M[a.k].sum(a.r):[];return(a.h?a.h+' ':'')+(sm[0]||'')+(sm[2]&&sm[2][1]?' ('+sm[2][1]+')':'')}).join('; ');
+  let z=0;for(const k of Object.keys(by)){const l=by[k];const det=l.map(a=>{if(a.k==='botaderos')return (a.h?a.h+' ':'')+'Punto '+(a.r.numero||'')+' - '+(a.r.dueno||'');if(a.k==='sucesos')return 'REPSUC '+(a.r.codigo||'')+' - '+(a.r.relato||'');if(a.k==='actnr')return (a.h?a.h+' ':'')+(a.r.lugar||'');const sm=M[a.k].sum?M[a.k].sum(a.r):[];return(a.h?a.h+' ':'')+(sm[0]||'')+(sm[2]&&sm[2][1]?' ('+sm[2][1]+')':'')}).join('; ');
    doc.setFont('helvetica','normal');doc.setFontSize(9);const ln=doc.splitTextToSize(T(det),CW-78);const hh=ln.length*4+2.6;need(hh);
    if(z++%2){doc.setFillColor(246,247,249);doc.rect(X,y-4,CW,hh,'F')}
    doc.setFont('helvetica','bold');doc.text(T(M[k].n),X+2,y,{maxWidth:60});doc.text(String(l.length),X+70,y,{align:'right'});doc.setFont('helvetica','normal');doc.text(ln,X+76,y);y+=hh}
@@ -962,7 +962,15 @@ async function reporteDiario(dia){let J;try{J=await loadPdf()}catch(e){toast('No
    y+=4}
   y+=2}
  // actividades no rutinarias: fecha, lugar, qué hice y fotos
- const anr=resto.filter(a=>a.k==='actnr');const resto2=resto.filter(a=>a.k!=='actnr');
+ const anr=resto.filter(a=>a.k==='actnr');const bots=resto.filter(a=>a.k==='botaderos');const resto2=resto.filter(a=>a.k!=='actnr'&&a.k!=='botaderos');
+ // botaderos: solo un resumen del levantamiento (el detalle va en su propio informe)
+ if(bots.length){H('Levantamiento de puntos de botadero');doc.setFontSize(9.5);
+  doc.setFont('helvetica','normal');const intro=doc.splitTextToSize(T('Se levantaron '+bots.length+' punto'+(bots.length>1?'s':'')+' de botadero de material excedente. El detalle (coordenadas, mapa y fotos) está en el informe "Puntos de Botaderos de ME".'),CW-4);need(intro.length*4.3+2);doc.text(intro,X+2,y);y+=intro.length*4.3+2;
+  for(const a of bots){const r=a.r;const t=(a.h?a.h+'  ':'')+'Punto '+(r.numero||'')+' - '+(r.dueno||'')+[r.lugar,r.estacion?'Est. '+r.estacion:'',r.dist?r.dist+' de la estación':''].filter(Boolean).map(x=>' | '+x).join('');
+   const l=doc.splitTextToSize(T(t),CW-8);need(l.length*4.3+1.5);doc.setFillColor(255,90,0);doc.circle(X+3,y-1.2,0.9,'F');doc.text(l,X+6,y);y+=l.length*4.3+1.5}
+  const caps=bots.map(a=>a.r.mapa||(a.r.fotos||[])[0]).filter(Boolean).slice(0,4);
+  if(caps.length){y+=1;const gap=3,cw=(CW-gap*3)/4,chh=cw*0.6;need(chh+6);for(let j=0;j<caps.length;j++){const p=await thumbDU(caps[j],800);const cx=X+j*(cw+gap);doc.setDrawColor(210);doc.setFillColor(240,240,240);doc.rect(cx,y,cw,chh,'FD');if(p){const sc=Math.min(cw/p.w,chh/p.h);doc.addImage(p.du,'JPEG',cx+(cw-p.w*sc)/2,y+(chh-p.h*sc)/2,p.w*sc,p.h*sc)}}y+=chh+4}
+  y+=4}
  if(anr.length){H('Actividades no rutinarias realizadas');let i=0;
   for(const a of anr){i++;const r=a.r;doc.setFontSize(10.5);doc.setFont('helvetica','bold');const tl=doc.splitTextToSize(T(i+'. '+(r.lugar||'')),CW-40);
    need(tl.length*5+14);doc.setFillColor(232,242,250);doc.rect(X,y-5,CW,tl.length*5+3,'F');doc.setFillColor(23,50,77);doc.rect(X,y-5,1.6,tl.length*5+3,'F');

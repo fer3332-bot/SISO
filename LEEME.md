@@ -125,7 +125,7 @@ En la pantalla **Hoy** está la tarjeta **Reporte diario SISO**: escoge la fecha
 - Encabezado con el título REPORTE DIARIO SISO, el logo y el día.
 - Datos del proyecto, contratista, responsable del informe y fecha y hora en que se generó.
 - Una tabla resumen con cada tipo de actividad, cuántas se hicieron y su detalle con la hora.
-- El detalle de cada actividad en orden de hora, con todos sus datos y sus fotos (tres por fila).
+- El detalle de cada actividad en orden de hora, con todos sus datos y sus fotos (tres por fila). Los puntos de botadero salen solo como resumen del levantamiento (el detalle va en su informe propio) y las charlas que siguen Programadas no aparecen.
 - La firma del responsable SISO (se guarda una sola vez en Proyecto → Firma del responsable SISO, o con el botón ✍️ Agregar mi firma de la tarjeta) y el número de página.
 
 La hora de cada actividad es la que anotaste en el formulario (hora, hora de inicio) y, si no tiene, la hora en que se registró. Las fotos se bajan de la nube, así que genera el reporte con conexión.
