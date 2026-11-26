@@ -108,7 +108,7 @@ Módulo **Actividades no rutinarias** para lo que haces fuera de la rutina (acom
 
 ## Botaderos de material excedente (ME)
 Módulo **Botaderos de material excedente**: cada punto lleva número (P1, P2… automático), dueño del terreno, contacto, lugar, estación más cercana y distancia desde ella (manual), nota, fotos del sitio y firma del dueño como autorización. La ubicación se marca con **🗺️ Marcar punto en el mapa** (mapa satelital: toca el sitio, puedes arrastrar el marcador y ves los otros puntos) o con **📍 Usar mi ubicación**; las coordenadas UTM (zona 16 N) se llenan solas y se toma automáticamente una captura del mapa con el punto marcado, que se guarda en el registro y sale en el informe. Si prefieres, puedes subir tu propia captura de Google Earth. El estado puede ser Activo, En trámite o Lleno / cerrado.
-El botón **Generar PDF** arma el informe "Puntos de Botaderos de ME": encabezado, datos del proyecto, tabla resumen de todos los puntos y una ficha por punto con su ubicación y fotos, más tu firma al final.
+El botón **Generar PDF** arma el informe "Puntos de Botaderos de ME": encabezado con logo, datos del proyecto y el primer punto en la primera hoja; después dos puntos por hoja. Cada punto lleva sus datos, el mapa y hasta 4 fotos, y al final tu firma.
 
 ## Pruebas de alcoholemia (PRO-SISO-CORDON-001)
 - **Lunes:** prueba fija; en el módulo salen todos los activos para tocar y registrar.
