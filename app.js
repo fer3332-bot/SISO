@@ -95,19 +95,18 @@ function utm(lat,lon){const a=6378137,f=1/298.257223563,k0=0.9996,e2=f*(2-f),ep2
  return{E,N:Nn,zone,hem:lat<0?'S':'N'}}
 Object.assign(M,{botaderos:{n:'Botaderos de material excedente',s:'Punto de botadero',d:'Puntos autorizados para depositar material excedente (ME)',f:[
  F('numero','Número de punto','num'),F('fecha','Fecha de registro','date'),F('estado','Estado','sel',['Activo','Lleno / cerrado','En trámite']),
- F('dueno','Dueño del terreno','text',null,{req:1}),F('contacto','Contacto (teléfono)','text'),F('lugar','Lugar / referencia','text',null,{w:1}),F('estacion','Estación del punto (ej. 25+200)','text'),F('frente','Frente de trabajo de referencia (estación)','text'),F('dist','Distancia desde el frente (km)','text'),
- F('hC','Coordenadas (UTM WGS84, zona 16 N)','hdr',null,{note:'Toca “Tomar coordenadas aquí” estando en el punto, o escríbelas desde Google Earth.'}),F('gps','','gps'),F('este','Coordenada Este (m E)','text'),F('norte','Coordenada Norte (m N)','text'),F('latlon','Latitud, longitud','text'),
+ F('dueno','Dueño del terreno','text',null,{req:1}),F('contacto','Contacto (teléfono)','text'),F('lugar','Lugar / referencia','text',null,{w:1}),F('estacion','Estación más cercana (ej. 25+200)','text'),F('dist','Distancia desde la estación más cercana','text',null,{ph:'Ej.: 350 m o 1.2 km'}),
+ F('hC','Ubicación del punto','hdr',null,{note:'Marca el punto en el mapa satelital (o usa tu ubicación si estás en el sitio). Las coordenadas UTM (WGS84, zona 16 N) se llenan solas y se toma una captura del mapa con el punto marcado para el informe.'}),F('gps','','gps'),F('este','Coordenada Este (m E)','text'),F('norte','Coordenada Norte (m N)','text'),F('latlon','Latitud, longitud','text'),
  F('nota','Nota','area',null,{w:1,ph:'Ej.: la ubicación fue indicada por el propietario para usar el material como relleno de plantel.'}),
- F('hM','Imagen de ubicación','hdr',null,{note:'Captura de Google Earth o del mapa con el punto marcado (P1, P2…).'}),F('mapa','Imagen de ubicación','img'),
+ F('mapa','Captura del mapa (se toma sola al marcar el punto; también puedes subir una de Google Earth)','img'),
  F('firmaD','Firma del dueño (autorización)','firma',null,{w:1})],
- sum:r=>['Punto '+(r.numero||'')+' · '+(r.dueno||''),[r.lugar,r.dist?r.dist+' km del frente':'',r.este&&r.norte?r.este+' E, '+r.norte+' N':''].filter(Boolean).join(' · '),r.estado==='Lleno / cerrado'?['','Cerrado']:r.estado==='En trámite'?['yl','En trámite']:['ok','Activo']]}});
-const estKm=v=>{const m=/(\d+)\s*\+\s*(\d{1,3}(?:\.\d+)?)/.exec(String(v||''));return m?+m[1]+(+m[2])/1000:null};
-document.addEventListener('input',ev=>{if(!cur||cur.k!=='botaderos')return;if(!['f_frente','f_estacion'].includes(ev.target.id))return;const a=estKm($('#f_frente').value),b=estKm($('#f_estacion').value),d=$('#f_dist');if(a!=null&&b!=null&&d&&(!d.value||d.dataset.auto)){d.value=Math.abs(a-b).toFixed(2);d.dataset.auto=1}});
+ sum:r=>['Punto '+(r.numero||'')+' · '+(r.dueno||''),[r.lugar,r.dist?r.dist+' de '+(r.estacion||'la estación'):'',r.este&&r.norte?r.este+' E, '+r.norte+' N':''].filter(Boolean).join(' · '),r.estado==='Lleno / cerrado'?['','Cerrado']:r.estado==='En trámite'?['yl','En trámite']:['ok','Activo']]}});
+document.addEventListener('change',ev=>{if(!cur||cur.k!=='botaderos'||ev.target.id!=='f_latlon')return;const p=parseLL(ev.target.value);if(p)setLL(p.lat,p.lon)});
 const botNext=()=>Math.max(0,...R('botaderos').map(r=>+r.numero||0))+1;
 document.addEventListener('click',async ev=>{const b=ev.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
- if(a==='gpsutm'){if(!cur)return;b.disabled=true;b.textContent='Buscando señal GPS…';const g=await here();b.disabled=false;b.textContent='📍 Tomar coordenadas aquí';
+ if(a==='gpsutm'){if(!cur)return;b.disabled=true;b.textContent='Buscando señal GPS…';const g=await here();b.disabled=false;b.textContent='📍 Usar mi ubicación';
   if(!g){toast('No se pudo obtener la ubicación (activa el GPS y da permiso)');return}const u=utm(g.lat,g.lon);
-  const set=(k,v)=>{const e=$('#f_'+k);if(e)e.value=v};set('este',u.E.toFixed(2));set('norte',u.N.toFixed(2));set('latlon',g.lat.toFixed(6)+', '+g.lon.toFixed(6));toast('Coordenadas tomadas (zona '+u.zone+u.hem+')');return}
+  setLL(g.lat,g.lon);toast('Coordenadas tomadas (zona '+u.zone+u.hem+')');return}
  if(a==='botpdf'){b.disabled=true;const t0=b.textContent;b.textContent='Generando…';try{const r=await botPDF();if(r)toast('Informe listo: '+r+' puntos')}catch(e){toast('No se pudo generar el informe'+(navigator.onLine?'':' (revisa la conexión)'))}b.disabled=false;b.textContent=t0}});
 function botBox(){const n=R('botaderos').length;return `<section style="margin-top:0"><div class="card" style="padding:12px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><div style="flex:1 1 200px"><b>Informe de botaderos (PDF)</b><br><small class="muted">${n?n+' punto'+(n>1?'s':'')+' con dueño, contacto, coordenadas, ubicación y fotos':'Registra el primer punto con el botón +'}</small></div><label style="display:flex;gap:6px;align-items:center;font-size:14px"><input type="checkbox" id="botall" style="width:20px;height:20px"> Incluir cerrados</label><button class="btn pri" data-act="botpdf" ${n?'':'disabled'}>Generar PDF</button></div></section>`}
 async function botPDF(){let J;try{J=await loadPdf()}catch(e){toast('No se pudo cargar el generador de PDF (revisa la conexión)');return}
@@ -126,7 +125,7 @@ async function botPDF(){let J;try{J=await loadPdf()}catch(e){toast('No se pudo c
  for(const [l,ln] of ils){doc.setFont('helvetica','bold');doc.setTextColor(80);doc.text(T(l),X+4,y);doc.setFont('helvetica','normal');doc.setTextColor(20);doc.text(ln,X+52,y);y+=ln.length*4.4+2.2}
  y+=8;
  // tabla resumen
- doc.setFillColor(23,50,77);doc.rect(X,y-4.5,CW,7,'F');doc.setTextColor(255);doc.setFont('helvetica','bold');doc.setFontSize(9);const cx=[X+2,X+15,X+55,X+80,X+126,X+143];['Punto','Dueño','Contacto','Coordenadas (m E / m N)','Dist. km','Lugar'].forEach((t,i)=>doc.text(T(t),cx[i],y));y+=6;doc.setTextColor(20);
+ doc.setFillColor(23,50,77);doc.rect(X,y-4.5,CW,7,'F');doc.setTextColor(255);doc.setFont('helvetica','bold');doc.setFontSize(9);const cx=[X+2,X+15,X+55,X+80,X+126,X+143];['Punto','Dueño','Contacto','Coordenadas (m E / m N)','Distancia','Lugar'].forEach((t,i)=>doc.text(T(t),cx[i],y));y+=6;doc.setTextColor(20);
  L.forEach((r,i)=>{doc.setFont('helvetica','normal');doc.setFontSize(8.8);const lug=doc.splitTextToSize(T(r.lugar||r.estacion||''),CW-145);const hh=Math.max(1,lug.length)*4+2.4;need(hh);if(i%2){doc.setFillColor(246,247,249);doc.rect(X,y-4,CW,hh,'F')}
   doc.setFont('helvetica','bold');doc.text('P'+(r.numero||i+1),cx[0],y);doc.setFont('helvetica','normal');doc.text(T(r.dueno||''),cx[1],y,{maxWidth:38});doc.text(T(r.contacto||''),cx[2],y);doc.text(T(r.este&&r.norte?r.este+' / '+r.norte:''),cx[3],y,{maxWidth:45});doc.text(T(r.dist||''),cx[4],y);doc.text(lug,cx[5],y);y+=hh});
  y+=6;
@@ -136,12 +135,13 @@ async function botPDF(){let J;try{J=await loadPdf()}catch(e){toast('No se pudo c
   doc.setFillColor(242,242,242);doc.setDrawColor(200);doc.setLineWidth(.5);doc.roundedRect(X,y,cardW,mapH,6,6,'FD');let ty=y+9;const tx=X+6,tw=cardW-12;
   doc.setTextColor(20);doc.setFont('helvetica','bold');doc.setFontSize(11.5);doc.text('Punto '+(r.numero||''),tx,ty);ty+=5.5;doc.setFont('helvetica','normal');doc.setFontSize(10.5);
   const ln=(t)=>{const l=doc.splitTextToSize(T(t),tw);if(ty+l.length*4.6<y+mapH-3){doc.text(l,tx,ty);ty+=l.length*4.6}};
-  ln('Dueño: '+(r.dueno||''));if(r.contacto)ln('Contacto: '+r.contacto);if(r.estacion)ln('Estación: '+r.estacion);if(r.dist)ln('Distancia desde el frente: '+r.dist+' km'+(r.frente?' (frente en '+r.frente+')':''));ty+=4.6;
+  ln('Dueño: '+(r.dueno||''));if(r.contacto)ln('Contacto: '+r.contacto);if(r.estacion)ln('Estación: '+r.estacion);if(r.dist)ln('Distancia desde la estación más cercana: '+r.dist);ty+=4.6;
   if(r.este||r.norte){ln('Coordenadas:');if(r.este)ln(r.este+' m E');if(r.norte)ln(r.norte+' m N');ty+=4.6}
   if(r.nota)ln('Nota: '+r.nota);
   if(r.estado&&r.estado!=='Activo'){doc.setFont('helvetica','bold');doc.setTextColor(192,57,43);ln(r.estado);doc.setTextColor(20);doc.setFont('helvetica','normal')}
   // imagen de ubicación
-  if(r.mapa)await ph(r.mapa,mapX,y,mapW,mapH);else{doc.setDrawColor(210);doc.setFillColor(248,248,248);doc.rect(mapX,y,mapW,mapH,'FD');doc.setFontSize(9);doc.setTextColor(140);doc.text('Sin imagen de ubicación',mapX+mapW/2,y+mapH/2,{align:'center'});doc.setTextColor(20)}
+  const ll=parseLL(r.latlon);let smap=null;if(ll&&!r.mapa)smap=await staticMap(ll,{id:r.id,num:r.numero,w:1200,h:Math.round(1200*mapH/mapW)});
+  if(smap){doc.setDrawColor(210);doc.rect(mapX,y,mapW,mapH);doc.addImage(smap,'JPEG',mapX,y,mapW,mapH)}else if(r.mapa)await ph(r.mapa,mapX,y,mapW,mapH);else{doc.setDrawColor(210);doc.setFillColor(248,248,248);doc.rect(mapX,y,mapW,mapH,'FD');doc.setFontSize(9);doc.setTextColor(140);doc.text('Sin ubicación marcada',mapX+mapW/2,y+mapH/2,{align:'center'});doc.setTextColor(20)}
   y+=mapH+6;
   // fotos 2 por fila
   const fs=r.fotos||[];const pw=(CW-6)/2,phh=pw*0.62;
@@ -152,6 +152,58 @@ async function botPDF(){let J;try{J=await loadPdf()}catch(e){toast('No se pudo c
  doc.setDrawColor(60);doc.setLineWidth(.3);doc.line(X+CW/2-40,y+12,X+CW/2+40,y+12);doc.setFont('helvetica','bold');doc.setFontSize(10);doc.text(T(RESP().replace(/ [–-] .*/,'')),X+CW/2,y+17,{align:'center'});doc.setFont('helvetica','normal');doc.setFontSize(9);doc.text('Responsable SISO - Elaboró',X+CW/2,y+21.5,{align:'center'});
  const np=doc.getNumberOfPages();for(let i=1;i<=np;i++){doc.setPage(i);doc.setFontSize(8);doc.setTextColor(120);doc.setDrawColor(220);doc.line(X,HP-11,W-X,HP-11);doc.text(T('Puntos de botaderos de ME - '+fdmy(dia)+' - '+(cfg.empresa||"Cordon's Heavy Equipment")),X,HP-7);doc.text('Página '+i+' de '+np,W-X,HP-7,{align:'right'})}
  await saveFile('Puntos de botaderos de ME '+fdmy(dia)+'.pdf',doc.output('blob'));return L.length}
+/* ---------- ubicación en mapa satelital dentro de la plataforma ---------- */
+const TILE_SAT='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',TILE_ROAD='https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}',TILE_LBL='https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}';
+let leafP=null;
+function loadLeaf(){return leafP||(leafP=new Promise((ok,no)=>{const l=document.createElement('link');l.rel='stylesheet';l.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';document.head.appendChild(l);const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';s.onload=()=>ok(window.L);s.onerror=()=>{leafP=null;no()};document.head.appendChild(s)}))}
+const parseLL=v=>{const m=/(-?\d+(?:\.\d+)?)\s*[,;\s]\s*(-?\d+(?:\.\d+)?)/.exec(String(v||''));if(!m)return null;const a=+m[1],b=+m[2];return Math.abs(a)<=90&&Math.abs(b)<=180?{lat:a,lon:b}:null};
+const PROJ_C={lat:15.12,lon:-87.27};
+function mapPickHTML(){return `<div class="f w"><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn pri" data-act="mappick">🗺️ Marcar punto en el mapa</button><button type="button" class="btn" data-act="gpsutm">📍 Usar mi ubicación</button></div><div id="mapprev" style="margin-top:6px"></div></div>`}
+async function snapMap(ll){const c0=cur;if(!c0)return;const st=t=>{const e=$('#mapprev');if(e)e.innerHTML=t?`<small class="muted">${t}</small>`:''};
+ if(!as||!navigator.onLine){st('Sin conexión: la captura del mapa se toma cuando vuelvas a marcar el punto con señal.');return}
+ st('Tomando captura del mapa…');c0.up=(c0.up||0)+1;
+ try{const du=await staticMap(ll,{w:1200,h:720,z:16,num:$('#f_numero')?$('#f_numero').value:c0.r.numero,id:c0.id});if(!du){st('No se pudo tomar la captura del mapa (revisa la conexión).');return}
+  const blob=await (await fetch(du)).blob();const up=await as.upload(blob,{type:'image/jpeg'});c0.img=c0.img||{};c0.img.mapa=up.id;if(cur===c0){refreshImg('mapa');st('✓ Captura del mapa agregada al informe')}}
+ catch(e){st('No se pudo guardar la captura: '+(e&&e.message||'revisa la conexión'))}finally{c0.up--}}
+function setLL(lat,lon){const u=utm(lat,lon);const set=(k,v)=>{const e=$('#f_'+k);if(e)e.value=v};set('este',u.E.toFixed(2));set('norte',u.N.toFixed(2));set('latlon',lat.toFixed(6)+', '+lon.toFixed(6));snapMap({lat,lon})}
+async function openMapPick(){let L;try{L=await loadLeaf()}catch(e){toast('Se necesita conexión para abrir el mapa');return}
+ const cur0=parseLL($('#f_latlon')&&$('#f_latlon').value)||(typeof geoC!=='undefined'&&geoC?{lat:geoC.lat,lon:geoC.lon}:null);
+ const ov=document.createElement('div');ov.id='mappk';ov.style.cssText='position:fixed;inset:0;z-index:9999;background:#000;display:flex;flex-direction:column';
+ ov.innerHTML=`<div style="display:flex;gap:6px;align-items:center;padding:8px;background:#17324d;color:#fff;flex-wrap:wrap"><b style="flex:1 1 140px;font-size:15px">Toca el mapa para marcar el punto</b><button class="btn sm" data-act="mpme">📍 Mi ubicación</button><button class="btn sm" data-act="mpcancel">Cancelar</button><button class="btn sm pri" data-act="mpok">Usar este punto</button></div><div id="mpmap" style="flex:1"></div><div id="mpinfo" style="padding:6px 10px;background:#17324d;color:#fff;font-size:13px">Sin punto marcado</div>`;
+ document.body.appendChild(ov);
+ const map=L.map('mpmap',{zoomControl:true,attributionControl:true}).setView(cur0?[cur0.lat,cur0.lon]:[PROJ_C.lat,PROJ_C.lon],cur0?17:14);
+ L.tileLayer(TILE_SAT,{maxZoom:19,attribution:'Imagen © Esri'}).addTo(map);L.tileLayer(TILE_ROAD,{maxZoom:19}).addTo(map);L.tileLayer(TILE_LBL,{maxZoom:19}).addTo(map);
+ for(const r of R('botaderos')){if(cur&&r.id===cur.id)continue;const p=parseLL(r.latlon);if(p)L.circleMarker([p.lat,p.lon],{radius:7,color:'#fff',weight:2,fillColor:'#c0392b',fillOpacity:.9}).addTo(map).bindTooltip('P'+(r.numero||''),{permanent:true,direction:'right'})}
+ let mk=null,pt=cur0;const show=()=>{$('#mpinfo').textContent=pt?(()=>{const u=utm(pt.lat,pt.lon);return u.E.toFixed(2)+' m E · '+u.N.toFixed(2)+' m N  ('+pt.lat.toFixed(6)+', '+pt.lon.toFixed(6)+')'})():'Sin punto marcado'};
+ const put=(lat,lon)=>{pt={lat,lon};if(mk)mk.setLatLng([lat,lon]);else mk=L.marker([lat,lon],{draggable:true}).addTo(map).on('dragend',e=>{const q=e.target.getLatLng();pt={lat:q.lat,lon:q.lng};show()});show()};
+ if(cur0)put(cur0.lat,cur0.lon);map.on('click',e=>put(e.latlng.lat,e.latlng.lng));setTimeout(()=>map.invalidateSize(),200);
+ const done=()=>{map.remove();ov.remove();document.removeEventListener('click',h,true)};
+ const h=async ev=>{const b=ev.target.closest('[data-act]');if(!b||!ov.contains(b))return;ev.stopPropagation();const a=b.dataset.act;
+  if(a==='mpcancel')done();
+  if(a==='mpme'){b.textContent='Buscando…';const g=await here();b.textContent='📍 Mi ubicación';if(!g){toast('No se pudo obtener la ubicación');return}put(g.lat,g.lon);map.setView([g.lat,g.lon],17)}
+  if(a==='mpok'){if(!pt){toast('Toca el mapa para marcar el punto');return}const p=pt;done();setLL(p.lat,p.lon);toast('Punto marcado')}};
+ document.addEventListener('click',h,true)}
+/* imagen fija del mapa (para la ficha y el PDF): mosaicos satelitales + puntos marcados */
+const tileImg=u=>new Promise(ok=>{const i=new Image();i.crossOrigin='anonymous';const t=setTimeout(()=>ok(null),8000);i.onload=()=>{clearTimeout(t);ok(i)};i.onerror=()=>{clearTimeout(t);ok(null)};i.src=u});
+async function staticMap(ll,o={}){if(!navigator.onLine)return null;const W=o.w||1200,H=o.h||720,z=o.z||16,TS=256;
+ const px=(lat,lon)=>{const s=Math.sin(lat*Math.PI/180),n=2**z*TS;return{x:(lon+180)/360*n,y:(0.5-Math.log((1+s)/(1-s))/(4*Math.PI))*n}};
+ const c0=px(ll.lat,ll.lon),x0=c0.x-W/2,y0=c0.y-H/2;const cv=document.createElement('canvas');cv.width=W;cv.height=H;const g=cv.getContext('2d');g.fillStyle='#ddd';g.fillRect(0,0,W,H);
+ const tx0=Math.floor(x0/TS),ty0=Math.floor(y0/TS),tx1=Math.floor((x0+W)/TS),ty1=Math.floor((y0+H)/TS);let okN=0;
+ for(const tpl of [TILE_SAT,TILE_ROAD]){const jobs=[];for(let tx=tx0;tx<=tx1;tx++)for(let ty=ty0;ty<=ty1;ty++)jobs.push(tileImg(tpl.replace('{z}',z).replace('{x}',tx).replace('{y}',ty)).then(im=>{if(im){g.drawImage(im,tx*TS-x0,ty*TS-y0);if(tpl===TILE_SAT)okN++}}));await Promise.all(jobs)}
+ if(!okN)return null;
+ const pts=R('botaderos').map(r=>({r,p:parseLL(r.latlon)})).filter(x=>x.p);if(o.id==null||!pts.some(x=>x.r.id===o.id))pts.push({r:{numero:o.num},p:ll,me:1});
+ for(const {r,p} of pts){const q=px(p.lat,p.lon),x=q.x-x0,y=q.y-y0;if(x<-20||y<-20||x>W+20||y>H+20)continue;const me=(o.id!=null&&r.id===o.id)||(p.lat===ll.lat&&p.lon===ll.lon);
+  g.lineWidth=me?6:4;g.strokeStyle='#e00';g.beginPath();g.arc(x,y,me?26:18,0,7);g.stroke();g.fillStyle='#e00';g.beginPath();g.arc(x,y,4,0,7);g.fill();
+  const t='P'+(r.numero||'');g.font=`bold ${me?34:26}px Arial`;g.lineWidth=5;g.strokeStyle='#fff';g.strokeText(t,x+(me?30:22),y-(me?22:14));g.fillStyle='#e00';g.fillText(t,x+(me?30:22),y-(me?22:14))}
+ g.fillStyle='rgba(255,255,255,.88)';g.fillRect(10,10,470,50);g.fillStyle='#111';g.font='bold 22px Arial';g.fillText('Puntos de Botadero de Material Excedente',20,34);g.font='15px Arial';g.fillStyle='#444';g.fillText('Proyecto '+(cfg.proyecto||'Yorito – Empalme RN-23'),20,53);
+ g.fillStyle='#fff';g.font='bold 22px Arial';g.textAlign='center';g.fillText('N',W-30,H-48);g.beginPath();g.moveTo(W-30,H-90);g.lineTo(W-40,H-62);g.lineTo(W-20,H-62);g.closePath();g.fill();g.textAlign='left';
+ g.font='12px Arial';g.fillStyle='rgba(255,255,255,.85)';g.fillText('Imagen satelital © Esri, Maxar, Earthstar Geographics',10,H-10);
+ try{return cv.toDataURL('image/jpeg',.85)}catch(e){return null}}
+document.addEventListener('click',ev=>{const b=ev.target.closest('[data-act="mappick"]');if(!b||!cur)return;openMapPick()});
+
+/* ---------- actividades no rutinarias ---------- */
+Object.assign(M,{actnr:{n:'Actividades no rutinarias',s:'Actividad no rutinaria',d:'Acompañamientos, gestiones y otras tareas fuera de la rutina',f:[F('fecha','Fecha','date'),F('hora','Hora','time'),F('lugar','Lugar o estación','text',null,{req:1}),F('desc','¿Qué hice?','area',null,{w:1,req:1,ph:'Ej.: Acompañamiento a la cuadrilla forestal en el inventario de árboles del derecho de vía.'})],
+ sum:r=>[r.desc?String(r.desc).split('\n')[0].slice(0,80):'',[r.lugar,r.hora].filter(Boolean).join(' · '),(r.fotos||[]).length?['ok',(r.fotos||[]).length+' foto'+((r.fotos||[]).length>1?'s':'')]:['','Sin foto']]}});
 
 for(const k in M)if(!M[k].cat)M[k].f.push(F('fotos','Evidencia fotográfica','fotos',null,{w:1}));
 const eitems=r=>r.lista&&r.lista.length?r.lista:((r.art||r.med)?[{art:r.art||r.med,cant:r.cant||1,vida:r.vida||''}]:[]);
@@ -163,7 +215,7 @@ function stockMap(c){const mk=M[c].mov,m={};for(const x of R(c))m[norm(x.nombre)
  for(const v of Object.values(m))v.ex=v.ini+v.e-v.s;return m}
 function stockRow(c,cat){const v=stockMap(c)[norm(cat.nombre)]||{ini:+cat.inicial||0,e:0,s:0};v.ex=v.ini+v.e-v.s;return v}
 
-const ORDER=['insp','despliegue','audepp','charlas','alcohol','sol','botaderos','inspareas','reuniones','sucesos','desvios','extintores','epp','botiquin','senal','radios','personal','equipos'];
+const ORDER=['insp','despliegue','audepp','charlas','alcohol','sol','actnr','botaderos','inspareas','reuniones','sucesos','desvios','extintores','epp','botiquin','senal','radios','personal','equipos'];
 function nc(it){return it?Object.values(it).filter(v=>v==='N').length:0}
 function ncx(it){return it?Object.values(it).filter(v=>v==='N'||v==='A').length:0}
 function nAs(r){return String(r.asist||'').split('\n').filter(x=>x.trim()).length}
@@ -339,7 +391,7 @@ function fieldHTML(f,r){const v=r[f.k]??'',id='f_'+f.k,ro=f.ro?'readonly':'';let
  if(f.t==='sel')inp=`<select id="${id}">${f.o.map(o=>`<option ${o===v?'selected':''}>${esc(o)}</option>`).join('')}</select>`;
  else if(f.t==='area')inp=`<textarea id="${id}"${f.ph?` placeholder="${esc(f.ph)}"`:''}>${esc(v)}</textarea>`;
  else if(f.t==='hdr')return `<h3 class="fh">${esc(f.l)}</h3>${f.note?`<p class="hint f w" style="margin:-4px 0 10px;font-size:13px;color:var(--mut)">${esc(f.note)}</p>`:''}`;
- else if(f.t==='gps')return `<div class="f w"><button type="button" class="btn" data-act="gpsutm">📍 Tomar coordenadas aquí</button></div>`;
+ else if(f.t==='gps')return mapPickHTML();
  else if(f.t==='img')inp=imgHTML(f,v);
  else if(f.t==='fotos')return `<div class="f w" style="margin-bottom:12px"><span style="display:block;font:600 14px Barlow,sans-serif;color:var(--mut);margin-bottom:4px">${esc(f.l)}</span><div class="fotos" id="f_fotos">${fotosHTML()}</div></div>`;
  else if(f.t==='firma')return `<div class="f w sig" style="margin-bottom:12px"><span style="display:block;font:600 14px Barlow,sans-serif;color:var(--mut);margin-bottom:4px">${esc(f.l)}</span><div id="f_${f.k}">${sigHTML(f.k)}</div></div>`;
@@ -890,7 +942,7 @@ async function reporteDiario(dia){let J;try{J=await loadPdf()}catch(e){toast('No
  const nfot=acts.reduce((s,a)=>s+(a.r.fotos||[]).length,0);
  if(!acts.length){doc.setFont('helvetica','italic');doc.setFontSize(10);doc.text('No hay actividades registradas en esta fecha.',X,y);y+=8}else{
   doc.setFillColor(23,50,77);doc.rect(X,y-4.5,CW,7,'F');doc.setTextColor(255);doc.setFont('helvetica','bold');doc.setFontSize(9.5);doc.text('Actividad',X+2,y);doc.text('Cant.',X+70,y,{align:'right'});doc.text('Detalle',X+76,y);y+=6;doc.setTextColor(20);
-  let z=0;for(const k of Object.keys(by)){const l=by[k];const det=l.map(a=>{if(a.k==='sucesos')return 'REPSUC '+(a.r.codigo||'')+' - '+(a.r.relato||'');const sm=M[a.k].sum?M[a.k].sum(a.r):[];return(a.h?a.h+' ':'')+(sm[0]||'')+(sm[2]&&sm[2][1]?' ('+sm[2][1]+')':'')}).join('; ');
+  let z=0;for(const k of Object.keys(by)){const l=by[k];const det=l.map(a=>{if(a.k==='sucesos')return 'REPSUC '+(a.r.codigo||'')+' - '+(a.r.relato||'');if(a.k==='actnr')return (a.h?a.h+' ':'')+(a.r.lugar||'');const sm=M[a.k].sum?M[a.k].sum(a.r):[];return(a.h?a.h+' ':'')+(sm[0]||'')+(sm[2]&&sm[2][1]?' ('+sm[2][1]+')':'')}).join('; ');
    doc.setFont('helvetica','normal');doc.setFontSize(9);const ln=doc.splitTextToSize(T(det),CW-78);const hh=ln.length*4+2.6;need(hh);
    if(z++%2){doc.setFillColor(246,247,249);doc.rect(X,y-4,CW,hh,'F')}
    doc.setFont('helvetica','bold');doc.text(T(M[k].n),X+2,y,{maxWidth:60});doc.text(String(l.length),X+70,y,{align:'right'});doc.setFont('helvetica','normal');doc.text(ln,X+76,y);y+=hh}
@@ -909,9 +961,23 @@ async function reporteDiario(dia){let J;try{J=await loadPdf()}catch(e){toast('No
      y=rowY+chh+7}}else{doc.setFont('helvetica','italic');doc.setFontSize(9);doc.setTextColor(120);doc.text('Sin fotografía',X+4,y);doc.setTextColor(20);y+=6}
    y+=4}
   y+=2}
+ // actividades no rutinarias: fecha, lugar, qué hice y fotos
+ const anr=resto.filter(a=>a.k==='actnr');const resto2=resto.filter(a=>a.k!=='actnr');
+ if(anr.length){H('Actividades no rutinarias realizadas');let i=0;
+  for(const a of anr){i++;const r=a.r;doc.setFontSize(10.5);doc.setFont('helvetica','bold');const tl=doc.splitTextToSize(T(i+'. '+(r.lugar||'')),CW-40);
+   need(tl.length*5+14);doc.setFillColor(232,242,250);doc.rect(X,y-5,CW,tl.length*5+3,'F');doc.setFillColor(23,50,77);doc.rect(X,y-5,1.6,tl.length*5+3,'F');
+   doc.setTextColor(20);doc.text(tl,X+4,y);doc.setFontSize(9.5);doc.setTextColor(23,50,77);doc.text(T(fdmy(r.fecha)+(a.h?'  '+a.h:'')),X+CW-2,y,{align:'right'});doc.setTextColor(20);y+=tl.length*5+3;
+   doc.setFont('helvetica','normal');doc.setFontSize(9.5);const dsl=doc.splitTextToSize(T(r.desc||''),CW-6);for(let k=0;k<dsl.length;k+=40){const part=dsl.slice(k,k+40);need(part.length*4.3+2);doc.text(part,X+3,y);y+=part.length*4.3+1}y+=2;
+   const fs=r.fotos||[];const cols=3,gap=4,cw=(CW-gap*(cols-1))/cols,chh=cw*0.75;
+   for(let i2=0;i2<fs.length;i2+=cols){need(chh+8);const rowY=y;
+    for(let j=0;j<cols&&i2+j<fs.length;j++){const p=await thumbDU(fs[i2+j]);const cx=X+j*(cw+gap);doc.setDrawColor(210);doc.setFillColor(240,240,240);doc.rect(cx,rowY,cw,chh,'FD');
+     if(p){const sc=Math.min(cw/p.w,chh/p.h),w2=p.w*sc,h2=p.h*sc;doc.addImage(p.du,'JPEG',cx+(cw-w2)/2,rowY+(chh-h2)/2,w2,h2)}else{doc.setFontSize(8);doc.setTextColor(120);doc.text('Foto no disponible sin conexión',cx+cw/2,rowY+chh/2,{align:'center'});doc.setTextColor(20)}}
+    y=rowY+chh+5}
+   y+=4}
+  y+=2}
  // detalle de cada actividad
- if(resto.length)H('Detalle de actividades y reporte fotográfico');
- let n=0;for(const a of resto){n++;const m=M[a.k];const sm=m.sum?m.sum(a.r):[];
+ if(resto2.length)H('Detalle de actividades y reporte fotográfico');
+ let n=0;for(const a of resto2){n++;const m=M[a.k];const sm=m.sum?m.sum(a.r):[];
   need(22);doc.setFillColor(255,240,230);doc.rect(X,y-5,CW,8,'F');doc.setFillColor(255,90,0);doc.rect(X,y-5,1.6,8,'F');
   doc.setFont('helvetica','bold');doc.setFontSize(10.5);doc.setTextColor(20);doc.text(T(n+'. '+m.s+(sm[0]?' - '+sm[0]:'')),X+4,y,{maxWidth:CW-34});
   doc.setFontSize(9.5);doc.setTextColor(23,50,77);doc.text(T(fdmy(a.r.fecha)+(a.h?'  '+a.h:'')),X+CW-2,y,{align:'right'});y+=8;doc.setTextColor(20);

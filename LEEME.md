@@ -103,8 +103,11 @@ Donde un documento lleva firma aparece el botón **Firmar**. Se abre una hoja en
 - Cada **foto** aparece como un enlace “Ver foto 1”, “Ver foto 2”… que abre o descarga la imagen. Los enlaces funcionan **1 año** desde que descargas el Excel; si necesitas uno más reciente, vuelve a descargarlo. Cualquier persona que tenga el Excel puede abrir esas fotos.
 - Para generar el Excel con fotos y firmas necesitas señal.
 
+## Actividades no rutinarias
+Módulo **Actividades no rutinarias** para lo que haces fuera de la rutina (acompañar a otra cuadrilla, gestiones en la alcaldía, etc.): fecha, hora, lugar o estación, qué hiciste y fotos. En el **Reporte diario SISO** salen en su propia sección, *Actividades no rutinarias realizadas*, con lugar, fecha y hora, la descripción y las fotos.
+
 ## Botaderos de material excedente (ME)
-Módulo **Botaderos de material excedente**: cada punto lleva número (P1, P2… automático), dueño del terreno, contacto, lugar, estación, distancia desde el frente (se calcula sola con la estación del punto y la del frente), coordenadas UTM (botón **📍 Tomar coordenadas aquí** las calcula con el GPS del teléfono, zona 16 N), nota, imagen de ubicación (captura de Google Earth con el punto marcado), fotos del sitio y firma del dueño como autorización. El estado puede ser Activo, En trámite o Lleno / cerrado.
+Módulo **Botaderos de material excedente**: cada punto lleva número (P1, P2… automático), dueño del terreno, contacto, lugar, estación más cercana y distancia desde ella (manual), nota, fotos del sitio y firma del dueño como autorización. La ubicación se marca con **🗺️ Marcar punto en el mapa** (mapa satelital: toca el sitio, puedes arrastrar el marcador y ves los otros puntos) o con **📍 Usar mi ubicación**; las coordenadas UTM (zona 16 N) se llenan solas y se toma automáticamente una captura del mapa con el punto marcado, que se guarda en el registro y sale en el informe. Si prefieres, puedes subir tu propia captura de Google Earth. El estado puede ser Activo, En trámite o Lleno / cerrado.
 El botón **Generar PDF** arma el informe "Puntos de Botaderos de ME": encabezado, datos del proyecto, tabla resumen de todos los puntos y una ficha por punto con su ubicación y fotos, más tu firma al final.
 
 ## Pruebas de alcoholemia (PRO-SISO-CORDON-001)
