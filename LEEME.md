@@ -103,6 +103,10 @@ Donde un documento lleva firma aparece el botón **Firmar**. Se abre una hoja en
 - Cada **foto** aparece como un enlace “Ver foto 1”, “Ver foto 2”… que abre o descarga la imagen. Los enlaces funcionan **1 año** desde que descargas el Excel; si necesitas uno más reciente, vuelve a descargarlo. Cualquier persona que tenga el Excel puede abrir esas fotos.
 - Para generar el Excel con fotos y firmas necesitas señal.
 
+## Botaderos de material excedente (ME)
+Módulo **Botaderos de material excedente**: cada punto lleva número (P1, P2… automático), dueño del terreno, contacto, lugar, estación, distancia desde el frente (se calcula sola con la estación del punto y la del frente), coordenadas UTM (botón **📍 Tomar coordenadas aquí** las calcula con el GPS del teléfono, zona 16 N), nota, imagen de ubicación (captura de Google Earth con el punto marcado), fotos del sitio y firma del dueño como autorización. El estado puede ser Activo, En trámite o Lleno / cerrado.
+El botón **Generar PDF** arma el informe "Puntos de Botaderos de ME": encabezado, datos del proyecto, tabla resumen de todos los puntos y una ficha por punto con su ubicación y fotos, más tu firma al final.
+
 ## Pruebas de alcoholemia (PRO-SISO-CORDON-001)
 - **Lunes:** prueba fija; en el módulo salen todos los activos para tocar y registrar.
 - **Jueves, viernes y sábado (o reincorporación):** botón **Sortear 15%** que escoge al azar; graba la pantalla al sortear para el video que pide SISO oficina central.
@@ -119,7 +123,7 @@ En la pantalla **Hoy** está la tarjeta **Reporte diario SISO**: escoge la fecha
 - Datos del proyecto, contratista, responsable del informe y fecha y hora en que se generó.
 - Una tabla resumen con cada tipo de actividad, cuántas se hicieron y su detalle con la hora.
 - El detalle de cada actividad en orden de hora, con todos sus datos y sus fotos (tres por fila).
-- La firma del responsable SISO y el número de página.
+- La firma del responsable SISO (se guarda una sola vez en Proyecto → Firma del responsable SISO, o con el botón ✍️ Agregar mi firma de la tarjeta) y el número de página.
 
 La hora de cada actividad es la que anotaste en el formulario (hora, hora de inicio) y, si no tiene, la hora en que se registró. Las fotos se bajan de la nube, así que genera el reporte con conexión.
 

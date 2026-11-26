@@ -4,581 +4,1286 @@
  "fecha": "2026-11-17",
  "config": {
   "proyecto": "Yorito – Empalme RN-23",
-  "sub": "Pavimentación DTS · Ruta 43 · 13.65 km",
-  "siso": "Fernando Domínguez",
-  "empresa": "Cordon's Heavy Equipment",
+  "sub": "Pavimentación DTS · 13.65 km",
+  "siso": "Ing. Fernando Dominguez",
+  "empresa": "Cordon's Heavy Equipment S. de R.L. de C.V.",
   "inicio": "2026-11-16"
  },
  "datos": {
-  "equipos": [
+  "insp": [
    {
-    "id": "M-509",
-    "inv": "M-509",
-    "tipo": "Motoniveladora",
-    "modelo": "140M",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": "Caterpillar"
+    "obs": "Anda con permiso de circulación sin placa, vence el 19 de Noviembre del 2026.",
+    "rec": "",
+    "hora": "13:45",
+    "clase": "Preoperatorio diario",
+    "fecha": "2026-11-17",
+    "fotos": [
+     "2026-11/mwl3uy7ueq6071.jpg"
+    ],
+    "items": {
+     "Luces": "C",
+     "Coolant": "C",
+     "Llantas": "C",
+     "Retrovisores": "C",
+     "Bocina (pito)": "C",
+     "Cabina limpia": "C",
+     "Aceite de motor": "C",
+     "Triángulos (2)": "C",
+     "Alarma de reversa": "C",
+     "EPP en buen estado": "C",
+     "Llanta de repuesto": "C",
+     "Baterías aseguradas": "C",
+     "Jack y llave de rueda": "C",
+     "Placas de circulación": "N",
+     "Cinturón en buen estado": "C",
+     "Boleta de revisión vigente": "C",
+     "Escobillas limpiaparabrisas": "C",
+     "Licencia de conducir vigente": "C",
+     "Extintor con carga y revisado": "C"
+    },
+    "equipo": "PS-764",
+    "conductor": "Ing. Merlin Ramos",
+    "horometro": "67511",
+    "id": "rmwl3wevh1an9"
    },
    {
-    "id": "M-528",
-    "inv": "M-528",
-    "tipo": "Motoniveladora",
-    "modelo": "140K",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": "Caterpillar"
-   },
-   {
-    "id": "E-591",
-    "inv": "E-591",
-    "tipo": "Excavadora",
-    "modelo": "320",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": "Caterpillar"
-   },
-   {
-    "id": "E-690",
-    "inv": "E-690",
-    "tipo": "Excavadora",
-    "modelo": "320 GC",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": "Caterpillar"
-   },
-   {
-    "id": "T-668",
-    "inv": "T-668",
-    "tipo": "Tractor",
-    "modelo": "D6T",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": "Caterpillar"
-   },
-   {
-    "id": "T-REY",
-    "inv": "T-REY",
-    "tipo": "Tractor",
-    "modelo": "D6H",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": "Caterpillar"
-   },
-   {
-    "id": "VC-238",
-    "inv": "VC-238",
-    "tipo": "Vibrocompactador",
-    "modelo": "CS533E",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": "Caterpillar"
-   },
-   {
-    "id": "VC-771",
-    "inv": "VC-771",
-    "tipo": "Vibrocompactador",
-    "modelo": "BW 212 D",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": ""
-   },
-   {
-    "id": "VC-772",
-    "inv": "VC-772",
-    "tipo": "Vibrocompactador",
-    "modelo": "BW 212 D",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": ""
-   },
-   {
-    "id": "V-543",
-    "inv": "V-543",
-    "tipo": "Volqueta",
+    "obs": "Falta 1 batería",
+    "rec": "",
+    "hora": "10:45",
+    "clase": "Auditoría mensual",
+    "fecha": "2026-11-18",
+    "fotos": [
+     "2026-11/mwmcsulzv0kbms.jpg",
+     "2026-11/mwmct4uliey7t2.jpg"
+    ],
+    "items": {
+     "EPP": "C",
+     "Luces": "C",
+     "Placas": "C",
+     "Llantas": "C",
+     "Conos (2)": "C",
+     "Parabrisas": "C",
+     "Bocina (pito)": "C",
+     "Cabina limpia": "C",
+     "Alarma de reversa": "C",
+     "Baterías aseguradas": "N",
+     "Jack y llave de rueda": "C",
+     "Cinturón de seguridad": "C",
+     "Niveles (aceite, agua)": "C",
+     "Sin fugas hidráulicas": "C",
+     "Escape en buenas condiciones": "C",
+     "Licencia de conducir vigente": "C",
+     "Certificado de operación vigente": "C",
+     "Extintor 5 lb con carga y revisado": "C"
+    },
+    "marca": "Volvo",
+    "placa": "HBJ6638",
+    "equipo": "V-645",
     "modelo": "440 FMX",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": "Volvo"
-   },
-   {
-    "id": "V-605",
-    "inv": "V-605",
-    "tipo": "Volqueta",
-    "modelo": "440 FMX",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": "Volvo"
-   },
-   {
-    "id": "V-606",
-    "inv": "V-606",
-    "tipo": "Volqueta",
-    "modelo": "440 FMX",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": "Volvo"
-   },
-   {
-    "id": "V-644",
-    "inv": "V-644",
-    "tipo": "Volqueta",
-    "modelo": "440 FMX",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": "Volvo"
-   },
-   {
-    "id": "V-645",
-    "inv": "V-645",
-    "tipo": "Volqueta",
-    "modelo": "440 FMX",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": "Volvo"
-   },
-   {
-    "id": "TA-141",
-    "inv": "TA-141",
-    "tipo": "Tanque de agua",
-    "modelo": "MACK",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": "Mack"
-   },
-   {
-    "id": "TA-342",
-    "inv": "TA-342",
-    "tipo": "Tanque de agua",
-    "modelo": "MACK",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": "Mack"
-   },
-   {
-    "id": "CZ-236",
-    "inv": "CZ-236",
-    "tipo": "Cabezal",
-    "modelo": "MACK",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": "Mack"
-   },
-   {
-    "id": "L-364",
-    "inv": "L-364",
-    "tipo": "Low boy",
-    "modelo": "Cama baja",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo",
-    "marca": ""
-   },
-   {
-    "id": "PS-764",
-    "inv": "PS-764",
-    "tipo": "Pick-up",
-    "modelo": "Tunland",
-    "placa": "JAB 5007",
-    "asignado": "Merlin Adalid Ramos Diaz",
-    "estado": "Activo",
-    "marca": "Foton"
-   },
-   {
-    "id": "PS-757",
-    "inv": "PS-757",
-    "tipo": "Pick-up",
-    "marca": "Foton",
-    "modelo": "Tunland",
-    "placa": "",
-    "asignado": "",
-    "estado": "Activo"
+    "conductor": "",
+    "horometro": "",
+    "id": "rmwmctdgl27xf"
    }
   ],
-  "personal": [
+  "despliegue": [
    {
-    "id": "p1",
-    "nombre": "Merlin Adalid Ramos Diaz",
-    "cargo": "Ingeniero Residente",
-    "estado": "Habilitado",
-    "lic": "Liviana Nacional",
-    "emision": "2025-02-03",
-    "lvence": "2030-02-02",
     "obs": "",
-    "area": "",
-    "telefono": "",
-    "ingreso": "",
-    "unidad": "PS-764"
+    "resp": "Fernando Elias Dominguez Arias",
+    "desde": "30+300",
+    "fecha": "2026-11-18",
+    "fotos": [],
+    "hasta": "29+600",
+    "lista": [
+     {
+      "art": "MAQUINAS TRABAJANDO",
+      "est": "29+600",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "MAQUINAS TRABAJANDO",
+      "est": "30+300",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "20 KM/H VELOCIDAD MÁXIMA",
+      "est": "30+300",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "HOMBRES TRABAJANDO (DIBUJO)",
+      "est": "30+300",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "20 KM/H VELOCIDAD MÁXIMA",
+      "est": "29+600",
+      "cant": 1,
+      "vida": ""
+     }
+    ],
+    "creado": "2026-11-18T21:52:34.347Z",
+    "frente": "Limpieza",
+    "id": "rmwmnq78rgivr"
    },
    {
-    "id": "p2",
-    "nombre": "Luisa Veronica Ramos Montes",
-    "cargo": "Ingeniero Asistente",
-    "estado": "Habilitado",
-    "lic": "Liviana Nacional",
-    "emision": "2026-11-03",
-    "lvence": "2028-11-02",
     "obs": "",
-    "area": "",
-    "telefono": "",
-    "ingreso": "",
-    "unidad": ""
+    "resp": "Fernando Elias Dominguez Arias",
+    "desde": "30+300",
+    "fecha": "2026-11-19",
+    "fotos": [
+     "2026-11/mwnko3y4g2jfn2.jpg"
+    ],
+    "hasta": "29+600",
+    "lista": [
+     {
+      "art": "MAQUINAS TRABAJANDO",
+      "est": "29+100",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "MAQUINAS TRABAJANDO",
+      "est": "30+300",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "20 KM/H VELOCIDAD MÁXIMA",
+      "est": "30+300",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "HOMBRES TRABAJANDO (DIBUJO)",
+      "est": "29+100",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "20 KM/H VELOCIDAD MÁXIMA",
+      "est": "29+100",
+      "cant": 1,
+      "vida": ""
+     }
+    ],
+    "creado": "2026-11-19T13:09:15.263Z",
+    "frente": "Limpieza",
+    "id": "rmwnkh27zzx53"
    },
    {
-    "id": "p3",
-    "nombre": "Gabriel Lira",
-    "cargo": "Ayudante",
-    "estado": "Habilitado",
-    "lic": "",
-    "emision": "",
-    "lvence": "",
-    "obs": "",
-    "area": "",
-    "telefono": "",
-    "ingreso": "",
-    "unidad": ""
+    "obs": "Los rótulos de la estación 30+300 ahí se están dejando ya que aún no se hará retirado los bultos de escombros productos de la limpieza",
+    "resp": "Fernando Domínguez",
+    "desde": "30+300",
+    "fecha": "2026-11-21",
+    "fotos": [
+     "2026-11/mwqgqc5cc5mban.jpg",
+     "2026-11/mwqja4gozutz32.jpg"
+    ],
+    "hasta": "27+600",
+    "lista": [
+     {
+      "art": "MAQUINAS TRABAJANDO",
+      "est": "27+600",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "20 KM/H VELOCIDAD MÁXIMA",
+      "est": "27+600",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "HOMBRES TRABAJANDO (DIBUJO)",
+      "est": "27+600",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "MAQUINAS TRABAJANDO",
+      "est": "30+000",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "20 KM/H VELOCIDAD MÁXIMA",
+      "est": "30+000",
+      "cant": 1,
+      "vida": ""
+     }
+    ],
+    "creado": "2026-11-21T13:50:10.384Z",
+    "frente": "Limpieza",
+    "comprobante": "2026-11/mws1aow06koif4.pdf",
+    "id": "rmwqgtdxsycsk"
    },
    {
-    "id": "p4",
-    "nombre": "Oscar Peres",
-    "cargo": "Ayudante",
-    "estado": "Habilitado",
-    "lic": "",
-    "emision": "",
-    "lvence": "",
     "obs": "",
-    "area": "",
-    "telefono": "",
-    "ingreso": "",
-    "unidad": ""
+    "resp": "Fernando Domínguez",
+    "desde": "30+300",
+    "fecha": "2026-11-22",
+    "fotos": [
+     "2026-11/mws3jksjii20m2.jpg"
+    ],
+    "hasta": "26+600",
+    "lista": [
+     {
+      "art": "MAQUINAS TRABAJANDO",
+      "est": "26+600",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "20 KM/H VELOCIDAD MÁXIMA",
+      "est": "26+600",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "HOMBRES TRABAJANDO (DIBUJO)",
+      "est": "26+600",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "MAQUINAS TRABAJANDO",
+      "est": "30+000",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "20 KM/H VELOCIDAD MÁXIMA",
+      "est": "30+000",
+      "cant": 1,
+      "vida": ""
+     }
+    ],
+    "creado": "2026-11-22T17:14:27.427Z",
+    "frente": "Limpieza",
+    "id": "rmws3jy7gdrc8"
    },
    {
-    "id": "p5",
-    "nombre": "Carlos Antonio Rodriguez Carcamo",
-    "cargo": "Ayudante",
-    "estado": "Habilitado",
-    "lic": "",
-    "emision": "",
-    "lvence": "",
     "obs": "",
-    "area": "",
-    "telefono": "",
-    "ingreso": "",
-    "unidad": ""
+    "resp": "Fernando Domínguez",
+    "desde": "30+300",
+    "fecha": "2026-11-24",
+    "fotos": [
+     "2026-11/mwv7bk9pzw31y4.jpg",
+     "2026-11/mwv7eiffi9aivx.jpg"
+    ],
+    "hasta": "25+200",
+    "lista": [
+     {
+      "art": "MAQUINAS TRABAJANDO",
+      "est": "25+200",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "20 KM/H VELOCIDAD MÁXIMA",
+      "est": "25+200",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "HOMBRES TRABAJANDO (DIBUJO)",
+      "est": "25+200",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "MAQUINAS TRABAJANDO",
+      "est": "30+000",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "20 KM/H VELOCIDAD MÁXIMA",
+      "est": "30+000",
+      "cant": 1,
+      "vida": ""
+     }
+    ],
+    "creado": "2026-11-24T21:23:48.882Z",
+    "frente": "Limpieza",
+    "id": "rmwv7cbvp51lk"
    },
    {
-    "id": "p6",
-    "nombre": "Hector Gonzalez",
-    "cargo": "Ayudante",
-    "estado": "Habilitado",
-    "lic": "",
-    "emision": "",
-    "lvence": "",
     "obs": "",
-    "area": "",
-    "telefono": "",
-    "ingreso": "",
-    "unidad": ""
+    "resp": "Fernando Domínguez",
+    "desde": "30+300",
+    "fecha": "2026-11-23",
+    "fotos": [
+     "2026-11/mwtbv2dzpbr59x.jpg"
+    ],
+    "hasta": "26+600",
+    "lista": [
+     {
+      "art": "MAQUINAS TRABAJANDO",
+      "est": "25+700",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "20 KM/H VELOCIDAD MÁXIMA",
+      "est": "25+700",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "HOMBRES TRABAJANDO (DIBUJO)",
+      "est": "25+700",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "MAQUINAS TRABAJANDO",
+      "est": "30+000",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "20 KM/H VELOCIDAD MÁXIMA",
+      "est": "30+000",
+      "cant": 1,
+      "vida": ""
+     }
+    ],
+    "creado": "2026-11-23T13:54:54.583Z",
+    "frente": "Limpieza",
+    "id": "rmwtbv6khzsq1"
+   }
+  ],
+  "audepp": [],
+  "charlas": [],
+  "alcohol": [
+   {
+    "obs": "Habilitado",
+    "cargo": "Operador de excavadora",
+    "fecha": "2026-11-24",
+    "firma": "",
+    "fotos": [
+     "2026-11/mwuq3f0b0zcsns.jpg"
+    ],
+    "creado": "2026-11-24T13:21:17.850Z",
+    "lectura": "0.00",
+    "persona": "José Arturo Palacios Fajardo",
+    "resultado": "Negativo",
+    "id": "rmwuq3t409i94"
    },
    {
-    "id": "p7",
-    "nombre": "Juan Reinaldo Mayorga Bueso",
-    "cargo": "Capataz",
-    "estado": "Habilitado",
-    "lic": "",
-    "emision": "",
-    "lvence": "",
-    "obs": "",
-    "area": "",
-    "telefono": "",
-    "ingreso": "",
-    "unidad": ""
-   },
-   {
-    "id": "p8",
-    "nombre": "Cristian Josue Escobar Rivera",
-    "cargo": "Chequiador de Combustible",
-    "estado": "Habilitado",
-    "lic": "",
-    "emision": "",
-    "lvence": "",
-    "obs": "",
-    "area": "",
-    "telefono": "",
-    "ingreso": "",
-    "unidad": ""
-   },
-   {
-    "id": "p9",
-    "nombre": "Alex Licona",
-    "cargo": "Ingeniero Superintendente",
-    "estado": "Habilitado",
-    "lic": "",
-    "emision": "",
-    "lvence": "",
-    "obs": "",
-    "area": "",
-    "telefono": "",
-    "ingreso": "",
-    "unidad": ""
-   },
-   {
-    "id": "p10",
-    "nombre": "Marvin Danilo Mendoza Giron",
+    "obs": "Habilitado",
     "cargo": "Motorista",
-    "estado": "Habilitado",
-    "lic": "",
-    "emision": "",
-    "lvence": "",
-    "obs": "",
-    "area": "",
-    "telefono": "",
-    "ingreso": "",
-    "unidad": ""
+    "fecha": "2026-11-24",
+    "firma": "2026-11/mwuq89m7nw8cb8.png",
+    "fotos": [
+     "2026-11/mwuq5k7ye1ciqa.jpg",
+     "2026-11/mwuq5p8d18fakn.jpg"
+    ],
+    "creado": "2026-11-24T13:22:49.662Z",
+    "lectura": "0.00",
+    "persona": "Santos Javier Sierra Ramírez",
+    "resultado": "Negativo",
+    "firmaFecha": "2026-11-24",
+    "id": "rmwuq5ry6efon"
    },
    {
-    "id": "p13",
-    "nombre": "Orbin Reyes",
-    "cargo": "Operador",
-    "estado": "Habilitado",
-    "lic": "",
-    "emision": "",
-    "lvence": "",
-    "obs": "",
-    "area": "",
-    "telefono": "",
-    "ingreso": "",
-    "unidad": ""
+    "obs": "Habilitado",
+    "cargo": "Motorista de volqueta",
+    "fecha": "2026-11-24",
+    "firma": "2026-11/mwuqdcue865ym4.png",
+    "fotos": [
+     "2026-11/mwuqbmp8fq34dr.jpg",
+     "2026-11/mwuqc27381w94t.jpg"
+    ],
+    "creado": "2026-11-24T13:27:58.121Z",
+    "lectura": "0.00",
+    "persona": "Marvin Danilo Mendoza Giron",
+    "resultado": "Negativo",
+    "firmaFecha": "2026-11-24",
+    "id": "rmwuqcdyhdght"
    },
    {
-    "id": "p14",
-    "nombre": "Rene Flores",
-    "cargo": "Operador",
-    "estado": "Habilitado",
-    "lic": "",
-    "emision": "",
-    "lvence": "",
-    "obs": "",
-    "area": "",
-    "telefono": "",
-    "ingreso": "",
-    "unidad": ""
+    "obs": "Habilitado",
+    "cargo": "Operador de excavadora",
+    "fecha": "2026-11-24",
+    "firma": "2026-11/mwuq8psrp9fea5.png",
+    "fotos": [
+     "2026-11/mwuq6g6efmzbth.jpg"
+    ],
+    "creado": "2026-11-24T13:22:07.272Z",
+    "lectura": "0.00",
+    "persona": "Orbin Noe Reyes Murillo",
+    "resultado": "Negativo",
+    "firmaFecha": "2026-11-24",
+    "comprobante": "2026-11/mwuq8udvfx7xm7.pdf",
+    "id": "rmwuq4v8o25gw"
    },
    {
-    "id": "p15",
-    "nombre": "Fernando Elias Dominguez Arias",
-    "cargo": "Supervisor SISO",
-    "estado": "Habilitado",
-    "lic": "",
-    "emision": "",
-    "lvence": "",
-    "obs": "",
-    "area": "",
-    "telefono": "",
-    "ingreso": "",
-    "unidad": ""
+    "obs": "Habilitado",
+    "cargo": "Motorista de volqueta",
+    "fecha": "2026-11-24",
+    "firma": "",
+    "fotos": [
+     "2026-11/mwuqaepkzwpop2.jpg"
+    ],
+    "creado": "2026-11-24T13:26:47.802Z",
+    "lectura": "0.00",
+    "persona": "Junior Benjamín Lara Valladares",
+    "resultado": "Negativo",
+    "comprobante": "2026-11/mwutp9cot42us0.pdf",
+    "id": "rmwuqavp6xpl4"
    }
   ],
+  "sol": [
+   {
+    "sol": "SOL#1 · Limpieza en plantel principal",
+    "desc": "Recolección de Basura del Plantel",
+    "fecha": "2026-11-24",
+    "fotos": [
+     "2026-11/mwv26iumaw6dt8.jpg"
+    ],
+    "sitio": "Plantel de Máquinas",
+    "creado": "2026-11-24T19:00:32.606Z",
+    "personas": 2,
+    "id": "rmwv282xsk9it"
+   },
+   {
+    "sol": "SOL#4 · Traslado de basura al botadero",
+    "desc": "Tirado de basura que estaba en el plantel de maquinas",
+    "fecha": "2026-11-24",
+    "fotos": [
+     "2026-11/mwv3eydn3tw5ay.jpg",
+     "2026-11/mwv3g7h19bsggj.jpg"
+    ],
+    "sitio": "Basurero Comunitario La Sabana",
+    "creado": "2026-11-24T19:36:06.348Z",
+    "personas": 2,
+    "id": "rmwv3htcdxce9"
+   },
+   {
+    "sol": "SOL#3 · Limpieza en casas de personal",
+    "desc": "Recogida de basura para ir a tirarla al basurero municipal",
+    "fecha": "2026-11-22",
+    "fotos": [
+     "2026-11/mwsas27ypd3rpx.jpg"
+    ],
+    "sitio": "Oficina",
+    "creado": "2026-11-22T20:36:51.525Z",
+    "personas": 2,
+    "id": "rmwsas8njg69p"
+   },
+   {
+    "sol": "SOL#3 · Limpieza en casas de personal",
+    "desc": "Recolección de basura",
+    "fecha": "2026-11-22",
+    "fotos": [
+     "2026-11/mwsb8763kl1yko.jpg"
+    ],
+    "sitio": "Casa de Ingenieros",
+    "creado": "2026-11-22T20:49:20.991Z",
+    "personas": 2,
+    "id": "rmwsb8axrea58"
+   },
+   {
+    "sol": "SOL#4 · Traslado de basura al botadero",
+    "desc": "Tirado de basura",
+    "fecha": "2026-11-22",
+    "fotos": [
+     "2026-11/mwsbtjpj6qnfys.jpg"
+    ],
+    "sitio": "Basurero Municipal",
+    "creado": "2026-11-22T21:33:02.542Z",
+    "personas": 2,
+    "id": "rmwscshqmd9te"
+   }
+  ],
+  "inspareas": [],
+  "reuniones": [
+   {
+    "hi": "13:00",
+    "part": "Ing. David Rodríguez",
+    "tema": "Capacitación",
+    "tipo": "Reunión de seguridad",
+    "fecha": "2026-11-16",
+    "fotos": [],
+    "lugar": "Oficina",
+    "creado": "2026-11-22T20:53:57.884Z",
+    "acuerdos": "Impartió capacitación de inducción a Fernando Domínguez (explicion y traslado de formatos en digital)",
+    "id": "rmwsbe8l8jexr"
+   }
+  ],
+  "sucesos": [
+   {
+    "c1": "",
+    "c2": "",
+    "cT": "",
+    "i1": "",
+    "i2": "",
+    "iT": "",
+    "n1": "Junior Lara",
+    "n2": "Ing. Merlin Ramos",
+    "nT": "",
+    "dano": "",
+    "hora": "16:20",
+    "obsD": "",
+    "otro": "",
+    "resp": "Pendiente",
+    "tipo": "Pérdida",
+    "clima": "Llovizna",
+    "cobro": "No",
+    "costo": "",
+    "danoM": "Ninguno",
+    "danoP": "Ninguno",
+    "fecha": "2026-11-18",
+    "fotos": [
+     "2026-11/mwo07kkg5a6lmj.jpg"
+    ],
+    "lugar": "Plantel de Máquinas",
+    "vPart": "Nos dieron las llaves para probar las volquetas en horas de la mañana y estoy seguro que entregamos las llaves al Ing. Ramos, él se percata en horas de la tarde que la llave de esta unidad no está junto a las demás y estuvimos buscándola por todos lados pero no la encontramos.",
+    "vTest": "Entregue el paquete de llaves  (sobre Manila) de las volquetas que me llegó de progreso  a los motoristas Junior Lara y Marvin para que las fueran probando y verificar el estado de las volquetas, la volqueta V-643 fue la primera que se verificó y lo hizo el operador Junior Lara después me entregaron  el sobre con llaves, Al momento que me devolvieron el sobre lo guarde directamente en la mochila  en el vehículo, después del medio día vino personal de taller de Él Progreso a revisar las volquetas que presentaban problemas , les entregué el sobre Manila con llaves pero la volqueta V-643 no la manipularon. \nEn la tarde que procedí a hacer inventario de llaves disponibles, la llave de la Volqueta no apareció en el sobre.",
+    "causaP": "",
+    "causas": [
+     "Descuido"
+    ],
+    "clasif": "Extravío / daño de componentes",
+    "codigo": "RS-2026-002",
+    "creado": "2026-11-19T20:28:46.055Z",
+    "equipo": "V-543",
+    "estado": "Abierto",
+    "factor": "Humano",
+    "firma1": "2026-11/mwp23bviwkslw9.png",
+    "firma2": "2026-11/mwp34nr736k6ah.png",
+    "firmaS": "2026-11/mwplcqcm0707xr.png",
+    "firmaT": "",
+    "relato": "Extravío de Llave de Encendido",
+    "opinion": "",
+    "acciones": "",
+    "criterio": "",
+    "fechaRep": "2026-11-18",
+    "firma1Fecha": "2026-11-20",
+    "firma2Fecha": "2026-11-20",
+    "firmaSFecha": "2026-11-20",
+    "participante": "Junior Lara\nIng. Merlin Ramos",
+    "id": "rmwo06a2108lr"
+   },
+   {
+    "c1": "",
+    "c2": "",
+    "cT": "",
+    "i1": "",
+    "i2": "",
+    "iT": "",
+    "n1": "Reynaldo Mayorga",
+    "n2": "Gabriel Lara",
+    "nT": "",
+    "dano": "",
+    "hora": "15:10",
+    "obsD": "",
+    "otro": "",
+    "resp": "Pendiente",
+    "tipo": "Accidente",
+    "clima": "Soleado",
+    "cobro": "No",
+    "costo": "",
+    "danoM": "Leves",
+    "danoP": "Ninguno",
+    "fecha": "2026-11-19",
+    "fotos": [
+     "2026-11/mwo1nlcr45uo7i.jpg",
+     "2026-11/mwo1u5hf4sz70z.jpg"
+    ],
+    "lugar": "Estación 29+100",
+    "vPart": "No me percato de lo ocurrido hasta que me notifican del daño, cabe mencionar que no a habido golpe que ocasione tal daño, lo más probable haya sido por la vibración y que los hules se reventaron por eso.",
+    "vTest": "Yo ando de ayudante con el otro tractor y cuando llegue a cierta área me percaté de un objeto amarillo en el suelo y fui y me di cuenta que era un foco y lo guardé y cuando pasó el ingeniero del proyecto se lo di a él.",
+    "causaP": "",
+    "causas": [
+     "Inevitable"
+    ],
+    "clasif": "Daño a equipo",
+    "codigo": "RS-2026-003",
+    "creado": "2026-11-19T21:15:23.254Z",
+    "equipo": "T-668",
+    "estado": "Abierto",
+    "factor": "Externo",
+    "firma1": "2026-11/mwp1ukpullsf7x.png",
+    "firma2": "2026-11/mwo970n6w6o96w.png",
+    "firmaS": "2026-11/mwpld59qnplzce.png",
+    "firmaT": "",
+    "relato": "Caída de Foco del Tractor",
+    "opinion": "",
+    "acciones": "",
+    "criterio": "",
+    "fechaRep": "2026-11-19",
+    "comprobante": "2026-11/mwozwynrdqiw7l.pdf",
+    "firma1Fecha": "2026-11-20",
+    "firma2Fecha": "2026-11-19",
+    "firmaSFecha": "2026-11-20",
+    "participante": "Reynaldo Mayorga\nGabriel Lara",
+    "id": "rmwo1u8dy6z77"
+   },
+   {
+    "c1": "Chequiador de Combustible",
+    "c2": "",
+    "cT": "",
+    "i1": "1804-1997-05036",
+    "i2": "",
+    "iT": "",
+    "n1": "Cristian Josué Escobar Rivera",
+    "n2": "",
+    "nT": "",
+    "dano": "Perdida de Combustible",
+    "hora": "15:26",
+    "obsD": "",
+    "otro": "",
+    "resp": "Pendiente",
+    "tipo": "Pérdida",
+    "clima": "Soleado",
+    "cobro": "Pendiente",
+    "costo": "",
+    "danoM": "Leves",
+    "danoP": "Ninguno",
+    "fecha": "2026-11-20",
+    "fotos": [
+     "2026-11/mwphrqeoa6emi3.jpg",
+     "2026-11/mwphumy0wnxtoa.jpg",
+     "2026-11/mwpi1e7k64xlu8.jpg",
+     "2026-11/mwqjpznit6xblg.jpg"
+    ],
+    "lugar": "Plantel de Maquinas",
+    "vPart": "La unidad desde que llegó el día 17 de noviembre por horas de la noche al plantel ya venia con una leve fuga pero hasta el día de hoy 20 de Noviembre con apoyo del personal de mecánica específicamente Daniel Paz enviado desde CHE desconectamos y volvimos a conectar las mangueras y es aquí en donde nos damos cuenta que la posible falla está en el empaque sello de manguera.",
+    "vTest": "",
+    "causaP": "Falla en los empaques quizás por una mala colocación de la manguera",
+    "causas": [
+     "Falta de mantenimiento",
+     "Error de chequeo"
+    ],
+    "clasif": "N/A (sin lesión)",
+    "codigo": "RS-2026-004",
+    "creado": "2026-11-20T21:37:32.804Z",
+    "equipo": "CM-621",
+    "estado": "Abierto",
+    "factor": "Externo",
+    "firma1": "2026-11/mwpj3xp716dqng.png",
+    "firma2": "",
+    "firmaS": "2026-11/mwplle4z3uabvd.png",
+    "firmaT": "",
+    "relato": "Fuga de combustible",
+    "opinion": "",
+    "acciones": "",
+    "criterio": "",
+    "fechaRep": "2026-11-20",
+    "firma1Fecha": "2026-11-20",
+    "firmaSFecha": "2026-11-20",
+    "participante": "Cristian Josue Escobar Rivera",
+    "id": "rmwpi2ky6jdw6"
+   },
+   {
+    "c1": "",
+    "c2": "",
+    "cT": "",
+    "i1": "",
+    "i2": "",
+    "iT": "",
+    "n1": "Marvin Mendoza",
+    "n2": "Ing. Merlin Ramos",
+    "nT": "",
+    "dano": "",
+    "hora": "11:30",
+    "obsD": "",
+    "otro": "",
+    "resp": "Pendiente",
+    "tipo": "Pérdida",
+    "clima": "Llovizna",
+    "cobro": "No",
+    "costo": "",
+    "danoM": "Ninguno",
+    "danoP": "Ninguno",
+    "fecha": "2026-11-18",
+    "fotos": [
+     "2026-11/mwnzmfueipvgfq.jpg"
+    ],
+    "lugar": "Plantel de Máquinas",
+    "vPart": "Nos entregaron llaves de las volquetas para que las fuéramos a revisar, procedí a intentar encenderla pero esta no encendió, al revisar el cubículo de las baterías me percaté que hacía falta una batería, inmediatamente procedí a informar al Ing. Ramos, cabe mencionar que hasta este momento nadie había usado estas volquetas porque no habían llaves y también que el plantel está sin vigilancia.",
+    "vTest": "Desde el momento que el personal del proyecto Yorito-Empalme nos hicimos presentes al plantel nadie del personal hizo alguna manipulación del equipo hasta que llegaron los motoristas. Al momento de la revisión se descubrió que hacía falta una batería de la V-645 y me informaron.",
+    "causaP": "",
+    "causas": [
+     "Aspectos de seguridad"
+    ],
+    "clasif": "Extravío / daño de componentes",
+    "codigo": "RS-2026-001",
+    "creado": "2026-11-19T20:03:02.847Z",
+    "equipo": "V-645",
+    "estado": "Abierto",
+    "factor": "Externo",
+    "firma1": "2026-11/mwp246e3umjkbe.png",
+    "firma2": "2026-11/mwp33qegpbljse.png",
+    "firmaS": "2026-11/mwplccmh5hjuts.png",
+    "firmaT": "",
+    "relato": "Pérdida de Batería",
+    "opinion": "",
+    "acciones": "",
+    "criterio": "",
+    "fechaRep": "2026-11-18",
+    "comprobante": "2026-11/mwp3etyf1r9pmv.pdf",
+    "firma1Fecha": "2026-11-20",
+    "firma2Fecha": "2026-11-20",
+    "firmaSFecha": "2026-11-20",
+    "participante": "Marvin Mendoza\nIng. Merlin Ramos",
+    "id": "rmwnz97b4vcoa"
+   },
+   {
+    "c1": "Motorista de volqueta",
+    "c2": "",
+    "cT": "",
+    "i1": "0801-1976-10608",
+    "i2": "",
+    "iT": "",
+    "n1": "Marvin Danilo Mendoza Giron",
+    "n2": "",
+    "nT": "",
+    "dano": "",
+    "hora": "09:24",
+    "obsD": "",
+    "otro": "",
+    "resp": "Pendiente",
+    "tipo": "Incidente",
+    "clima": "Soleado",
+    "cobro": "Pendiente",
+    "costo": "",
+    "danoM": "Ninguno",
+    "danoP": "Ninguno",
+    "fecha": "2026-11-21",
+    "fotos": [
+     "2026-11/mwqkenis97pwmw.jpg"
+    ],
+    "lugar": "27+960",
+    "vPart": "El día de hoy 21 de noviembre salí del plantel cargué mi primer viaje tranquilo en el segundo viaje ya miré que el carro se empezó a bajar el aire pues entonces ya el carro se embrecó ya no lo pude mover entonces aquí lo aquí lo deje estacionado en la estacion 27+960",
+    "vTest": "",
+    "causaP": "Falla en el sistema de aire de frenado",
+    "causas": [
+     "Falta de mantenimiento"
+    ],
+    "clasif": "N/A (sin lesión)",
+    "codigo": "RS-2026-005",
+    "creado": "2026-11-21T15:31:16.626Z",
+    "equipo": "V-606",
+    "estado": "Abierto",
+    "factor": "Externo",
+    "firma1": "2026-11/mwqkfeopk6mlqo.png",
+    "firma2": "",
+    "firmaS": "2026-11/mwqkff9xj98jke.png",
+    "firmaT": "",
+    "relato": "Falla en el sistema de aire de Frenos",
+    "opinion": "",
+    "acciones": "Esperar que el servicio de mecánica pueda revisar la causa exacta y reparar",
+    "criterio": "Difícilmente se pueda embrecar por error humano o una mala operación de la máquina, las volqueta hasta el día de hoy 21 solo se hicieron 2 viajes de aprox 5 km de distancia cada uno.",
+    "fechaRep": "2026-11-21",
+    "firma1Fecha": "2026-11-21",
+    "firmaSFecha": "2026-11-21",
+    "participante": "Marvin Mendoza",
+    "id": "rmwqkffse0qg7"
+   },
+   {
+    "c1": "Motorista de volqueta",
+    "c2": "",
+    "cT": "",
+    "i1": "0801-1976-10608",
+    "i2": "",
+    "iT": "",
+    "n1": "Marvin Danilo Mendoza Giron",
+    "n2": "",
+    "nT": "",
+    "dano": "",
+    "hora": "09:47",
+    "obsD": "",
+    "otro": "",
+    "resp": "Pendiente",
+    "tipo": "Incidente",
+    "clima": "Soleado",
+    "cobro": "Pendiente",
+    "costo": "",
+    "danoM": "Ninguno",
+    "danoP": "Ninguno",
+    "fecha": "2026-11-21",
+    "fotos": [
+     "2026-11/mwql7gel7cfe5n.jpg"
+    ],
+    "lugar": "27+960",
+    "vPart": "El día de hoy 21 de noviembre después que se dañara la unidad V-606 el Ing. Merlin me llevó al plantel a recoger la volqueta V-605, estando en el punto me cargaron de material y cuando dispuse a arrancar ya la unidad no funcionaba presentando el mismo problema que la V-606 y aquí quedaron estacionadas a la orilla de la calle",
+    "vTest": "",
+    "causaP": "Falta de Mantenimiento y/o error de fabricación",
+    "causas": [
+     "Falta de mantenimiento",
+     "Error de fabricación"
+    ],
+    "clasif": "N/A (sin lesión)",
+    "codigo": "RS-2026-006",
+    "creado": "2026-11-21T15:56:57.233Z",
+    "equipo": "V-605",
+    "estado": "Abierto",
+    "factor": "Externo",
+    "firma1": "2026-11/mwqlhglwzmy2h3.png",
+    "firma2": "",
+    "firmaS": "2026-11/mwqlcff5mq6mg0.png",
+    "firmaT": "",
+    "relato": "Falla en el sistema de aire de Frenos",
+    "opinion": "",
+    "acciones": "",
+    "criterio": "Ya que la misma falla se presenta en dos unidades del mismo modelo, podría deberse a una falla mecánica común en ellas y una falta de mantenimiento preventivo",
+    "fechaRep": "2026-11-21",
+    "firma1Fecha": "2026-11-21",
+    "firmaSFecha": "2026-11-21",
+    "participante": "Marvin Mendoza",
+    "id": "rmwqlcgao7v52"
+   },
+   {
+    "c1": "Motorista de volqueta",
+    "c2": "",
+    "cT": "",
+    "i1": "0801-1976-10608",
+    "i2": "",
+    "iT": "",
+    "n1": "Marvin Danilo Mendoza Giron",
+    "n2": "",
+    "nT": "",
+    "dano": "Falla de Caja Mecánica",
+    "hora": "12:40",
+    "obsD": "",
+    "otro": "",
+    "resp": "Pendiente",
+    "tipo": "Incidente",
+    "clima": "Soleado",
+    "cobro": "Pendiente",
+    "costo": "",
+    "danoM": "Ninguno",
+    "danoP": "Ninguno",
+    "fecha": "2026-11-22",
+    "fotos": [
+     "2026-11/mws7grponi6gkr.jpg"
+    ],
+    "lugar": "Plantel de Máquinas",
+    "vPart": "Yo salí con la unidad el día de hoy 22 de noviembre y miré que la caja como que no agarra retroceso inmediatamente le reporte al Ing. Merlin, a pesar seguí intentando\nhasta donde pude porque ya no aguantaba mi mano yo porque retroceso cuesta que le entre como que están estirados los cables de la palanca entonces cuesta quedar retroceso entonces mejor tome la decisión de ir a parquear porque ahí el problema directamente es los cables que los regulen para que agarre bien el retroceso.",
+    "vTest": "",
+    "causaP": "Falla Mecánica",
+    "causas": [
+     "Falta de mantenimiento",
+     "Error de chequeo"
+    ],
+    "clasif": "N/A (sin lesión)",
+    "codigo": "RS-2026-007",
+    "creado": "2026-11-22T18:47:49.182Z",
+    "equipo": "V-543",
+    "estado": "Abierto",
+    "factor": "Externo",
+    "firma1": "2026-11/mws6w0jiyiujkj.png",
+    "firma2": "",
+    "firmaS": "2026-11/mws6w1em1m5i39.png",
+    "firmaT": "",
+    "relato": "Falla Mecánica V-543",
+    "opinion": "",
+    "acciones": "",
+    "criterio": "Deben de ponerme a prueba las unidades después de reparadas y que el personal de taller esté presente para detectar y documentar todas las fallas posibles.",
+    "fechaRep": "2026-11-22",
+    "firma1Fecha": "2026-11-22",
+    "firmaSFecha": "2026-11-22",
+    "participante": "Marvin Mendoza",
+    "id": "rmws6w1x8dy4z"
+   }
+  ],
+  "desvios": [],
   "extintores": [
    {
-    "id": "x-T-668",
-    "fecha": "2026-11-01",
-    "equipo": "T-668",
-    "cap": 10,
-    "recarga": "",
-    "vence": "",
+    "cap": 5,
+    "etq": "Legible",
+    "obs": "Funcional",
+    "fecha": "2026-11-17",
+    "fotos": [
+     "2026-11/mwl3zot7tfoj2w.jpg"
+    ],
     "items": {
      "Seguro": "C",
      "Pasador": "C",
      "Boquilla": "C",
-     "Manguera / boquilla": "C",
      "Manómetro": "C",
      "Palanca de disparo": "C",
-     "Arnés o base del extintor": "C",
-     "Estado del cilindro": "C"
+     "Estado del cilindro": "C",
+     "Manguera / boquilla": "C",
+     "Arnés o base del extintor": "C"
     },
-    "obs": "Etiqueta de recarga y vencimiento ilegible. Cargado del archivo de inspección de extintores de noviembre 2026.",
-    "fotos": [],
-    "tipoeq": "Tractor",
-    "modelo": "CAT D6T",
-    "etq": "No se lee"
+    "vence": "2027-01-30",
+    "creado": "2026-11-20T17:00:47.618Z",
+    "equipo": "PS-764",
+    "tipoeq": "Pick-up",
+    "recarga": "2026-01-30",
+    "id": "rmwl3zvlkbkpj"
    },
    {
-    "id": "x-T-REY",
-    "fecha": "2026-11-01",
-    "equipo": "T-REY",
     "cap": 10,
-    "recarga": "",
+    "etq": "Legible",
+    "obs": "Cargado del archivo de inspección de extintores de noviembre 2026.",
+    "fecha": "2026-11-01",
+    "fotos": [],
+    "items": {
+     "Seguro": "C",
+     "Pasador": "C",
+     "Boquilla": "C",
+     "Manómetro": "C",
+     "Palanca de disparo": "C",
+     "Estado del cilindro": "C",
+     "Manguera / boquilla": "C",
+     "Arnés o base del extintor": "C"
+    },
+    "vence": "2027-06-01",
+    "creado": "2026-11-20T17:01:42.898Z",
+    "equipo": "CZ-236",
+    "modelo": "Mack MACK",
+    "tipoeq": "Cabezal",
+    "recarga": "2026-06-01",
+    "id": "x-CZ-236"
+   },
+   {
+    "cap": 10,
+    "etq": "Legible",
+    "obs": "Cargado del archivo de inspección de extintores de noviembre 2026.",
+    "fecha": "2026-11-01",
+    "fotos": [],
+    "items": {
+     "Seguro": "C",
+     "Pasador": "C",
+     "Boquilla": "C",
+     "Manómetro": "C",
+     "Palanca de disparo": "C",
+     "Estado del cilindro": "C",
+     "Manguera / boquilla": "C",
+     "Arnés o base del extintor": "C"
+    },
+    "vence": "2027-03-30",
+    "creado": "2026-11-20T17:02:41.194Z",
+    "equipo": "TA-141",
+    "modelo": "Mack MACK",
+    "tipoeq": "Tanque de agua",
+    "recarga": "2026-03-30",
+    "id": "x-TA-141"
+   },
+   {
+    "cap": 10,
+    "etq": "Legible",
+    "obs": "Cilindro pelado.",
+    "fecha": "2026-11-01",
+    "fotos": [],
+    "items": {
+     "Seguro": "C",
+     "Pasador": "C",
+     "Boquilla": "C",
+     "Manómetro": "C",
+     "Palanca de disparo": "C",
+     "Estado del cilindro": "N",
+     "Manguera / boquilla": "C",
+     "Arnés o base del extintor": "C"
+    },
+    "vence": "2027-08-31",
+    "creado": "2026-11-20T17:02:52.906Z",
+    "equipo": "TA-342",
+    "modelo": "Mack MACK",
+    "tipoeq": "Tanque de agua",
+    "recarga": "2026-08-31",
+    "id": "x-TA-342"
+   },
+   {
+    "cap": 10,
+    "etq": "No se lee",
+    "obs": "Ya no tiene presión, manguera dañada, etiqueta ilegible",
+    "fecha": "2026-11-17",
+    "fotos": [
+     "2026-11/mwl4et2brpt0xs.jpg"
+    ],
+    "items": {
+     "Seguro": "N",
+     "Pasador": "N",
+     "Boquilla": "N",
+     "Manómetro": "N",
+     "Palanca de disparo": "C",
+     "Estado del cilindro": "C",
+     "Manguera / boquilla": "N",
+     "Arnés o base del extintor": "C"
+    },
     "vence": "",
+    "creado": "2026-11-20T17:01:23.510Z",
+    "equipo": "T-668",
+    "tipoeq": "Tractor",
+    "recarga": "",
+    "id": "rmwl4exa83tzm"
+   },
+   {
+    "cap": 10,
+    "etq": "No se lee",
+    "obs": "Sin seguro ni pasador; cilindro en mal estado; etiqueta ilegible.",
+    "fecha": "2026-11-01",
+    "fotos": [],
     "items": {
      "Seguro": "A",
      "Pasador": "A",
      "Boquilla": "C",
-     "Manguera / boquilla": "C",
      "Manómetro": "C",
      "Palanca de disparo": "C",
-     "Arnés o base del extintor": "C",
-     "Estado del cilindro": "N"
+     "Estado del cilindro": "N",
+     "Manguera / boquilla": "C",
+     "Arnés o base del extintor": "C"
     },
-    "obs": "Sin seguro ni pasador; cilindro en mal estado; etiqueta ilegible. Cargado del archivo de inspección de extintores de noviembre 2026.",
-    "fotos": [],
-    "tipoeq": "Tractor",
+    "vence": "",
+    "creado": "2026-11-20T17:02:06.265Z",
+    "equipo": "T-REY",
     "modelo": "CAT D6H",
-    "etq": "No se lee"
+    "tipoeq": "Tractor",
+    "recarga": "",
+    "id": "x-T-REY"
    },
    {
-    "id": "x-TA-141",
-    "fecha": "2026-11-01",
-    "equipo": "TA-141",
     "cap": 10,
-    "recarga": "2026-03-30",
-    "vence": "2027-03-30",
+    "etq": "No se lee",
+    "obs": "Etiqueta de recarga y vencimiento ilegible. Cargado del archivo de inspección de extintores de noviembre 2026.",
+    "fecha": "2026-11-01",
+    "fotos": [],
     "items": {
      "Seguro": "C",
      "Pasador": "C",
      "Boquilla": "C",
-     "Manguera / boquilla": "C",
      "Manómetro": "C",
      "Palanca de disparo": "C",
-     "Arnés o base del extintor": "C",
-     "Estado del cilindro": "C"
+     "Estado del cilindro": "C",
+     "Manguera / boquilla": "C",
+     "Arnés o base del extintor": "C"
     },
-    "obs": "Cargado del archivo de inspección de extintores de noviembre 2026.",
-    "fotos": [],
-    "tipoeq": "Tanque de agua",
-    "modelo": "Mack MACK",
-    "etq": "Legible"
+    "vence": "",
+    "equipo": "T-668",
+    "modelo": "CAT D6T",
+    "tipoeq": "Tractor",
+    "recarga": "",
+    "id": "x-T-668"
    },
    {
-    "id": "x-TA-342",
-    "fecha": "2026-11-01",
+    "cap": 10,
+    "etq": "Legible",
+    "obs": "",
+    "fecha": "2026-11-24",
+    "fotos": [
+     "2026-11/mwv0erh9khfcgb.jpg",
+     "2026-11/mwv0fm1q539xzf.jpg"
+    ],
+    "items": {
+     "Seguro": "C",
+     "Pasador": "C",
+     "Boquilla": "C",
+     "Manómetro": "C",
+     "Palanca de disparo": "C",
+     "Estado del cilindro": "N",
+     "Manguera / boquilla": "C",
+     "Arnés o base del extintor": "C"
+    },
+    "vence": "2026-08-31",
+    "creado": "2026-11-24T18:10:39.054Z",
     "equipo": "TA-342",
-    "cap": 10,
-    "recarga": "2026-08-31",
-    "vence": "2027-08-31",
-    "items": {
-     "Seguro": "C",
-     "Pasador": "C",
-     "Boquilla": "C",
-     "Manguera / boquilla": "C",
-     "Manómetro": "C",
-     "Palanca de disparo": "C",
-     "Arnés o base del extintor": "C",
-     "Estado del cilindro": "N"
-    },
-    "obs": "Cilindro pelado. Cargado del archivo de inspección de extintores de noviembre 2026.",
-    "fotos": [],
+    "modelo": "MACK",
     "tipoeq": "Tanque de agua",
-    "modelo": "Mack MACK",
-    "etq": "Legible"
+    "recarga": "2026-08-31",
+    "id": "rmwv0fx3z4wnd"
    },
    {
-    "id": "x-CZ-236",
-    "fecha": "2026-11-01",
-    "equipo": "CZ-236",
     "cap": 10,
-    "recarga": "2026-06-01",
-    "vence": "2027-06-01",
+    "etq": "No se lee",
+    "obs": "No tiene presión,",
+    "fecha": "2026-11-24",
+    "fotos": [
+     "2026-11/mwuweg5j2nzgc9.jpg"
+    ],
     "items": {
-     "Seguro": "C",
-     "Pasador": "C",
+     "Seguro": "A",
+     "Pasador": "A",
      "Boquilla": "C",
-     "Manguera / boquilla": "C",
-     "Manómetro": "C",
+     "Manómetro": "N",
      "Palanca de disparo": "C",
-     "Arnés o base del extintor": "C",
-     "Estado del cilindro": "C"
+     "Estado del cilindro": "C",
+     "Manguera / boquilla": "C",
+     "Arnés o base del extintor": "C"
     },
-    "obs": "Cargado del archivo de inspección de extintores de noviembre 2026.",
-    "fotos": [],
-    "tipoeq": "Cabezal",
-    "modelo": "Mack MACK",
-    "etq": "Legible"
+    "vence": "",
+    "creado": "2026-11-24T16:18:10.211Z",
+    "equipo": "T-REY",
+    "modelo": "D6H",
+    "tipoeq": "Tractor",
+    "recarga": "",
+    "id": "rmwuwf9no1zl4"
    }
   ],
-  "catepp": [
-   {
-    "id": "c-casco-azul",
-    "nombre": "Casco azul",
-    "unidad": "Unidad",
-    "inicial": 0,
-    "minimo": 0,
-    "obs": ""
-   },
-   {
-    "id": "c-casco-blanco",
-    "nombre": "Casco blanco",
-    "unidad": "Unidad",
-    "inicial": 0,
-    "minimo": 0,
-    "obs": "Revisar existencia inicial: tiene una entrega de 4 sin entrada registrada."
-   },
-   {
-    "id": "c-chaleco-normal",
-    "nombre": "Chaleco normal",
-    "unidad": "Unidad",
-    "inicial": 0,
-    "minimo": 0,
-    "obs": ""
-   }
-  ],
-  "catbot": [],
   "epp": [
    {
-    "id": "43mr4zwtvxyiz97bwsoe",
-    "fecha": "2026-11-16",
-    "mov": "Entrada / compra",
-    "persona": "Fernando Domínguez",
-    "cargo": "Jefe SISO",
+    "mov": "Entrega a personal",
+    "obs": "",
+    "cargo": "Ayudante",
+    "fecha": "2026-11-17",
+    "firma": "",
+    "fotos": [],
     "lista": [
      {
-      "art": "Casco azul",
-      "cant": 16,
+      "art": "Chaleco Normal",
+      "cant": 1,
       "vida": ""
      }
     ],
-    "obs": "",
-    "fotos": []
+    "persona": "Gabriel Lira",
+    "id": "rmwkuvckxxr65"
    },
    {
-    "id": "9gc46v64ywp1phstiyfw",
-    "fecha": "2026-11-17",
     "mov": "Entrega a personal",
-    "persona": "Fernando Domínguez",
-    "cargo": "Jefe SISO",
+    "obs": "",
+    "cargo": "Ayudante",
+    "fecha": "2026-11-17",
+    "firma": "",
+    "fotos": [],
     "lista": [
      {
-      "art": "Casco blanco",
+      "art": "Chaleco Normal",
+      "cant": 1,
+      "vida": ""
+     }
+    ],
+    "persona": "Oscar Pérez",
+    "id": "rmwkuw79tk7cp"
+   },
+   {
+    "mov": "Entrega a personal",
+    "obs": "",
+    "cargo": "Ayudante",
+    "fecha": "2026-11-17",
+    "firma": "",
+    "fotos": [],
+    "lista": [
+     {
+      "art": "Chaleco Normal",
+      "cant": 1,
+      "vida": ""
+     }
+    ],
+    "persona": "Héctor González",
+    "id": "rmwkuwt5fycpf"
+   },
+   {
+    "mov": "Entrega a personal",
+    "obs": "El los tomó de la caja y se los llevó al otro proyecto",
+    "cargo": "Jefe SISO Sulaco-Yorito",
+    "fecha": "2026-11-17",
+    "firma": "",
+    "fotos": [],
+    "lista": [
+     {
+      "art": "Chaleco Normal",
+      "cant": 5,
+      "vida": ""
+     }
+    ],
+    "persona": "Ing. David Rodriguez",
+    "id": "rmwkv0374fvue"
+   },
+   {
+    "mov": "Entrega a personal",
+    "obs": "",
+    "cargo": "Operador",
+    "fecha": "2026-11-17",
+    "firma": "2026-11/mwl36m60bi8z4g.png",
+    "fotos": [
+     "2026-11/mwl36klrt7nu7s.jpg"
+    ],
+    "lista": [
+     {
+      "art": "Chaleco Normal",
+      "cant": 1,
+      "vida": ""
+     }
+    ],
+    "persona": "Reynaldo Mayorga",
+    "firmaFecha": "2026-11-17",
+    "id": "rmwkuxlbt0uff"
+   },
+   {
+    "mov": "Entrada / compra",
+    "obs": "",
+    "cargo": "Jefe SISO",
+    "fecha": "2026-11-16",
+    "firma": "",
+    "fotos": [],
+    "lista": [
+     {
+      "art": "Casco Azul",
+      "cant": 16,
+      "vida": ""
+     },
+     {
+      "art": "Casco Blanco",
       "cant": 4,
       "vida": ""
      }
     ],
-    "obs": "",
-    "fotos": []
+    "persona": "Fernando Domínguez",
+    "id": "43mr4zwtvxyiz97bwsoe"
    },
    {
-    "id": "9y4pcp8lgdb7rxtfelcs",
+    "mov": "Entrega a personal",
+    "obs": "",
+    "cargo": "Ing. Superintendente",
     "fecha": "2026-11-17",
+    "firma": "",
+    "fotos": [
+     "2026-11/mwkuqr3y64ljab.jpg"
+    ],
+    "lista": [
+     {
+      "art": "Casco Blanco",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "Chaleco Normal",
+      "cant": 1,
+      "vida": ""
+     }
+    ],
+    "persona": "Ing. Alex Licona",
+    "id": "rmwkuqy1wryd0"
+   },
+   {
     "mov": "Entrada / compra",
-    "persona": "Fernando Dominguez",
+    "obs": "",
     "cargo": "Jefe SISO",
+    "fecha": "2026-11-17",
+    "firma": "2026-11/mwkywfeoukp0k6.png",
+    "fotos": [],
+    "lista": [
+     {
+      "art": "Cinta de Precaución",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "Cinta de Peligro",
+      "cant": 1,
+      "vida": ""
+     }
+    ],
+    "persona": "Fernando Domínguez",
+    "firmaFecha": "2026-11-17",
+    "id": "rmwkywgp95lwq"
+   },
+   {
+    "mov": "Entrada / compra",
+    "obs": "",
+    "cargo": "Jefe SISO",
+    "fecha": "2026-11-17",
+    "fotos": [],
     "lista": [
      {
       "art": "Chaleco normal",
@@ -586,176 +1291,1149 @@
       "vida": ""
      }
     ],
-    "obs": "",
-    "fotos": []
+    "persona": "Fernando Dominguez",
+    "id": "9y4pcp8lgdb7rxtfelcs"
    },
    {
-    "id": "l9lbb5wj8yzrew4il32y",
-    "fecha": "2026-11-17",
     "mov": "Entrega a personal",
-    "persona": "3 ayudantes, 1 operador de tractor, 1 Ing. Licona",
-    "cargo": "Varios",
+    "obs": "",
+    "cargo": "Motorista",
+    "fecha": "2026-11-18",
+    "firma": "2026-11/mwm7594qyi4h0e.png",
+    "fotos": [
+     "2026-11/mwm756gkobm4ps.jpg"
+    ],
     "lista": [
      {
-      "art": "Chaleco normal",
-      "cant": 5,
+      "art": "Chaleco Normal",
+      "cant": 1,
       "vida": ""
      }
     ],
+    "persona": "Marvin Danilo Mendoza",
+    "firmaFecha": "2026-11-18",
+    "id": "rmwm759chbd5c"
+   },
+   {
+    "mov": "Entrega a personal",
     "obs": "",
-    "fotos": []
+    "cargo": "Motorista",
+    "fecha": "2026-11-18",
+    "firma": "2026-11/mwm76el4n8vf8y.png",
+    "fotos": [
+     "2026-11/mwm76awpf9w870.jpg"
+    ],
+    "lista": [
+     {
+      "art": "Chaleco Normal",
+      "cant": 1,
+      "vida": ""
+     }
+    ],
+    "persona": "Junior Lara",
+    "firmaFecha": "2026-11-18",
+    "id": "rmwm76euw9nqq"
+   },
+   {
+    "mov": "Entrega a personal",
+    "obs": "",
+    "cargo": "Operador",
+    "fecha": "2026-11-18",
+    "firma": "2026-11/mwm79s1dfxmjhk.png",
+    "fotos": [
+     "2026-11/mwm79hacs1xgb2.jpg"
+    ],
+    "lista": [
+     {
+      "art": "Chaleco Normal",
+      "cant": 1,
+      "vida": ""
+     }
+    ],
+    "persona": "José Arturo Palacios",
+    "firmaFecha": "2026-11-18",
+    "id": "rmwm79seu2vjz"
+   },
+   {
+    "mov": "Entrega a personal",
+    "obs": "",
+    "cargo": "Operador",
+    "fecha": "2026-11-18",
+    "firma": "2026-11/mwm7bc2dy31p63.png",
+    "fotos": [
+     "2026-11/mwm7anoopiiesr.jpg"
+    ],
+    "lista": [
+     {
+      "art": "Chaleco Normal",
+      "cant": 1,
+      "vida": ""
+     }
+    ],
+    "persona": "René Flores",
+    "firmaFecha": "2026-11-18",
+    "id": "rmwm7bcex5kfv"
+   },
+   {
+    "mov": "Entrega a personal",
+    "obs": "",
+    "cargo": "Operador de excavadora",
+    "fecha": "2026-11-25",
+    "firma": "2026-11/mwwgqk9i0or07x.png",
+    "fotos": [
+     "2026-11/mwwgpzfofbnbw4.jpg"
+    ],
+    "lista": [
+     {
+      "art": "Chaleco Normal",
+      "est": "",
+      "cant": 1,
+      "vida": ""
+     }
+    ],
+    "creado": "2026-11-25T18:34:35.660Z",
+    "persona": "Orbin Noe Reyes Murillo",
+    "firmaFecha": "2026-11-25",
+    "id": "rmwwgqkn4x00f"
+   },
+   {
+    "mov": "Entrega a personal",
+    "obs": "",
+    "cargo": "Ayudante",
+    "fecha": "2026-11-25",
+    "firma": "2026-11/mwwi51v2trwcbu.png",
+    "fotos": [
+     "2026-11/mwwi4xvpqat7nr.jpg"
+    ],
+    "lista": [
+     {
+      "art": "Chaleco Normal",
+      "est": "",
+      "cant": 1,
+      "vida": ""
+     }
+    ],
+    "creado": "2026-11-25T19:13:51.277Z",
+    "persona": "Carlos Antonio Rodriguez Carcamo",
+    "firmaFecha": "2026-11-25",
+    "id": "rmwwi527k8fzl"
+   }
+  ],
+  "botiquin": [
+   {
+    "mov": "Entrada / requisición",
+    "obs": "",
+    "cargo": "Jefe SISO",
+    "fecha": "2026-11-17",
+    "firma": "2026-11/mwkvtev7v2oj0q.png",
+    "fotos": [
+     "2026-11/mwkvt9eacgv7v2.jpg"
+    ],
+    "lista": [
+     {
+      "art": "Acetaminofen 500mg",
+      "cant": 20,
+      "vida": ""
+     },
+     {
+      "art": "Sudagrip Cápsulas",
+      "cant": 10,
+      "vida": ""
+     },
+     {
+      "art": "Ibuprofeno",
+      "cant": 20,
+      "vida": ""
+     },
+     {
+      "art": "Curitas",
+      "cant": 20,
+      "vida": ""
+     },
+     {
+      "art": "Gasa Estéril",
+      "cant": 5,
+      "vida": ""
+     },
+     {
+      "art": "Guantes Quirúrgicos Par",
+      "cant": 2,
+      "vida": ""
+     },
+     {
+      "art": "SalAndrews",
+      "cant": 10,
+      "vida": ""
+     },
+     {
+      "art": "Tevirin",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "Enteroguanil",
+      "cant": 10,
+      "vida": ""
+     },
+     {
+      "art": "Pastillas TUMS",
+      "cant": 48,
+      "vida": ""
+     },
+     {
+      "art": "Agua Oxigenada 118ml",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "Cinta Adhesiva Durapore",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "Alcohol Etílico 125ml",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "Rollo de Gasa 6” 10 yardas",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "Alcohol Etílico 450ml",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "Venda",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "Baterías AA Par",
+      "cant": 2,
+      "vida": ""
+     },
+     {
+      "art": "Alcoholimetro",
+      "cant": 1,
+      "vida": ""
+     },
+     {
+      "art": "Algodón",
+      "cant": 50,
+      "vida": ""
+     }
+    ],
+    "persona": "Fernando Dominguez",
+    "firmaFecha": "2026-11-17",
+    "id": "rmwkvofkdunx2"
    }
   ],
   "senal": [
    {
-    "id": "s01",
-    "senal": "10 KM/H VELOCIDAD MÁXIMA",
-    "total": 4,
+    "act": "",
     "uso": 0,
+    "ubic": "",
+    "fotos": [],
+    "senal": "PALETA PARE/SIGA",
+    "total": 0,
     "danada": 0,
     "extrav": 0,
-    "ubic": "",
-    "act": ""
+    "id": "rmwkynbigp5vp"
    },
    {
-    "id": "s02",
+    "act": "",
+    "uso": 2,
+    "ubic": "",
+    "fotos": [
+     "2026-11/mwl2peej3cry9q.jpg"
+    ],
     "senal": "20 KM/H VELOCIDAD MÁXIMA",
     "total": 4,
-    "uso": 0,
     "danada": 0,
     "extrav": 0,
-    "ubic": "",
-    "act": ""
+    "id": "rmwkyhmn1eq7i"
    },
    {
-    "id": "s03",
-    "senal": "DESVÍO ←",
-    "total": 4,
+    "act": "",
     "uso": 0,
-    "danada": 0,
-    "extrav": 0,
     "ubic": "",
-    "act": ""
-   },
-   {
-    "id": "s04",
-    "senal": "DESVÍO →",
-    "total": 4,
-    "uso": 0,
-    "danada": 0,
-    "extrav": 0,
-    "ubic": "",
-    "act": ""
-   },
-   {
-    "id": "s05",
-    "senal": "CARRIL DERECHO CERRADO",
-    "total": 2,
-    "uso": 0,
-    "danada": 0,
-    "extrav": 0,
-    "ubic": "",
-    "act": ""
-   },
-   {
-    "id": "s06",
-    "senal": "CARRIL IZQUIERDO CERRADO",
-    "total": 2,
-    "uso": 0,
-    "danada": 0,
-    "extrav": 0,
-    "ubic": "",
-    "act": ""
-   },
-   {
-    "id": "s07",
+    "fotos": [
+     "2026-11/mwl2qvtzwv08dg.jpg"
+    ],
     "senal": "SOLO UN CARRIL",
     "total": 2,
-    "uso": 0,
     "danada": 0,
     "extrav": 0,
-    "ubic": "",
-    "act": ""
+    "id": "rmwkykj9u2h9j"
    },
    {
-    "id": "s08",
+    "act": "",
+    "uso": 0,
+    "ubic": "",
+    "fotos": [
+     "2026-11/mwl2pux2facv7a.jpg"
+    ],
     "senal": "BANDERILLERO (DIBUJO)",
     "total": 10,
-    "uso": 0,
     "danada": 0,
     "extrav": 0,
-    "ubic": "",
-    "act": ""
+    "id": "rmwkykzi8sgp7"
    },
    {
-    "id": "s09",
-    "senal": "HOMBRES TRABAJANDO (DIBUJO)",
-    "total": 10,
-    "uso": 0,
-    "danada": 0,
-    "extrav": 0,
+    "act": "",
+    "uso": 2,
     "ubic": "",
-    "act": ""
-   },
-   {
-    "id": "s10",
-    "senal": "DISCULPE TRABAJO EN EJECUCIÓN",
-    "total": 5,
-    "uso": 0,
-    "danada": 0,
-    "extrav": 0,
-    "ubic": "",
-    "act": ""
-   },
-   {
-    "id": "s11",
-    "senal": "FIN DE CARRETERA EN CONSTRUCCIÓN",
-    "total": 1,
-    "uso": 0,
-    "danada": 0,
-    "extrav": 0,
-    "ubic": "",
-    "act": ""
-   },
-   {
-    "id": "s12",
-    "senal": "INICIO DE CARRETERA EN CONSTRUCCIÓN",
-    "total": 1,
-    "uso": 0,
-    "danada": 0,
-    "extrav": 0,
-    "ubic": "",
-    "act": ""
-   },
-   {
-    "id": "s13",
+    "fotos": [
+     "2026-11/mwl2rkoyebccjz.jpg"
+    ],
     "senal": "MAQUINAS TRABAJANDO",
     "total": 5,
-    "uso": 0,
     "danada": 0,
     "extrav": 0,
-    "ubic": "",
-    "act": ""
+    "id": "rmwkymxi21s2x"
    },
    {
-    "id": "s14",
-    "senal": "PELIGRO",
+    "act": "",
+    "uso": 0,
+    "ubic": "",
+    "fotos": [
+     "2026-11/mwl2sygnxl458w.jpg"
+    ],
+    "senal": "FIN DE CARRETERA EN CONSTRUCCIÓN",
+    "total": 1,
+    "danada": 0,
+    "extrav": 0,
+    "id": "rmwkym60g4me5"
+   },
+   {
+    "act": "",
+    "uso": 0,
+    "ubic": "",
+    "fotos": [
+     "2026-11/mwl2r87804kt6v.jpg"
+    ],
+    "senal": "INICIO DE CARRETERA EN CONSTRUCCIÓN",
+    "total": 1,
+    "danada": 0,
+    "extrav": 0,
+    "id": "rmwkymk4wl8q5"
+   },
+   {
+    "act": "",
+    "uso": 0,
+    "ubic": "",
+    "fotos": [
+     "2026-11/mwl2skfgw9k4lw.jpg"
+    ],
+    "senal": "DISCULPE TRABAJO EN EJECUCIÓN",
     "total": 5,
-    "uso": 0,
     "danada": 0,
     "extrav": 0,
-    "ubic": "",
-    "act": ""
+    "id": "rmwkylubtm2yu"
    },
    {
-    "id": "s15",
-    "senal": "PALETA PARE/SIGA",
-    "total": 8,
+    "act": "",
     "uso": 0,
+    "ubic": "",
+    "fotos": [
+     "2026-11/mwl2vhvj6osn47.jpg"
+    ],
+    "senal": "CARRIL DERECHO CERRADO",
+    "total": 2,
     "danada": 0,
     "extrav": 0,
+    "id": "rmwkyjphine1o"
+   },
+   {
+    "act": "",
+    "uso": 0,
     "ubic": "",
-    "act": ""
+    "fotos": [
+     "2026-11/mwl2qed2z1h8cp.jpg"
+    ],
+    "senal": "CARRIL IZQUIERDO CERRADO",
+    "total": 2,
+    "danada": 0,
+    "extrav": 0,
+    "id": "rmwkyk0uwlt9f"
+   },
+   {
+    "act": "",
+    "uso": 0,
+    "ubic": "",
+    "fotos": [
+     "2026-11/mwl2twt2iqpymv.jpg"
+    ],
+    "senal": "PELIGRO",
+    "total": 6,
+    "danada": 0,
+    "extrav": 0,
+    "id": "rmwkyqag29k2a"
+   },
+   {
+    "act": "",
+    "uso": 0,
+    "ubic": "",
+    "fotos": [
+     "2026-11/mwl2uk8wvzexe2.jpg"
+    ],
+    "senal": "DESVÍO →",
+    "total": 4,
+    "danada": 0,
+    "extrav": 0,
+    "id": "rmwkyieljtrs9"
+   },
+   {
+    "act": "",
+    "uso": 0,
+    "ubic": "",
+    "fotos": [
+     "2026-11/mwl2p019kre343.jpg"
+    ],
+    "senal": "10 KM/H VELOCIDAD MÁXIMA",
+    "total": 4,
+    "danada": 0,
+    "extrav": 0,
+    "id": "rmwkyf61432yf"
+   },
+   {
+    "act": "",
+    "uso": 1,
+    "ubic": "",
+    "fotos": [
+     "2026-11/mwl2tmtw6pecci.jpg"
+    ],
+    "senal": "HOMBRES TRABAJANDO (DIBUJO)",
+    "total": 10,
+    "danada": 0,
+    "extrav": 0,
+    "id": "rmwkyle3h0r6t"
+   },
+   {
+    "act": "",
+    "uso": 0,
+    "ubic": "",
+    "fotos": [
+     "2026-11/mwl2uusy9j1b5c.jpg"
+    ],
+    "senal": "DESVÍO ←",
+    "total": 4,
+    "danada": 0,
+    "extrav": 0,
+    "id": "rmwkyi8ilzs0p"
+   }
+  ],
+  "radios": [],
+  "personal": [
+   {
+    "lic": "Liviana Nacional",
+    "obs": "",
+    "area": "Oficinas",
+    "cargo": "Ingeniero Asistente",
+    "fotos": [],
+    "estado": "Habilitado",
+    "lvence": "2028-11-02",
+    "nombre": "Luisa Veronica Ramos Montes",
+    "unidad": "",
+    "emision": "2026-11-03",
+    "ingreso": "",
+    "telefono": "",
+    "comprobante": "2026-11/mwmi02lfie60j4.pdf",
+    "id": "p2"
+   },
+   {
+    "lic": "Liviana Nacional",
+    "obs": "",
+    "area": "Campo",
+    "cargo": "Supervisor SISO",
+    "fotos": [
+     "2026-11/mwm7g422z2zw2e.jpg"
+    ],
+    "creado": "2026-11-21T16:43:07.203Z",
+    "estado": "Habilitado",
+    "lvence": "2031-01-28",
+    "nombre": "Fernando Elias Dominguez Arias",
+    "unidad": "",
+    "emision": "2026-01-29",
+    "ingreso": "2026-11-16",
+    "telefono": "97968642",
+    "identidad": "1801-1993-02248",
+    "id": "rmwll4h8dybp4"
+   },
+   {
+    "lic": "",
+    "obs": "",
+    "area": "Campo",
+    "cargo": "Ayudante",
+    "fotos": [
+     "2026-11/mwuwhml2x3lqkp.jpg"
+    ],
+    "creado": "2026-11-24T16:20:06.277Z",
+    "estado": "Habilitado",
+    "lvence": "",
+    "nombre": "Hector Alexis Gonzalez Perez",
+    "unidad": "",
+    "emision": "",
+    "ingreso": "2026-11-16",
+    "telefono": "9632-7823",
+    "identidad": "1810-1989-00108",
+    "id": "p6"
+   },
+   {
+    "lic": "",
+    "obs": "",
+    "area": "Campo",
+    "cargo": "Ayudante",
+    "fotos": [
+     "2026-11/mww8h16ts2yhab.jpg"
+    ],
+    "creado": "2026-11-25T14:43:27.527Z",
+    "estado": "Habilitado",
+    "lvence": "",
+    "nombre": "Oscar Eduardo Pérez",
+    "unidad": "",
+    "emision": "",
+    "ingreso": "2026-11-15",
+    "telefono": "9568-5510",
+    "identidad": "1811-1999-00204",
+    "id": "p4"
+   },
+   {
+    "lic": "B, C, C1",
+    "obs": "",
+    "area": "Campo",
+    "cargo": "Motorista de volqueta",
+    "fotos": [
+     "2026-11/mwo2k492qyh8ju.jpg"
+    ],
+    "creado": "2026-11-19T21:35:39.988Z",
+    "estado": "Habilitado",
+    "lvence": "2031-08-31",
+    "nombre": "Junior Benjamín Lara Valladares",
+    "unidad": "V-645",
+    "emision": "2026-09-01",
+    "ingreso": "2026-09-21",
+    "telefono": "87612595",
+    "identidad": "0801-1981-02343",
+    "id": "rmwo2kb84cy1d"
+   },
+   {
+    "lic": "",
+    "obs": "",
+    "area": "Campo",
+    "cargo": "Ingeniero Superintendente",
+    "fotos": [],
+    "creado": "2026-11-25T14:54:09.819Z",
+    "estado": "Habilitado",
+    "lvence": "",
+    "nombre": "Alex Jeovanny Licona Ortiz",
+    "unidad": "PS-757",
+    "emision": "",
+    "ingreso": "2026-11-03",
+    "telefono": "9850-4264",
+    "identidad": "0801-1974-10916",
+    "id": "p9"
+   },
+   {
+    "lic": "",
+    "obs": "No Necesita Licencia",
+    "area": "Campo",
+    "cargo": "Operador de excavadora",
+    "fotos": [],
+    "creado": "2026-11-19T21:36:43.248Z",
+    "estado": "Habilitado",
+    "lvence": "",
+    "nombre": "José Arturo Palacios Fajardo",
+    "unidad": "C-630",
+    "emision": "",
+    "ingreso": "2026-11-15",
+    "telefono": "96674058",
+    "identidad": "0301-1972-00118",
+    "id": "rmwo2lo1dhalp"
+   },
+   {
+    "lic": "",
+    "obs": "",
+    "area": "Oficinas",
+    "cargo": "Asistente de RRHH",
+    "fotos": [],
+    "creado": "2026-11-25T14:55:40.870Z",
+    "estado": "Habilitado",
+    "lvence": "",
+    "nombre": "Carol Daniela Cáceres Dubon",
+    "unidad": "",
+    "emision": "",
+    "ingreso": "2026-11-12",
+    "telefono": "9311-3048",
+    "identidad": "1809-2000-00195",
+    "id": "rmww8x1dy5rcn"
+   },
+   {
+    "lic": "B, C, C1, CE, D, D1",
+    "obs": "",
+    "area": "Campo",
+    "cargo": "Motorista de volqueta",
+    "fotos": [
+     "2026-11/mwo2px57yf4yrg.jpg"
+    ],
+    "creado": "2026-11-19T21:40:33.046Z",
+    "estado": "Habilitado",
+    "lvence": "2028-04-29",
+    "nombre": "Marvin Danilo Mendoza Giron",
+    "unidad": "",
+    "emision": "2026-04-30",
+    "ingreso": "2026-09-18",
+    "telefono": "92042625",
+    "identidad": "0801-1976-10608",
+    "id": "rmwo2qlcmxp18"
+   },
+   {
+    "lic": "",
+    "obs": "No Necesita Licencia",
+    "area": "Campo",
+    "cargo": "Chequeador de Combustible",
+    "fotos": [
+     "2026-11/mwqjkc1o01fow2.jpg"
+    ],
+    "creado": "2026-11-19T21:44:12.779Z",
+    "estado": "Habilitado",
+    "lvence": "",
+    "nombre": "Cristian Josué Escobar Rivera",
+    "unidad": "CM-621",
+    "emision": "",
+    "ingreso": "2026-11-17",
+    "telefono": "88746692",
+    "identidad": "1804-1997-05036",
+    "id": "rmwo2vawbkd06"
+   },
+   {
+    "lic": "",
+    "obs": "",
+    "area": "Campo",
+    "cargo": "Ayudante",
+    "fotos": [
+     "2026-11/mwuwlpi4u72uqx.jpg"
+    ],
+    "creado": "2026-11-24T16:22:00.172Z",
+    "estado": "Habilitado",
+    "lvence": "",
+    "nombre": "Carlos Antonio Rodriguez Carcamo",
+    "unidad": "",
+    "emision": "",
+    "ingreso": "2026-11-23",
+    "telefono": "9346-5766",
+    "identidad": "1811-1999-00262",
+    "id": "p5"
+   },
+   {
+    "lic": "",
+    "obs": "No Necesita",
+    "area": "Campo",
+    "cargo": "Capataz",
+    "fotos": [
+     "2026-11/mwuxstn2gmm16o.jpg"
+    ],
+    "creado": "2026-11-20T14:17:26.189Z",
+    "estado": "Habilitado",
+    "lvence": "",
+    "nombre": "Juan Reinaldo Mayorga Bueso",
+    "unidad": "T-668",
+    "emision": "",
+    "ingreso": "2026-11-16",
+    "telefono": "9502-7096",
+    "identidad": "1618-1960-00149",
+    "id": "rmwp2clh5g1b1"
+   },
+   {
+    "lic": "",
+    "obs": "No Necesita Licencia",
+    "area": "Campo",
+    "cargo": "Operador de excavadora",
+    "fotos": [],
+    "creado": "2026-11-23T17:06:27.167Z",
+    "estado": "Habilitado",
+    "lvence": "",
+    "nombre": "Orbin Noe Reyes Murillo",
+    "unidad": "E-591",
+    "emision": "",
+    "ingreso": "2026-11-20",
+    "telefono": "96824893",
+    "identidad": "1801-2000-00010",
+    "id": "rmwtipianp4zp"
+   },
+   {
+    "lic": "Pesada Nacional",
+    "obs": "",
+    "area": "Campo",
+    "cargo": "Motorista",
+    "fotos": [
+     "2026-11/mwtimmavdrmuef.jpg"
+    ],
+    "creado": "2026-11-23T17:04:23.192Z",
+    "estado": "Habilitado",
+    "lvence": "2027-02-19",
+    "nombre": "Santos Javier Sierra Ramírez",
+    "unidad": "TA-342",
+    "emision": "2025-02-19",
+    "ingreso": "2026-11-23",
+    "telefono": "99474811",
+    "identidad": "0801-1980-02744",
+    "id": "rmwtimun48rq5"
+   },
+   {
+    "lic": "",
+    "obs": "",
+    "area": "Campo",
+    "cargo": "Operador",
+    "fotos": [
+     "2026-11/mwuw3vfad69lek.jpg"
+    ],
+    "creado": "2026-11-24T16:09:23.424Z",
+    "estado": "Habilitado",
+    "lvence": "",
+    "nombre": "Rene Flores Valladares",
+    "unidad": "T-REY",
+    "emision": "",
+    "ingreso": "2026-11-12",
+    "telefono": "9945-4692",
+    "identidad": "0315-1952-00059",
+    "id": "p14"
+   },
+   {
+    "lic": "",
+    "obs": "",
+    "area": "Campo",
+    "cargo": "Ayudante",
+    "fotos": [
+     "2026-11/mwuwm6m0sw9412.jpg"
+    ],
+    "creado": "2026-11-24T16:12:43.764Z",
+    "estado": "Habilitado",
+    "lvence": "",
+    "nombre": "Josué Gabriel Lira Torres",
+    "unidad": "",
+    "emision": "",
+    "ingreso": "2026-11-16",
+    "telefono": "9340-8642",
+    "identidad": "0615-2007-00113",
+    "id": "p3"
+   },
+   {
+    "lic": "Liviana Nacional",
+    "obs": "",
+    "area": "Campo",
+    "cargo": "Ing. Residente",
+    "fotos": [
+     "2026-11/mwl3p78531f5la.jpg",
+     "2026-11/mww9es42z5ni3u.jpg"
+    ],
+    "creado": "2026-11-25T15:09:32.014Z",
+    "estado": "Habilitado",
+    "lvence": "2030-02-02",
+    "nombre": "Merlin Adalid Ramos Dias",
+    "unidad": "PS-764",
+    "emision": "2025-02-03",
+    "ingreso": "",
+    "telefono": "9249-8682",
+    "identidad": "1317-1992-00235",
+    "id": "rmwl3pbe89cx1"
+   }
+  ],
+  "equipos": [
+   {
+    "inv": "PS-764",
+    "tipo": "Pick-up",
+    "fotos": [
+     "2026-11/mwl3m4gte1244g.jpg"
+    ],
+    "marca": "Foton",
+    "placa": "JAB5007",
+    "creado": "2026-11-19T18:40:46.871Z",
+    "estado": "Activo",
+    "modelo": "Tunland S",
+    "asignado": "Merlin Adalid Ramos Dias",
+    "id": "PS-764"
+   },
+   {
+    "inv": "T-668",
+    "tipo": "Tractor",
+    "fotos": [
+     "2026-11/mwl45o09k0g7qb.jpg"
+    ],
+    "marca": "Caterpillar",
+    "placa": "N/A",
+    "estado": "Activo",
+    "modelo": "D6T",
+    "asignado": "Juan Reinaldo Mayorga Bueso",
+    "id": "T-668"
+   },
+   {
+    "inv": "M-509",
+    "tipo": "Motoniveladora",
+    "marca": "Caterpillar",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "140M",
+    "asignado": "",
+    "id": "M-509"
+   },
+   {
+    "inv": "M-528",
+    "tipo": "Motoniveladora",
+    "marca": "Caterpillar",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "140K",
+    "asignado": "",
+    "id": "M-528"
+   },
+   {
+    "inv": "E-690",
+    "tipo": "Excavadora",
+    "marca": "Caterpillar",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "320 GC",
+    "asignado": "",
+    "id": "E-690"
+   },
+   {
+    "inv": "VC-238",
+    "tipo": "Vibrocompactador",
+    "marca": "Caterpillar",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "CS533E",
+    "asignado": "",
+    "id": "VC-238"
+   },
+   {
+    "inv": "VC-771",
+    "tipo": "Vibrocompactador",
+    "marca": "",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "BW 212 D",
+    "asignado": "",
+    "id": "VC-771"
+   },
+   {
+    "inv": "VC-772",
+    "tipo": "Vibrocompactador",
+    "marca": "",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "BW 212 D",
+    "asignado": "",
+    "id": "VC-772"
+   },
+   {
+    "inv": "V-543",
+    "tipo": "Volqueta",
+    "marca": "Volvo",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "440 FMX",
+    "asignado": "",
+    "id": "V-543"
+   },
+   {
+    "inv": "V-605",
+    "tipo": "Volqueta",
+    "marca": "Volvo",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "440 FMX",
+    "asignado": "",
+    "id": "V-605"
+   },
+   {
+    "inv": "V-606",
+    "tipo": "Volqueta",
+    "marca": "Volvo",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "440 FMX",
+    "asignado": "",
+    "id": "V-606"
+   },
+   {
+    "inv": "V-644",
+    "tipo": "Volqueta",
+    "marca": "Volvo",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "440 FMX",
+    "asignado": "",
+    "id": "V-644"
+   },
+   {
+    "inv": "TA-141",
+    "tipo": "Tanque de agua",
+    "marca": "Mack",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "MACK",
+    "asignado": "",
+    "id": "TA-141"
+   },
+   {
+    "inv": "CZ-236",
+    "tipo": "Cabezal",
+    "marca": "Mack",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "MACK",
+    "asignado": "",
+    "id": "CZ-236"
+   },
+   {
+    "inv": "L-364",
+    "tipo": "Low boy",
+    "marca": "",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "Cama baja",
+    "asignado": "",
+    "id": "L-364"
+   },
+   {
+    "inv": "TA-342",
+    "tipo": "Tanque de agua",
+    "marca": "Mack",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "MACK",
+    "asignado": "Santos Javier Sierra Ramírez",
+    "id": "TA-342"
+   },
+   {
+    "inv": "E-591",
+    "tipo": "Excavadora",
+    "marca": "Caterpillar",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "320",
+    "asignado": "Orbin Noe Reyes Murillo",
+    "id": "E-591"
+   },
+   {
+    "inv": "V-645",
+    "tipo": "Volqueta",
+    "marca": "Volvo",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "440 FMX",
+    "asignado": "Junior Benjamín Lara Valladares",
+    "id": "V-645"
+   },
+   {
+    "inv": "T-REY",
+    "tipo": "Tractor",
+    "marca": "Caterpillar",
+    "placa": "",
+    "estado": "Activo",
+    "modelo": "D6H",
+    "asignado": "Rene Flores Valladares",
+    "id": "T-REY"
+   },
+   {
+    "inv": "PS-757",
+    "tipo": "Pick-up",
+    "fotos": [],
+    "marca": "Foton",
+    "placa": "",
+    "creado": "2026-11-19T18:39:55.540Z",
+    "estado": "Activo",
+    "modelo": "Tunland S",
+    "asignado": "Alex Jeovanny Licona Ortiz",
+    "id": "PS-757"
+   }
+  ],
+  "entregas": [
+   {
+    "due": "2026-11-02",
+    "task": "boti",
+    "hecho": "2026-11-17",
+    "id": "boti_2026-11-02"
+   }
+  ],
+  "catepp": [
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Casco Azul",
+    "unidad": "Unidad",
+    "inicial": 0,
+    "id": "cmwkuo4e8qz2"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Casco Blanco",
+    "unidad": "Unidad",
+    "inicial": 0,
+    "id": "cmwkuo4eb7en"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Chaleco Normal",
+    "unidad": "Unidad",
+    "inicial": 0,
+    "id": "cmwkuo4eb7zi"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Cinta de Precaución",
+    "inicial": 0,
+    "id": "cmwkywfdrh6z"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Cinta de Peligro",
+    "inicial": 0,
+    "id": "cmwkywfdup54"
+   }
+  ],
+  "catbot": [
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Acetaminofen 500mg",
+    "inicial": 0,
+    "id": "cmwkvofk42jh"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Sudagrip Cápsulas",
+    "inicial": 0,
+    "id": "cmwkvofk8ugf"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Ibuprofeno",
+    "inicial": 0,
+    "id": "cmwkvofk9ghy"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Curitas",
+    "inicial": 0,
+    "id": "cmwkvofk9qti"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Gasa Estéril",
+    "inicial": 0,
+    "id": "cmwkvofk96i7"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Algodón",
+    "inicial": 0,
+    "id": "cmwkvofk9029"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Guantes Quirúrgicos Par",
+    "inicial": 0,
+    "id": "cmwkvofk9oa9"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "SalAndrews",
+    "inicial": 0,
+    "id": "cmwkvofk99uu"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Tevirin",
+    "inicial": 0,
+    "id": "cmwkvofkamhn"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Enteroguanil",
+    "inicial": 0,
+    "id": "cmwkvofkajue"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Pastillas TUMS",
+    "inicial": 0,
+    "id": "cmwkvofkb73s"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Agua Oxigenada 118ml",
+    "inicial": 0,
+    "id": "cmwkvofkb4p8"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Cinta Adhesiva Durapore",
+    "inicial": 0,
+    "id": "cmwkvofkb3wg"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Alcohol Etílico 125ml",
+    "inicial": 0,
+    "id": "cmwkvofkcvcf"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Rollo de Gasa 6” 10 yardas",
+    "inicial": 0,
+    "id": "cmwkvofkcgnt"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Alcohol Etílico 450ml",
+    "inicial": 0,
+    "id": "cmwkvofkcvqs"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Venda",
+    "inicial": 0,
+    "id": "cmwkvofkcygu"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Baterías AA Par",
+    "inicial": 0,
+    "id": "cmwkvofkcn7d"
+   },
+   {
+    "obs": "Creado desde un movimiento",
+    "minimo": 0,
+    "nombre": "Alcoholimetro",
+    "inicial": 0,
+    "id": "cmwkvteui1pe"
    }
   ]
  }
