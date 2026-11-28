@@ -120,6 +120,9 @@ El botón **Generar PDF** arma el informe "Puntos de Botaderos de ME": encabezad
 ## Agenda sugerida de charlas
 En **Charlas de seguridad** aparece la tarjeta **Agenda sugerida de charlas** (de martes a jueves, 10 minutos al cierre de la jornada; noviembre y diciembre 2026). Toca **Revisar y cargar**: puedes desmarcar las que no quieras, cambiar el tema (escribiendo o escogiendo de la lista, que incluye temas de la etapa de limpieza del derecho de vía) y fijar la hora. Se guardan como **Programadas** y salen en Hoy el día que toca. Después de darla, abre la charla, ponla como **Impartida** y anota los asistentes.
 
+## Calendario de charlas (Excel)
+En **Charlas de seguridad** está la tarjeta **Calendario de charlas (Excel)**: escoge el mes (después del 20 propone el siguiente) y toca **Descargar**. Sale con el encabezado de siempre, un calendario mensual de lunes a domingo con cada charla en el color de su tipo (maquinaria y vehículos, EPP, emergencias, comportamiento seguro, salud ocupacional, riesgos del frente, medio ambiente), la hora, las pruebas de alcohol de lunes y sábado, feriados, la leyenda y el total frente a la meta de 12; y una hoja *Listado*. Se arma con las charlas registradas en ese momento, así que si cambias o borras alguna, el calendario sale actualizado.
+
 ## Reporte diario SISO (PDF)
 En la pantalla **Hoy** está la tarjeta **Reporte diario SISO**: escoge la fecha (por defecto hoy) y toca **Generar PDF**. El documento trae:
 - Encabezado con el título REPORTE DIARIO SISO, el logo y el día.

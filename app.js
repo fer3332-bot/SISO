@@ -351,7 +351,7 @@ function vMod(){const k=modOpen,m=M[k];let rs=R(k).slice();
  const meses=[...new Set(R(k).map(r=>String(r.fecha||'').slice(0,7)).filter(Boolean).concat(today().slice(0,7)))].sort().reverse();
  return `<div class="sh"><h2>${m.n}</h2><div class="tools" style="margin:0"><button class="btn pri" data-act="new:${k}">+ Nuevo</button>${k==='despliegue'?'<button class="btn" data-act="duplast">Duplicar el último</button>':''}<button class="btn" data-act="x:${k}">Excel</button></div></div>
  <div class="tools"><input id="q" type="search" placeholder="Buscar…" value="${esc(filt.q)}">${m.nodate?'':`<select id="mes"><option value="">Todos los meses</option>${meses.map(x=>`<option value="${x}" ${x===filt.mes?'selected':''}>${MES[+x.slice(5)-1]} ${x.slice(0,4)}</option>`).join('')}</select>`}</div>
- ${m.inv?invTable(m.inv):k==='extintores'?extPend():k==='insp'?inspPend():k==='charlas'?agendaBox():k==='alcohol'?alcPend():k==='botaderos'?botBox():''}
+ ${m.inv?invTable(m.inv):k==='extintores'?extPend():k==='insp'?inspPend():k==='charlas'?agendaBox()+calBox():k==='alcohol'?alcPend():k==='botaderos'?botBox():''}
  <div class="card">${rs.length?rs.map(r=>{const s=m.sum(r);return row({left:m.nodate?'':`<div class="day">${r.fecha?pd(r.fecha).getDate():'–'}<small>${r.fecha?MES[pd(r.fecha).getMonth()].slice(0,3):''}</small></div>`,t:s[0]||'(sin nombre)',s:(s[1]||'')+((r.fotos||[]).length?' · '+r.fotos.length+' foto'+(r.fotos.length>1?'s':''):''),tag:s[2]&&s[2][1]?s[2]:null,click:'edit:'+k+':'+r.id})}).join(''):`<p class="empty">${R(k).length?'Nada coincide con el filtro.':'Aún no hay registros. Usa “+ Nuevo”.'}</p>`}</div>`}
 
 /* ---------- informe mensual ---------- */
@@ -1123,6 +1123,71 @@ async function alcX(dia,list){const X=await loadX();const logo=await loadLogo();
 {const m=M.alcohol;const i=m.f.findIndex(x=>x.t==='fotos');if(i>=0){m.f[i].l='Fotos de cada lectura';m.f.splice(i,0,F('hF','Evidencia fotográfica','hdr',null,{note:'Toma foto del momento de la prueba y del resultado en la pantalla del alcoholímetro (cada lectura).'}))}}
 /* ---------- firma guardada del responsable SISO ---------- */
 function sisoSigHTML(){return cfg.firmaSISO?`<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px;width:180px;height:70px;display:flex;align-items:center;justify-content:center"><img data-sid="${esc(cfg.firmaSISO)}" alt="Firma" style="max-width:100%;max-height:100%"></div><button class="btn sm" data-act="sigopen:__siso">Cambiar firma</button></div>`:`<button class="btn" data-act="sigopen:__siso">✍️ Firmar</button>`}
+
+/* ---------- calendario mensual de charlas (Excel) ---------- */
+const CAL_CAT=[['AMB','Medio ambiente','FFC9B458','FFF4EFD3',/derrame|ambient|residuo|basura|combustible/i],['EMER','Emergencias','FFE06666','FFF8D7D7',/emergencia|extintor|incendio|primeros auxilios|evacuaci|botiqu/i],
+ ['EPP','Equipo de protección personal','FF5B9BD5','FFDDEBF7',/\bepp\b|protecci[oó]n personal|casco|guante|chaleco|respirator|auditiv/i],['FRENTE','Riesgos del frente de trabajo','FF93C47D','FFE2F0D9',/derecho de v[ií]a|talud|banderiller|tr[aá]nsito|se[ñn]al|zanja|borde|desmonte|[aá]rbol|polvo/i],
+ ['MAQ','Maquinaria y vehículos','FFF4B183','FFFCE4D6',/equipo m[oó]vil|maquinaria|volquet|veh[ií]cul|conduc|carretera|aver[ií]a|reversa|puntos ciegos|360|excavadora|tractor|cargadora|giro|terracer|manejo defensivo/i],
+ ['SALUD','Salud ocupacional','FF4DB6AC','FFD9F2EF',/levantamiento|carga manual|hidrataci|calor|salud|ergon|estr[eé]s|fatiga|higiene|dengue/i],['COMP','Comportamiento seguro','FF8E7CC3','FFE6E0F3',/./]];
+const calCat=t=>CAL_CAT.find(c=>c[4].test(String(t||'')))||CAL_CAT[CAL_CAT.length-1];
+const FERIADOS={'01-01':'Año Nuevo · feriado','05-01':'Día del Trabajo · feriado','09-15':'Independencia · feriado','12-25':'Navidad · feriado','12-24':'Nochebuena','12-31':'Fin de año'};
+const h12=h=>{if(!h)return '';const [a,b]=h.split(':').map(Number);return ((a%12)||12)+':'+pad(b)+(a<12?' a. m.':' p. m.')};
+function calBox(){const t=today(),d=pd(t);const nx=new Date(d.getFullYear(),d.getMonth()+(d.getDate()>=20?1:0),1);const mv=nx.getFullYear()+'-'+pad(nx.getMonth()+1);
+ return `<section style="margin-top:0"><div class="card" style="padding:12px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><div style="flex:1 1 200px"><b>Calendario de charlas (Excel)</b><br><small class="muted">Calendario mensual a colores con las charlas registradas; refleja tus cambios y eliminaciones</small></div><input type="month" id="calmes" value="${mv}" style="min-height:44px;border:1px solid var(--line);border-radius:8px;padding:0 8px;font:inherit"><button class="btn pri" data-act="calxls">Descargar</button></div></section>`}
+document.addEventListener('click',async ev=>{const b=ev.target.closest('[data-act="calxls"]');if(!b)return;const mes=($('#calmes')&&$('#calmes').value)||today().slice(0,7);b.disabled=true;
+ try{const r=await calX(mes);if(r){await saveFile(r.name,r.blob);toast('Calendario listo: '+r.n+' charlas')}}catch(e){toast('No se pudo generar el calendario'+(navigator.onLine?'':' (revisa la conexión)'))}b.disabled=false});
+async function calX(mes){let X;try{X=await loadX()}catch(e){toast('No se pudo cargar el generador de Excel (revisa la conexión)');return}
+ const logo=await loadLogo();const wb=new X.Workbook();wb.creator=cfg.siso||'SISO';wb.created=new Date();
+ const C={ink:'FF141414',navy:'FF17324D',amber:'FFFFC000',teal:'FF177E89',info:'FFEAF2F5',or:'FFFF5A00',line:'FFD9D4CA',grid:'FFBFC7D1',white:'FFFFFFFF'};
+ const med={style:'medium',color:{argb:C.ink}},thin={style:'thin',color:{argb:C.grid}};
+ const nombre=(cfg.siso||'Fernando Domínguez').replace(/^ing\.?\s*/i,''),proy=PROY_TITULO().replace(/^proyecto\s+/i,'');
+ const [Y,Mo]=mes.split('-').map(Number);const MESN=MES[Mo-1].toUpperCase();
+ const list=R('charlas').filter(c=>String(c.fecha||'').startsWith(mes)&&c.estado!=='Cancelada').sort((a,b)=>String(a.fecha+(a.hi||'')).localeCompare(String(b.fecha+(b.hi||''))));
+ const header=(ws,last,title,widths)=>{ws.columns=widths.map(w=>({width:w}));const px=w=>w*7+5;const LH=54,LW=logo?Math.round(LH*logo.w/logo.h):300;let span=1,acc=px(widths[0]);while(acc<LW+16&&span<last-1){acc+=px(widths[span]);span++}
+  const mg=(r,c1,c2)=>{if(c2>c1)(ws.mergeCellsWithoutStyle||ws.mergeCells).call(ws,r,c1,r,c2)};
+  const box=(r,c1,c2)=>{for(let c=c1;c<=c2;c++){const x=ws.getCell(r,c);x.border={top:med,bottom:med,left:c===c1?med:undefined,right:c===c2?med:undefined}}};
+  const fillRow=(r,argb)=>{for(let c=1;c<=last;c++)ws.getCell(r,c).fill={type:'pattern',pattern:'solid',fgColor:{argb}}};
+  ws.getRow(1).height=46;box(1,1,span);box(1,span+1,last);mg(1,1,span);mg(1,span+1,last);
+  if(logo){const id=wb.addImage({base64:logo.du,extension:'png'});ws.addImage(id,{tl:{col:0.08,row:0.05},ext:{width:LW,height:LH},editAs:'oneCell'})}
+  const t=ws.getCell(1,span+1);t.value=title.toUpperCase();t.font={name:'Calibri',size:15,bold:true,color:{argb:C.ink}};t.alignment={horizontal:'center',vertical:'middle',wrapText:true};
+  ws.getRow(2).height=35;fillRow(2,C.amber);mg(2,1,last);const p2=ws.getCell(2,1);p2.value='PROYECTO | '+proy;p2.font={name:'Calibri',size:10,bold:true,color:{argb:C.ink}};p2.alignment={horizontal:'center',vertical:'middle',wrapText:true};
+  ws.getRow(3).height=8;fillRow(3,C.teal);mg(3,1,last);
+  ws.getRow(4).height=27;fillRow(4,C.info);mg(4,1,last);const f4=ws.getCell(4,1);f4.value='FECHA: '+fdmy(today())+'     |     RESPONSABLE: Ing. '+nombre+'     |     ÁREA: Seguridad Industrial y Salud Ocupacional (SISO)';f4.font={name:'Calibri',size:10,bold:true,color:{argb:C.navy}};f4.alignment={horizontal:'left',vertical:'middle',indent:1,wrapText:true};
+  ws.getRow(5).height=8;return mg};
+ /* hoja calendario */
+ const ws=wb.addWorksheet(MES[Mo-1][0].toUpperCase()+MES[Mo-1].slice(1)+' '+Y,{views:[{showGridLines:false}],pageSetup:{orientation:'landscape',fitToPage:true,fitToWidth:1,fitToHeight:1,paperSize:1,horizontalCentered:true,margins:{left:.3,right:.3,top:.4,bottom:.4,header:.2,footer:.2}}});
+ const mg=header(ws,7,'Calendario de charlas de seguridad · '+MESN+' '+Y,[24,24,24,24,24,24,24]);
+ const DIAS=['LUNES','MARTES','MIÉRCOLES','JUEVES','VIERNES','SÁBADO','DOMINGO'];let r=6;
+ DIAS.forEach((d,i)=>{const c=ws.getCell(r,i+1);c.value=d;c.font={name:'Arial',size:10,bold:true,color:{argb:C.white}};c.fill={type:'pattern',pattern:'solid',fgColor:{argb:C.navy}};c.alignment={horizontal:'center',vertical:'middle'};c.border={top:thin,left:thin,right:thin,bottom:thin}});ws.getRow(r).height=22;r++;
+ const first=new Date(Y,Mo-1,1),off=(first.getDay()+6)%7,start=new Date(Y,Mo-1,1-off);const byD={};for(const c of list)(byD[c.fecha]=byD[c.fecha]||[]).push(c);
+ const fill=(c,a)=>c.fill={type:'pattern',pattern:'solid',fgColor:{argb:a}};
+ for(let w=0;w<6;w++){const wd=new Date(start.getFullYear(),start.getMonth(),start.getDate()+w*7);if(w>0&&wd.getMonth()!==Mo-1)break;
+  const rn=r,rc=r+1;ws.getRow(rn).height=18;ws.getRow(rc).height=80;
+  for(let i=0;i<7;i++){const d=new Date(wd.getFullYear(),wd.getMonth(),wd.getDate()+i),iso=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()),inm=d.getMonth()===Mo-1;
+   const cn=ws.getCell(rn,i+1),cc=ws.getCell(rc,i+1);cn.value=d.getDate();cn.alignment={horizontal:'right',vertical:'middle',indent:1};cc.alignment={horizontal:'center',vertical:'middle',wrapText:true};
+   cn.border={top:thin,left:thin,right:thin};cc.border={bottom:thin,left:thin,right:thin};
+   if(!inm){fill(cn,'FFF2F2F2');fill(cc,'FFF2F2F2');cn.font={name:'Arial',size:9,color:{argb:'FFBBBBBB'}};continue}
+   const ch=byD[iso]||[];const fer=FERIADOS[iso.slice(5)];
+   if(ch.length){const cat=calCat(ch[0].tema);fill(cn,cat[2]);fill(cc,cat[3]);cn.font={name:'Arial',size:11,bold:true,color:{argb:C.white}};
+    cc.value=ch.map(c=>(c.tema||'')+'\n'+h12(c.hi)+(c.estado==='Impartida'?'  ✓ Impartida':'')).join('\n\n');cc.font={name:'Arial',size:9.5,bold:true,color:{argb:'FF222222'}}}
+   else{cn.font={name:'Arial',size:11,bold:true,color:{argb:C.navy}};const note=fer||(i===0?'Prueba de alcohol (fija)':i===5?'Prueba de alcohol (rotación 15%)':i===6?'Descanso':'');
+    if(fer){fill(cn,'FFEDEDED');fill(cc,'FFEDEDED')}cc.value=note;cc.font={name:'Arial',size:fer?9:8.5,italic:true,color:{argb:fer?'FF888888':'FF9AA4AF'}}}}
+  r+=2}
+ r++;const lg=ws.getCell(r,1);lg.value='LEYENDA';lg.font={name:'Arial',size:10,bold:true,color:{argb:C.navy}};r++;
+ CAL_CAT.forEach((c,i)=>{const cell=ws.getCell(r+Math.floor(i/4),1+(i%4)*2);cell.value=c[1];fill(cell,c[2]);cell.font={name:'Arial',size:9,bold:true,color:{argb:C.white}};cell.alignment={horizontal:'center',vertical:'middle'};ws.getRow(r+Math.floor(i/4)).height=18});
+ r+=3;const tl=ws.getCell(r,1);tl.value='Total de charlas programadas:';tl.font={name:'Arial',size:10,bold:true};mg(r,1,2);
+ const tv=ws.getCell(r,3);tv.value={formula:"COUNTA('Listado'!B7:B"+(6+Math.max(1,list.length))+")",result:list.length};tv.font={name:'Arial',size:11,bold:true,color:{argb:C.or}};tv.alignment={horizontal:'left'};
+ const mt=ws.getCell(r,4);mt.value='Meta del mes (Control de riesgo): 12';mt.font={name:'Arial',size:10,color:{argb:'FF555555'}};mg(r,4,7);r++;
+ const nt=ws.getCell(r,1);nt.value='Charlas de 10 minutos al cierre de la jornada. Lunes: prueba de alcohol fija · jueves a sábado: rotación aleatoria del 15 %.';nt.font={name:'Arial',size:8.5,italic:true,color:{argb:'FF777777'}};mg(r,1,7);
+ /* hoja listado */
+ const ls=wb.addWorksheet('Listado',{views:[{showGridLines:false}],pageSetup:{orientation:'portrait',fitToPage:true,fitToWidth:1,fitToHeight:0,paperSize:1,horizontalCentered:true,margins:{left:.4,right:.4,top:.5,bottom:.5,header:.3,footer:.3}}});
+ header(ls,6,'Charlas programadas · '+MESN+' '+Y,[13,12,52,28,11,13]);
+ ['Fecha','Día','Tema','Categoría','Hora','Estado'].forEach((h,i)=>{const c=ls.getCell(6,i+1);c.value=h;c.font={name:'Calibri',size:10,bold:true,color:{argb:C.white}};fill(c,C.navy);c.alignment={horizontal:'center',vertical:'middle'};c.border={top:thin,left:thin,right:thin,bottom:thin}});ls.getRow(6).height=22;
+ const DN=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+ list.forEach((c,j)=>{const rr=7+j,cat=calCat(c.tema);const vals=[fdmy(c.fecha),DN[pd(c.fecha).getDay()],c.tema||'',cat[1],h12(c.hi),c.estado||''];
+  vals.forEach((v,i)=>{const x=ls.getCell(rr,i+1);x.value=v;x.font={name:'Calibri',size:10};x.border={top:thin,left:thin,right:thin,bottom:thin};x.alignment={vertical:'middle',wrapText:i===2};if(j%2)fill(x,'FFF4F6F9')});fill(ls.getCell(rr,4),cat[3])});
+ if(!list.length){const x=ls.getCell(7,1);x.value='Sin charlas registradas en este mes';x.font={name:'Calibri',size:10,italic:true}}
+ const buf=await wb.xlsx.writeBuffer();return{blob:new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),name:'Calendario de charlas SISO '+MES[Mo-1][0].toUpperCase()+MES[Mo-1].slice(1)+' '+Y+'.xlsx',n:list.length}}
 
 /* ---------- PDF ---------- */
 let pdfP=null;
