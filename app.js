@@ -930,7 +930,7 @@ async function reporteDiario(dia){let J;try{J=await loadPdf()}catch(e){toast('No
  doc.setFont('helvetica','normal');doc.setFontSize(9.5);doc.text(T('Seguridad Industrial y Salud Ocupacional (SISO)'),X,20.5);doc.text(T(dn+' '+fdmy(dia)),X,26);
  y=40;doc.setTextColor(20);
  // datos del proyecto
- const info=[['Proyecto',PROY_TITULO()],['Contratista',cfg.empresa||"Cordon's Heavy Equipment"],['Responsable del informe',RESP()],['Fecha del reporte',dn+' '+fdmy(dia)],['Generado',fdmy(today())+' '+pad(new Date().getHours())+':'+pad(new Date().getMinutes())]];
+ const info=[['Proyecto',PROY_TITULO()],['Responsable del informe',RESP()],['Fecha del reporte',dn+' '+fdmy(dia)]];
  doc.setFontSize(9.5);let ih=0;const ils=info.map(([l,v])=>{const ln=doc.splitTextToSize(T(v),CW-48);ih+=ln.length*4.4+2.2;return[l,ln]});
  doc.setFillColor(244,246,249);doc.setDrawColor(205,212,222);doc.roundedRect(X,y-5,CW,ih+5,2,2,'FD');
  for(const [l,ln] of ils){doc.setFont('helvetica','bold');doc.setTextColor(80);doc.text(T(l),X+4,y);doc.setFont('helvetica','normal');doc.setTextColor(20);doc.text(ln,X+48,y);y+=ln.length*4.4+2.2}

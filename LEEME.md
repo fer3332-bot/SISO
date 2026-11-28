@@ -123,7 +123,7 @@ En **Charlas de seguridad** aparece la tarjeta **Agenda sugerida de charlas** (d
 ## Reporte diario SISO (PDF)
 En la pantalla **Hoy** está la tarjeta **Reporte diario SISO**: escoge la fecha (por defecto hoy) y toca **Generar PDF**. El documento trae:
 - Encabezado con el título REPORTE DIARIO SISO, el logo y el día.
-- Datos del proyecto, contratista, responsable del informe y fecha y hora en que se generó.
+- Datos del proyecto, responsable del informe y fecha del reporte.
 - Una tabla resumen con cada tipo de actividad, cuántas se hicieron y su detalle con la hora.
 - El detalle de cada actividad en orden de hora, con todos sus datos y sus fotos (tres por fila). Los puntos de botadero salen solo como resumen del levantamiento (el detalle va en su informe propio) y las charlas que siguen Programadas no aparecen.
 - La firma del responsable SISO (se guarda una sola vez en Proyecto → Firma del responsable SISO, o con el botón ✍️ Agregar mi firma de la tarjeta) y el número de página.
